@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Craftwork_Project.Service
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -16,8 +17,8 @@
 						<div class="col-md-6 col-12">
 							<img src="img/simple-house-logo.png" alt="Logo" class="tm-site-logo" /> 
 							<div class="tm-site-text-box">
-								<h1 class="tm-site-title">Simple House</h1>
-								<h6 class="tm-site-description">new restaurant template</h6>	
+								<h1 class="tm-site-title">@Config.CompanyName</h1>
+								<h6 class="tm-site-description">@Config.CompanyShortDesc</h6>	
 							</div>
 						</div>
 						<nav class="col-md-6 col-12 tm-nav">
@@ -34,8 +35,8 @@
 
 	<main>
 		<header class="row tm-welcome-section">
-			<h2 class="col-12 text-center tm-section-title">Welcome to Simple House</h2>
-			<p class="col-12 text-center">Total 3 HTML pages are included in this template. Header image has a parallax effect. You can feel free to download, edit and use this TemplateMo layout for your commercial or non-commercial websites.</p>
+			<h2 class="col-12 text-center tm-section-title">Welcome to @Config.CompanyName</h2>
+			<p class="col-12 text-center">Desc</p>
 		</header>
 
 	<div>
