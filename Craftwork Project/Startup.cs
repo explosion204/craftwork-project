@@ -47,8 +47,9 @@ namespace Craftwork_Project
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = true;
-            });
-            
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+
             // setting up auth cookie
             services.ConfigureApplicationCookie(options =>
             {
@@ -57,10 +58,18 @@ namespace Craftwork_Project
                 options.LoginPath = "/account/login";
                 options.SlidingExpiration = true;
             });
+
+            services.AddAuthorization(x =>
+            {
+                x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
+            });
             
             // add MVC
-            services.AddControllersWithViews()
-                    .AddSessionStateTempDataProvider();
+            services.AddControllersWithViews(x =>
+                {
+                    x.Conventions.Add(new AdminAreaAuth("Admin", "AdminArea"));
+                })
+                .AddSessionStateTempDataProvider();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -85,6 +94,7 @@ namespace Craftwork_Project
             // routes
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("admin", "{area:exists}/controller");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
