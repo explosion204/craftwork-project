@@ -94,8 +94,8 @@ namespace Craftwork_Project
             // routes
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("admin", "{area:exists}/controller");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("admin", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
