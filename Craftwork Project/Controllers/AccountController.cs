@@ -47,7 +47,7 @@ namespace Craftwork_Project.Controllers
                     }
                 }
                 
-                ModelState.AddModelError(nameof(LoginViewModel.Username), "Invalid login or password.");
+                ModelState.AddModelError(nameof(LoginViewModel.Password), "Invalid login or password.");
             }
 
             return View(model);

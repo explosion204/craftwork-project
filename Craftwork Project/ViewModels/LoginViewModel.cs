@@ -4,7 +4,7 @@ namespace Craftwork_Project.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        // [Required]
         [Display(Name = "Username")]
         public string Username { get; set; }
         
