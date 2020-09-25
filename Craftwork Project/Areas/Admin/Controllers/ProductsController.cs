@@ -2,8 +2,7 @@
 
 namespace Craftwork_Project.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class HomeController : Controller
+    public class ProductsController : Controller
     {
         // GET
         public IActionResult Index()

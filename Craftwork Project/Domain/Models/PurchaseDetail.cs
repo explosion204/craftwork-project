@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace Craftwork_Project.Domain.Models
@@ -9,10 +10,12 @@ namespace Craftwork_Project.Domain.Models
         [Required]
         public Guid Id { get; set; }
         [Required]
+        [ForeignKey("User")]
         public Guid UserId { get; set; }
         [Required]
-        public IdentityUser User { get; set; }
+        public IdentityUser<Guid> User { get; set; }
         [Required]
+        [ForeignKey("Product")]
         public Guid ProductId { get; set; }
         [Required]
         public Product Product { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Craftwork_Project.Domain.Models
 {
@@ -20,7 +21,8 @@ namespace Craftwork_Project.Domain.Models
         [Required]
         public string ImagePath { get; set; }
         [Required]
-        public int CategoryId { get; set; }
+        [ForeignKey("Category")]
+        public Guid CategoryId { get; set; }
         [Required]
         public Category Category { get; set; }
     }
