@@ -23,7 +23,6 @@ namespace Craftwork_Project.Domain.Models
         [Required]
         [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
-        [Required]
         public Category Category { get; set; }
     }
 }
