@@ -15,26 +15,29 @@
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    <form class="form-horizontal" method="post" asp-area="Admin" asp-controller="Categories" asp-action="Update">
+    <form class="form-horizontal" method="post" action="/admin/categories/update">
         <div class="box-body">
             <div class="form-group">
                 <label asp-for="Name" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10">
-                <input asp-for="Name" type="text" class="form-control" name="Name" value="@Model.Name">
+                    <input asp-for="Name" type="text" class="form-control" name="Name" value="@Model.Name">
+                    <span asp-validation-for="Name"></span>
                 </div>
+                
             </div>
             <div class="form-group">
                 <label asp-for="Desc" class="col-sm-2 control-label">Description</label>
                 <div class="col-sm-10">
-                <input asp-for="Desc" type="text" class="form-control" name="Desc" placeholder="Description" value="@Model.Desc">
+                    <input asp-for="Desc" type="text" class="form-control" name="Desc" placeholder="Description" value="@Model.Desc">
+                    <span asp-validation-for="Desc"></span>
                 </div>
             </div>
             <input asp-for="Id" type="hidden" name="Id" value="@Model.Id"/>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-        <button type="submit" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-info pull-right">Update</button>
+            <input type="button" class="btn btn-info" value="Cancel" onclick="location.href='/admin/categories/'">
+            <button type="submit" class="btn btn-info pull-right" onclick="this.disabled = true; this.value = 'Creating'; this.form.submit();">Update</button>
         </div>
         <!-- /.box-footer -->
     </form>

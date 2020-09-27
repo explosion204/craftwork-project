@@ -1,4 +1,5 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@model Craftwork_Project.Domain.Models.Category
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -11,33 +12,35 @@
 <section class="content container-fluid">
     <!-- Horizontal Form -->
     <div class="box box-info">
-    <div class="box-header with-border">
-        <h3 class="box-title">Add category</h3>
-    </div>
-    <!-- /.box-header -->
-    <!-- form start -->
-    <form class="form-horizontal" method="post" asp-area="Admin" asp-controller="Categories" asp-action="Create">
-        <div class="box-body">
-        <div class="form-group">
-            <label asp-for="Name" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
-            <input asp-for="Name" type="text" class="form-control" name="Name" placeholder="Name">
+        <div class="box-header with-border">
+            <h3 class="box-title">Add category</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" method="post" action="/admin/categories/create">
+            <div class="box-body">
+                <div class="form-group">
+                    <label asp-for="Name" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Name" type="text" class="form-control" name="Name" placeholder="Name">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Desc" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Desc" type="text" class="form-control" name="Desc" placeholder="Description">
+                        <span asp-validation-for="Desc"></span>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Desc" class="col-sm-2 control-label">Description</label>
-            <div class="col-sm-10">
-            <input asp-for="Desc" type="text" class="form-control" name="Desc" placeholder="Description">
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <input type="button" class="btn btn-info" value="Cancel" onclick="location.href='/admin/categories/'">
+                <button type="submit" class="btn btn-info pull-right" onclick="this.disabled = true; this.value = 'Creating'; this.form.submit();">Create</button>
             </div>
-        </div>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-        <button type="submit" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-info pull-right">Create</button>
-        </div>
-        <!-- /.box-footer -->
-    </form>
+            <!-- /.box-footer -->
+        </form>
     </div>
     <!-- /.box -->
 </section>

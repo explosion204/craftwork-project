@@ -1,0 +1,18 @@
+﻿<ul class="sidebar-menu" data-widget="tree">
+    <li class="header">Models</li>
+    
+@switch (ViewContext.RouteData.Values["controller"].ToString())
+{
+    case "categories":
+    case "Categories":
+        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Categories</span></a></li>
+        <li><a href="/admin/products"><i class="fa fa-link"></i> <span>Products</span></a></li>
+        break;
+    case "products":
+    case "Products":
+        <li><a href="/admin/categories"><i class="fa fa-link"></i> <span>Categories</span></a></li>
+        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Products</span></a></li>
+        break;
+}
+</ul>
+
