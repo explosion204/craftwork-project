@@ -63,7 +63,7 @@ namespace Craftwork_Project.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 dataManager.Categories.SaveCategory(category);
-                return RedirectToAction("Index", "Categories");
+                return Redirect("/admin/categories");
             }
 
             return View(category);

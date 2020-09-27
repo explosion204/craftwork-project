@@ -65,7 +65,7 @@ namespace Craftwork_Project.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 dataManager.Products.SaveProduct(product);
-                return RedirectToAction("Index", "Products"); 
+                return Redirect("/admin/products"); 
             }
 
             ViewBag.AllCategories = dataManager.Categories.GetAllCategories().ToList();
