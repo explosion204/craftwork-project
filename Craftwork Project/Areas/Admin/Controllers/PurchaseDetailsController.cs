@@ -11,9 +11,9 @@ namespace Craftwork_Project.Areas.Admin.Controllers
     public class PurchaseDetailsController : Controller
     {
         private DataManager dataManager;
-        private UserManager<IdentityUser> userManager;
+        private UserManager<ApplicationUser> userManager;
 
-        public PurchaseDetailsController(DataManager dataManager, UserManager<IdentityUser> userManager)
+        public PurchaseDetailsController(DataManager dataManager, UserManager<ApplicationUser> userManager)
         {
             this.dataManager = dataManager;
             this.userManager = userManager;
