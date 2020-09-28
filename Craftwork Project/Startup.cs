@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Craftwork_Project.Domain;
+using Craftwork_Project.Domain.Models;
 using Craftwork_Project.Domain.Repositories.EntityFramework;
 using Craftwork_Project.Domain.Repositories.Interfaces;
 using Craftwork_Project.Service;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,7 +41,7 @@ namespace Craftwork_Project
             services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(Config.ConnectionString));
 
             // setting up identity
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequiredLength = 8;
@@ -48,7 +50,10 @@ namespace Craftwork_Project
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = true;
             })
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders()
+            .AddUserStore<UserStore<ApplicationUser, IdentityRole<Guid>, ApplicationDbContext, Guid>>()
+            .AddRoleStore<RoleStore<IdentityRole<Guid>, ApplicationDbContext, Guid>>();
 
             // setting up auth cookie
             services.ConfigureApplicationCookie(options =>

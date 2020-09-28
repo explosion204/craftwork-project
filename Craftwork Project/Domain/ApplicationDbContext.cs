@@ -1,4 +1,5 @@
-﻿using Craftwork_Project.Domain.Models;
+﻿using System;
+using Craftwork_Project.Domain.Models;
 using Craftwork_Project.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Craftwork_Project.Domain
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -25,29 +26,29 @@ namespace Craftwork_Project.Domain
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<IdentityRole>().HasData(new IdentityRole()
+            builder.Entity<IdentityRole<Guid>>().HasData(new IdentityRole<Guid>()
             {
-                Id = "1a1059b8-61e5-4ea8-b2dd-7d44793910f4",
+                Id = Guid.Parse("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"),
                 Name = "admin",
                 NormalizedName = "ADMIN"
             });
 
-            builder.Entity<IdentityUser>().HasData(new IdentityUser()
+            builder.Entity<ApplicationUser>().HasData(new ApplicationUser()
             {
-                Id = "5a1e1cfc-ee1d-4afb-aad3-a6d932066727",
+                Id = Guid.Parse("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"),
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
                 Email = "dzmitriy20magic@gmail.com",
                 NormalizedEmail = "DZMITRIY20MAGIC@GMAIL.COM",
                 EmailConfirmed = true,
-                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "admin"),
+                PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(null, "admin"),
                 SecurityStamp = string.Empty
             });
 
-            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>()
+            builder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>()
             {
-                RoleId = "1a1059b8-61e5-4ea8-b2dd-7d44793910f4",
-                UserId = "5a1e1cfc-ee1d-4afb-aad3-a6d932066727"
+                RoleId = Guid.Parse("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"),
+                UserId = Guid.Parse("5a1e1cfc-ee1d-4afb-aad3-a6d932066727")
             });
         }
     }

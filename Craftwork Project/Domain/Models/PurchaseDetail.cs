@@ -16,7 +16,7 @@ namespace Craftwork_Project.Domain.Models
         [ForeignKey("User")]
         public Guid UserId { get; set; }
         
-        public IdentityUser<Guid> User { get; set; }
+        public ApplicationUser User { get; set; }
         
         [Required]
         [ForeignKey("Product")]
