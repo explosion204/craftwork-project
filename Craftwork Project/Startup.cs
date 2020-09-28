@@ -65,11 +65,11 @@ namespace Craftwork_Project
             });
             
             // add MVC
-            services.AddControllersWithViews(x =>
-                {
-                    x.Conventions.Add(new AdminAreaAuth("Admin", "AdminArea"));
-                })
-                .AddSessionStateTempDataProvider();
+            services.AddControllersWithViews(options =>
+            {
+                options.Conventions.Add(new AdminAreaAuth("Admin", "AdminArea"));
+            })
+            .AddSessionStateTempDataProvider();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -94,9 +94,10 @@ namespace Craftwork_Project
             // routes
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute("admin", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=home}/{action=index}");
+                endpoints.MapControllerRoute("admin", "{area:exists}/{controller=categories}/{action=index}/{id?}");
             });
+            
         }
     }
 }

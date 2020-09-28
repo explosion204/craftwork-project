@@ -3,15 +3,17 @@ using System;
 using Craftwork_Project.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Craftwork_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200928094555_third")]
+    partial class third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,6 +49,9 @@ namespace Craftwork_Project.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Desc")
                         .IsRequired()
                         .HasColumnType("text");
@@ -81,7 +86,7 @@ namespace Craftwork_Project.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("Finished")
+                    b.Property<bool>("Confirmed")
                         .HasColumnType("boolean");
 
                     b.Property<int?>("OrderId")
@@ -134,7 +139,7 @@ namespace Craftwork_Project.Migrations
                         new
                         {
                             Id = "1a1059b8-61e5-4ea8-b2dd-7d44793910f4",
-                            ConcurrencyStamp = "7d9077a4-9e39-4392-824f-3527f6720fc7",
+                            ConcurrencyStamp = "3e886308-5305-4e8c-b14c-ba23908cd77e",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -232,13 +237,13 @@ namespace Craftwork_Project.Migrations
                         {
                             Id = "5a1e1cfc-ee1d-4afb-aad3-a6d932066727",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a91aa5e4-804a-44e1-8ccc-2b34622e3c8b",
+                            ConcurrencyStamp = "304311bb-665b-4284-a093-af6f0062d239",
                             Email = "dzmitriy20magic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DZMITRIY20MAGIC@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPD7gOqeG6IMOlzx04hjcrwZiy+ybltLiImLLdcGe/d/VvQljGro4TdqwLt4ctTtug==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE6Zj7kkRsaQ0hVKxPs5Ysg2WnCoZt96ewAbRRNwT7KZ1Xtc7roopSfpEa78jVpslA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

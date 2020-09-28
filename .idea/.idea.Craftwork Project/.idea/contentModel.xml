@@ -1,18 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Dmitry\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Dmitry\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Craftwork Project.-678515792.00" t="ExcludeRecursive" />
-    <e p="D:\projects\Craftwork Project" t="IncludeFlat">
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_Craftwork Project.131484132.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Craftwork Project" t="IncludeRecursive">
-        <e p="appsettings.Development.json" t="Include" />
-        <e p="appsettings.json" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
+        <e p="Areas" t="Include">
+          <e p="Admin" t="Include">
+            <e p="Controllers" t="Include">
+              <e p="CategoriesController.cs" t="Include" />
+              <e p="ProductsController.cs" t="Include" />
+              <e p="PurchaseDetailsController.cs" t="Include" />
+            </e>
+            <e p="Views" t="Include">
+              <e p="Categories" t="Include">
+                <e p="Create.cshtml" t="Include" />
+                <e p="Index.cshtml" t="Include" />
+                <e p="Update.cshtml" t="Include" />
+              </e>
+              <e p="Products" t="Include">
+                <e p="Create.cshtml" t="Include" />
+                <e p="Index.cshtml" t="Include" />
+                <e p="Update.cshtml" t="Include" />
+              </e>
+              <e p="PurchaseDetails" t="Include">
+                <e p="Create.cshtml" t="Include" />
+                <e p="Index.cshtml" t="Include" />
+                <e p="Update.cshtml" t="Include" />
+              </e>
+              <e p="Shared" t="Include">
+                <e p="_Layout.cshtml" t="Include" />
+                <e p="_MainMenu.cshtml" t="Include" />
+              </e>
+              <e p="_ViewStart.cshtml" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Controllers" t="Include">
+          <e p="AccountController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
         </e>
         <e p="Craftwork Project.csproj" t="IncludeRecursive" />
-        <e p="Models" t="Include" />
+        <e p="Domain" t="Include">
+          <e p="ApplicationDbContext.cs" t="Include" />
+          <e p="DataManager.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="Category.cs" t="Include" />
+            <e p="Product.cs" t="Include" />
+            <e p="PurchaseDetail.cs" t="Include" />
+          </e>
+          <e p="Repositories" t="Include">
+            <e p="EntityFramework" t="Include">
+              <e p="EFCategoryRepository.cs" t="Include" />
+              <e p="EFProductRepository.cs" t="Include" />
+              <e p="EFPurchaseDetailRepository.cs" t="Include" />
+            </e>
+            <e p="Interfaces" t="Include">
+              <e p="ICategoryRepository.cs" t="Include" />
+              <e p="IProductRepository.cs" t="Include" />
+              <e p="IPurchaseDetailRepository.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20200925150926_initial.Designer.cs" t="Include" />
+          <e p="20200925150926_initial.cs" t="Include" />
+          <e p="20200927140414_second.Designer.cs" t="Include" />
+          <e p="20200927140414_second.cs" t="Include" />
+          <e p="20200928094555_third.Designer.cs" t="Include" />
+          <e p="20200928094555_third.cs" t="Include" />
+          <e p="20200928095343_fourth_purchasedetail_finished.Designer.cs" t="Include" />
+          <e p="20200928095343_fourth_purchasedetail_finished.cs" t="Include" />
+          <e p="20200928112743_fifth_product_created_field_removed.Designer.cs" t="Include" />
+          <e p="20200928112743_fifth_product_created_field_removed.cs" t="Include" />
+          <e p="20200928113106_sixth.Designer.cs" t="Include" />
+          <e p="20200928113106_sixth.cs" t="Include" />
+          <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Service" t="Include">
+          <e p="AdminAreaAuth.cs" t="Include" />
+          <e p="Config.cs" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="ViewModels" t="Include">
+          <e p="LoginViewModel.cs" t="Include" />
+        </e>
+        <e p="Views" t="Include">
+          <e p="Account" t="Include">
+            <e p="Login.cshtml" t="Include" />
+          </e>
+          <e p="Home" t="Include">
+            <e p="Index.cshtml" t="Include" />
+          </e>
+          <e p="Shared" t="Include">
+            <e p="CssShared.cshtml" t="Include" />
+            <e p="FooterShared.cshtml" t="Include" />
+            <e p="MetaShared.cshtml" t="Include" />
+            <e p="ScriptsShared.cshtml" t="Include" />
+            <e p="_Layout.cshtml" t="Include" />
+          </e>
+          <e p="_ViewImports.cshtml" t="Include" />
+          <e p="_ViewStart.cshtml" t="Include" />
+        </e>
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -21,31 +116,34 @@
             </e>
           </e>
         </e>
-        <e p="Program.cs" t="Include" />
-        <e p="Properties" t="Include">
-          <e p="launchSettings.json" t="Include" />
-        </e>
-        <e p="Startup.cs" t="Include" />
-        <e p="Views" t="Include">
-          <e p="_ViewImports.cshtml" t="Include" />
-          <e p="_ViewStart.cshtml" t="Include" />
-          <e p="Home" t="Include">
-            <e p="Index.cshtml" t="Include" />
-          </e>
-          <e p="Shared" t="Include">
-            <e p="_Layout.cshtml" t="Include" />
-            <e p="CssShared.cshtml" t="Include" />
-            <e p="FooterShared.cshtml" t="Include" />
-            <e p="MetaShared.cshtml" t="Include" />
-            <e p="ScriptsShared.cshtml" t="Include" />
-          </e>
-        </e>
         <e p="wwwroot" t="Include">
           <e p="about.html" t="Include" />
+          <e p="categories_admin.html" t="Include" />
           <e p="contact.html" t="Include" />
           <e p="css" t="Include">
+            <e p="font-awesome.min.css" t="Include" />
+            <e p="loginform.css" t="Include" />
             <e p="mainstyle.css" t="Include" />
+            <e p="material-design-iconic-font.min.css" t="Include" />
             <e p="searchbar.css" t="Include" />
+            <e p="skin-blue.min.css" t="Include" />
+            <e p="vendor" t="Include">
+              <e p="AdminLTE.min.css" t="Include" />
+              <e p="bootstrap.min.css" t="Include" />
+              <e p="dataTables.bootstrap.min.css" t="Include" />
+              <e p="ionicons.min.css" t="Include" />
+              <e p="jquery.dataTables.min.css" t="Include" />
+              <e p="select.dataTables.min.css" t="Include" />
+              <e p="select2.min.css" t="Include" />
+            </e>
+          </e>
+          <e p="fonts" t="Include">
+            <e p="FontAwesome.otf" t="Include" />
+            <e p="fontawesome-webfont.eot" t="Include" />
+            <e p="fontawesome-webfont.svg" t="Include" />
+            <e p="fontawesome-webfont.ttf" t="Include" />
+            <e p="fontawesome-webfont.woff" t="Include" />
+            <e p="fontawesome-webfont.woff2" t="Include" />
           </e>
           <e p="img" t="Include">
             <e p="about-01.jpg" t="Include" />
@@ -71,33 +169,23 @@
           </e>
           <e p="index.html" t="Include" />
           <e p="js" t="Include">
-            <e p="extention" t="Include">
+            <e p="loginform.js" t="Include" />
+            <e p="vendor" t="Include">
+              <e p="adminlte.min.js" t="Include" />
+              <e p="bootstrap.bundle.min.js" t="Include" />
+              <e p="bootstrap.min.js" t="Include" />
               <e p="choices.js" t="Include" />
               <e p="custom-materialize.js" t="Include" />
+              <e p="dataTables.buttons.min.js" t="Include" />
               <e p="flatpickr.js" t="Include" />
+              <e p="jquery.dataTables.js" t="Include" />
+              <e p="jquery.min.js" t="Include" />
+              <e p="parallax.min.js" t="Include" />
+              <e p="select2.min.js" t="Include" />
             </e>
-            <e p="jquery.min.js" t="Include" />
-            <e p="main.js" t="Include" />
-            <e p="parallax.min.js" t="Include" />
           </e>
           <e p="search.html" t="Include" />
-          <e p="webfonts" t="Include">
-            <e p="fa-brands-400.eot" t="Include" />
-            <e p="fa-brands-400.svg" t="Include" />
-            <e p="fa-brands-400.ttf" t="Include" />
-            <e p="fa-brands-400.woff" t="Include" />
-            <e p="fa-brands-400.woff2" t="Include" />
-            <e p="fa-regular-400.eot" t="Include" />
-            <e p="fa-regular-400.svg" t="Include" />
-            <e p="fa-regular-400.ttf" t="Include" />
-            <e p="fa-regular-400.woff" t="Include" />
-            <e p="fa-regular-400.woff2" t="Include" />
-            <e p="fa-solid-900.eot" t="Include" />
-            <e p="fa-solid-900.svg" t="Include" />
-            <e p="fa-solid-900.ttf" t="Include" />
-            <e p="fa-solid-900.woff" t="Include" />
-            <e p="fa-solid-900.woff2" t="Include" />
-          </e>
+          <e p="signupfrom.html" t="Include" />
         </e>
       </e>
       <e p="Craftwork Project.sln" t="IncludeFlat" />

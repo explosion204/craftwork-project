@@ -3,15 +3,17 @@ using System;
 using Craftwork_Project.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Craftwork_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200928095343_fourth_purchasedetail_finished")]
+    partial class fourth_purchasedetail_finished
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +48,9 @@ namespace Craftwork_Project.Migrations
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Desc")
                         .IsRequired()
@@ -134,7 +139,7 @@ namespace Craftwork_Project.Migrations
                         new
                         {
                             Id = "1a1059b8-61e5-4ea8-b2dd-7d44793910f4",
-                            ConcurrencyStamp = "7d9077a4-9e39-4392-824f-3527f6720fc7",
+                            ConcurrencyStamp = "ec7b00a1-a989-4dd9-af66-1cabfd537345",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -232,13 +237,13 @@ namespace Craftwork_Project.Migrations
                         {
                             Id = "5a1e1cfc-ee1d-4afb-aad3-a6d932066727",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a91aa5e4-804a-44e1-8ccc-2b34622e3c8b",
+                            ConcurrencyStamp = "cfc95bb2-7146-454c-b9b1-93027b332a13",
                             Email = "dzmitriy20magic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DZMITRIY20MAGIC@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPD7gOqeG6IMOlzx04hjcrwZiy+ybltLiImLLdcGe/d/VvQljGro4TdqwLt4ctTtug==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMID0H0Ua9NMrvU8GQ7+gyl9v5b7WCDBIIEnRdrWRO9/Zh+TPT8k3g7VgwcI1kATxA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
