@@ -33,6 +33,13 @@ namespace Craftwork_Project.Domain
                 NormalizedName = "ADMIN"
             });
 
+            builder.Entity<IdentityRole<Guid>>().HasData(new IdentityRole<Guid>()
+            {
+                Id = Guid.Parse("3800721a-cf25-427e-b5e1-9c26710df0d5"),
+                Name = "customer",
+                NormalizedName = "CUSTOMER"
+            });
+
             builder.Entity<ApplicationUser>().HasData(new ApplicationUser()
             {
                 Id = Guid.Parse("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"),
