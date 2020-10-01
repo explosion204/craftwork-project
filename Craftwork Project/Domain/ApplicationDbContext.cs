@@ -12,6 +12,7 @@ namespace Craftwork_Project.Domain
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
+        public DbSet<Order> Orders { get; set; }
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 

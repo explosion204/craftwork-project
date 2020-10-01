@@ -7,16 +7,13 @@ namespace Craftwork_Project.Domain.Models
 {
     public class PurchaseDetail
     {
-        public int? OrderId { get; set; }
-        
         [Required]
         public Guid Id { get; set; }
+
+        [ForeignKey("Order")]
+        public int OrderId { get; set; }
         
-        [Required]
-        [ForeignKey("User")]
-        public Guid UserId { get; set; }
-        
-        public ApplicationUser User { get; set; }
+        public Order Order { get; set; }
         
         [Required]
         [ForeignKey("Product")]
@@ -26,12 +23,6 @@ namespace Craftwork_Project.Domain.Models
         
         [Required]
         public int Amount { get; set; }
-        
-        [Required]
-        public bool Processed { get; set; }
-        
-        [Required]
-        public bool Finished { get; set; }
-        
+
     }
 }

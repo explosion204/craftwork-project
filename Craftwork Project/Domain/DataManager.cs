@@ -7,14 +7,17 @@ namespace Craftwork_Project.Domain
         public ICategoryRepository Categories { get; set; }
         public IProductRepository Products { get; set; }
         public IPurchaseDetailRepository PurchaseDetails { get; set; }
+        public IOrderRepository Orders { get; set; }
 
         public DataManager(ICategoryRepository categoriesRepository, 
             IProductRepository productsRepository,
-            IPurchaseDetailRepository purchaseDetailRepository)
+            IPurchaseDetailRepository purchaseDetailRepository,
+            IOrderRepository ordersRepository)
         {
             Categories = categoriesRepository;
             Products = productsRepository;
             PurchaseDetails = purchaseDetailRepository;
+            Orders = ordersRepository;
         }
     }
 }
