@@ -17,20 +17,20 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" method="post" action="/admin/purchasedetails/create">
+        <form class="form-horizontal" method="post" action="/admin/purchasedetails/update">
             <div class="box-body">
                 <div class="form-group">
-                    <label asp-for="UserId" class="col-sm-2 control-label">User</label>
+                    <label asp-for="OrderId" class="col-sm-2 control-label">Order</label>
                     <div class="col-sm-10">
-                        <select asp-for="UserId" asp-items="@(new SelectList(ViewBag.AllUsers, "Id", dataTextField: "UserName"))" class="form-control"></select>
-                        <span asp-validation-for="UserId"></span>
+                        <select asp-for="OrderId" asp-items="@(new SelectList(ViewBag.AllOrders, "Id", dataTextField: "Id"))" class="form-control"></select>
+                        <span asp-validation-for="OrderId"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="ProductId" class="col-sm-2 control-label">Product</label>
                     <div class="col-sm-10">
                         <select asp-for="ProductId" asp-items="@(new SelectList(ViewBag.AllProducts, "Id", dataTextField: "Name"))" class="form-control"></select>
-                        <span asp-validation-for="UserId"></span>
+                        <span asp-validation-for="ProductId"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -40,20 +40,7 @@
                         <span asp-validation-for="Amount"></span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Processed" class="col-sm-2 control-label">Processed</label>
-                    <div class="col-sm-10">
-                        <input asp-for="Processed" type="checkbox" style="position: relative; top: 6px" placeholder="Processed">
-                        <span asp-validation-for="Processed"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                <label asp-for="Finished" class="col-sm-2 control-label">Finished</label>
-                <div class="col-sm-10">
-                    <input asp-for="Finished" type="checkbox" style="position: relative; top: 6px" placeholder="Finished">
-                    <span asp-validation-for="Finished"></span>
-                </div>
-            </div>
+                <input asp-for="Id" type="hidden" name="Id" value="@Model.Id"/>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

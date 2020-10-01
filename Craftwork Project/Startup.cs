@@ -33,6 +33,7 @@ namespace Craftwork_Project
             services.AddTransient<ICategoryRepository, EFCategoryRepository>();
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddTransient<IPurchaseDetailRepository, EFPurchaseDetailRepository>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             
             // adding repository aggregator as service
             services.AddTransient<DataManager>();

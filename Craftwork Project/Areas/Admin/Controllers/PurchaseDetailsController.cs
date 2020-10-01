@@ -2,7 +2,6 @@
 using System.Linq;
 using Craftwork_Project.Domain;
 using Craftwork_Project.Domain.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Craftwork_Project.Areas.Admin.Controllers
@@ -11,12 +10,10 @@ namespace Craftwork_Project.Areas.Admin.Controllers
     public class PurchaseDetailsController : Controller
     {
         private DataManager dataManager;
-        private UserManager<ApplicationUser> userManager;
 
-        public PurchaseDetailsController(DataManager dataManager, UserManager<ApplicationUser> userManager)
+        public PurchaseDetailsController(DataManager dataManager)
         {
             this.dataManager = dataManager;
-            this.userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -25,7 +22,7 @@ namespace Craftwork_Project.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.AllUsers = userManager.Users.ToList();
+            ViewBag.AllOrders = dataManager.Orders.GetAllOrders().ToList();
             ViewBag.AllProducts = dataManager.Products.GetAllProducts().ToList();
             return View();
         }
@@ -39,7 +36,7 @@ namespace Craftwork_Project.Areas.Admin.Controllers
                 return Redirect("/admin/purchasedetails");
             }
             
-            ViewBag.AllUsers = userManager.Users.ToList();
+            ViewBag.AllOrders = dataManager.Orders.GetAllOrders().ToList();
             ViewBag.AllProducts = dataManager.Products.GetAllProducts().ToList();
             return View(detail);
         }
@@ -60,7 +57,7 @@ namespace Craftwork_Project.Areas.Admin.Controllers
         
         public IActionResult Update(Guid id)
         {
-            ViewBag.AllUsers = userManager.Users.ToList();
+            ViewBag.AllOrders = dataManager.Orders.GetAllOrders().ToList();
             ViewBag.AllProducts = dataManager.Products.GetAllProducts().ToList();
             return View(dataManager.PurchaseDetails.GetPurchaseDetail(id));
         }
@@ -74,7 +71,7 @@ namespace Craftwork_Project.Areas.Admin.Controllers
                 return Redirect("/admin/purchasedetails");
             }
             
-            ViewBag.AllUsers = userManager.Users.ToList();
+            ViewBag.AllOrders = dataManager.Orders.GetAllOrders().ToList();
             ViewBag.AllProducts = dataManager.Products.GetAllProducts().ToList();
             return View(detail);
         }
