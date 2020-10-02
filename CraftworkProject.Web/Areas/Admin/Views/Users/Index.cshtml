@@ -1,0 +1,92 @@
+@model IQueryable<CraftworkProject.Domain.Identity.ApplicationUser>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<section class="content-header">
+    <h1>
+    Users
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Manage users</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Verified</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EmailConfirmed)</td>
+                        @if (!ViewBag.userManager.GetUserId(User).Equals(item.Id.ToString()))
+                        {
+                            <td><a href="/admin/users/update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
+                        }
+                        else
+                        {
+                            <td><a href="/admin/users/update/@item.Id">Update</a></td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+        <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+<!-- page script -->
+<script>
+    $(function () {
+        $('#example1').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    text: 'New user',
+                    action: function ( e, dt, node, config ) {
+                        window.location.replace('/admin/users/create')
+                    }
+                }
+            ]
+        });
+    });
+    
+    function Delete(id, callback){
+        var r = confirm("Are you sure you want to Delete?");
+        if (r) {
+            $.ajax(
+            {
+                type: 'POST',
+                dataType: 'text',
+                url: '/admin/users/delete',
+                data: {
+                    id: id
+                },
+                async: false,
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        } 
+    }
+</script>

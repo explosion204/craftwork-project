@@ -1,0 +1,83 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IQueryable<CraftworkProject.Domain.Category>
+
+<section class="content-header">
+    <h1>
+    Categories
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Manage categories</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Desc)</td>
+                        <td><a href="/admin/categories/update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+<!-- page script -->
+<script>
+    $(function () {
+        $('#example1').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    text: 'New category',
+                    action: function ( e, dt, node, config ) {
+                        window.location.replace('/admin/categories/create')
+                    }
+                }
+            ]
+        });
+    });
+    
+    function Delete(id, callback){
+        var r = confirm("Are you sure you want to Delete?");
+        if (r) {
+            $.ajax(
+            {
+                type: 'POST',
+                dataType: 'text',
+                url: '/admin/categories/delete',
+                data: {
+                    id: id
+                },
+                async: false,
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        } 
+    }
+</script>

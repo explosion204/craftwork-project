@@ -1,0 +1,54 @@
+@model CraftworkProject.Domain.PurchaseDetail
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Purchase details
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content container-fluid">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Update purchase detail</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" method="post" action="/admin/purchasedetails/update">
+            <div class="box-body">
+                <div class="form-group">
+                    <label asp-for="OrderId" class="col-sm-2 control-label">Order</label>
+                    <div class="col-sm-10">
+                        <select asp-for="OrderId" asp-items="@(new SelectList(ViewBag.AllOrders, "Id", dataTextField: "Id"))" class="form-control"></select>
+                        <span asp-validation-for="OrderId"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductId" class="col-sm-2 control-label">Product</label>
+                    <div class="col-sm-10">
+                        <select asp-for="ProductId" asp-items="@(new SelectList(ViewBag.AllProducts, "Id", dataTextField: "Name"))" class="form-control"></select>
+                        <span asp-validation-for="ProductId"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Amount" class="col-sm-2 control-label">Amount</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Amount" type="text" class="form-control" placeholder="Amount">
+                        <span asp-validation-for="Amount"></span>
+                    </div>
+                </div>
+                <input asp-for="Id" type="hidden" name="Id" value="@Model.Id"/>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <input type="button" class="btn btn-info" value="Cancel" onclick="location.href='/admin/purchasedetails/'">
+                <button type="submit" class="btn btn-info pull-right" id="createBtn" onclick="this.disabled = true; this.value = 'Updating'; this.form.submit();">Update</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+    <!-- /.box -->
+</section>
