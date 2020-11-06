@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace CraftworkProject.Domain
+namespace CraftworkProject.Domain.Models
 {
     public class Product : BaseEntity
     {
@@ -20,11 +18,7 @@ namespace CraftworkProject.Domain
         
         [Required]
         public string ImagePath { get; set; }
-        
-        [Required]
-        [ForeignKey("Category")]
-        public Guid CategoryId { get; set; }
-        
+
         public Category Category { get; set; }
     }
 }

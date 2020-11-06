@@ -8,15 +8,15 @@
       <e p="CraftworkProject.Domain" t="IncludeRecursive">
         <e p="CraftworkProject.Domain.csproj" t="IncludeRecursive" />
         <e p="IRepository.cs" t="Include" />
-        <e p="Identity" t="Include">
-          <e p="ApplicationUser.cs" t="Include" />
-        </e>
+        <e p="IUserManager.cs" t="Include" />
         <e p="Models" t="Include">
           <e p="BaseEntity.cs" t="Include" />
           <e p="Category.cs" t="Include" />
           <e p="Order.cs" t="Include" />
           <e p="Product.cs" t="Include" />
           <e p="PurchaseDetail.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+          <e p="UserRole.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
@@ -29,13 +29,28 @@
       </e>
       <e p="CraftworkProject.Infrastructure" t="IncludeRecursive">
         <e p="ApplicationDbContext.cs" t="Include" />
+        <e p="ApplicationUserManager.cs" t="Include" />
         <e p="CraftworkProject.Infrastructure.csproj" t="IncludeRecursive" />
+        <e p="MappingProfile.cs" t="Include" />
         <e p="Migrations" t="Include">
-          <e p="20201002191052_initial.Designer.cs" t="Include" />
-          <e p="20201002191052_initial.cs" t="Include" />
+          <e p="20201106114822_initial.Designer.cs" t="Include" />
+          <e p="20201106114822_initial.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
-        <e p="Repository.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="EFCategory.cs" t="Include" />
+          <e p="EFOrder.cs" t="Include" />
+          <e p="EFProduct.cs" t="Include" />
+          <e p="EFPurchaseDetail.cs" t="Include" />
+          <e p="EFUser.cs" t="Include" />
+          <e p="EFUserRole.cs" t="Include" />
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="CategoryRepository.cs" t="Include" />
+          <e p="OrderRepository.cs" t="Include" />
+          <e p="ProductRepository.cs" t="Include" />
+          <e p="PurchaseDetailRepository.cs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -47,7 +62,12 @@
       </e>
       <e p="CraftworkProject.Services" t="IncludeRecursive">
         <e p="CraftworkProject.Services.csproj" t="IncludeRecursive" />
-        <e p="DataManager.cs" t="Include" />
+        <e p="Implementations" t="Include">
+          <e p="DataManager.cs" t="Include" />
+        </e>
+        <e p="Interfaces" t="Include">
+          <e p="IDataManager.cs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -68,6 +88,9 @@
               <e p="UsersController.cs" t="Include" />
             </e>
             <e p="ViewModels" t="Include">
+              <e p="OrderViewModel.cs" t="Include" />
+              <e p="ProductViewModel.cs" t="Include" />
+              <e p="PurchaseDetailViewModel.cs" t="Include" />
               <e p="UserViewModel.cs" t="Include" />
             </e>
             <e p="Views" t="Include">
@@ -116,6 +139,8 @@
         <e p="Service" t="Include">
           <e p="AdminAreaAuth.cs" t="Include" />
           <e p="Config.cs" t="Include" />
+          <e p="ConfigureAppServices.cs" t="Include" />
+          <e p="ConfigureAuthServices.cs" t="Include" />
         </e>
         <e p="Startup.cs" t="Include" />
         <e p="ViewModels" t="Include">

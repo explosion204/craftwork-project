@@ -1,15 +1,6 @@
-using System;
-using CraftworkProject.Domain;
-using CraftworkProject.Domain.Identity;
-using CraftworkProject.Infrastructure;
-using CraftworkProject.Services;
 using CraftworkProject.Web.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,60 +9,16 @@ namespace CraftworkProject.Web
 {
     public class Startup
     {
-        public IConfiguration Configuration { get;  }
+        public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration) => Configuration = configuration;
         public void ConfigureServices(IServiceCollection services)
         {
-            // binding Config class to appsettings.json
             Configuration.Bind("Project", new Config());
-
-            // adding model repositories as services
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-            // adding repository aggregator as service
-            services.AddTransient<DataManager>();
-
-            // setting up db context
-            services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(Config.ConnectionString));
-
-            // setting up identity
-            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireDigit = false;
-            })
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders()
-            .AddUserStore<UserStore<ApplicationUser, IdentityRole<Guid>, ApplicationDbContext, Guid>>()
-            .AddRoleStore<RoleStore<IdentityRole<Guid>, ApplicationDbContext, Guid>>();
-
-            // setting up auth cookie
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.Name = Config.CompanyEmail + "Auth";
-                options.Cookie.HttpOnly = true;
-                options.LoginPath = "/account/login";
-                options.SlidingExpiration = true;
-            });
-
-            services.AddAuthorization(x =>
-            {
-                x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
-            });
-            
-            // add MVC
-            services.AddControllersWithViews(options =>
-            {
-                options.Conventions.Add(new AdminAreaAuth("Admin", "AdminArea"));
-            })
-            .AddSessionStateTempDataProvider();
+            ConfigureAppServices.Configure(services);
+            ConfigureAuthServices.Configure(services);
         }
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // dev env
@@ -79,7 +26,7 @@ namespace CraftworkProject.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             // setting up static files
             app.UseStaticFiles();
             

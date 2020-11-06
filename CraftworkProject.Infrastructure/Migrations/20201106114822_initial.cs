@@ -52,12 +52,57 @@ namespace CraftworkProject.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Desc = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Desc = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Processed = table.Column<bool>(type: "boolean", nullable: false),
+                    Finished = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Desc = table.Column<string>(type: "text", nullable: true),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    InStock = table.Column<bool>(type: "boolean", nullable: false),
+                    ImagePath = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PurchaseDetails",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Amount = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseDetails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,102 +211,19 @@ namespace CraftworkProject.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Processed = table.Column<bool>(type: "boolean", nullable: false),
-                    Finished = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Orders_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Desc = table.Column<string>(type: "text", nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    InStock = table.Column<bool>(type: "boolean", nullable: false),
-                    ImagePath = table.Column<string>(type: "text", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uuid", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PurchaseDetails",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Amount = table.Column<int>(type: "integer", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uuid", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PurchaseDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PurchaseDetails_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PurchaseDetails_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PurchaseDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"), "f389507d-b12f-48ac-87a7-61daff747d23", "admin", "ADMIN" },
-                    { new Guid("3800721a-cf25-427e-b5e1-9c26710df0d5"), "ce249f9b-af5f-4b25-8535-2f6d85f330a3", "customer", "CUSTOMER" }
+                    { new Guid("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"), "a357058a-334c-4f91-879c-51480947a5b9", "admin", "ADMIN" },
+                    { new Guid("3800721a-cf25-427e-b5e1-9c26710df0d5"), "88aad9f0-3cca-47f4-8a37-1567e133c156", "customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"), 0, "7c654d5a-1752-4a97-b248-d8a1a150095c", "dzmitriy20magic@gmail.com", true, false, null, "DZMITRIY20MAGIC@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEHKdlbtiVvvuImRV8WESQPF44FIpY2O6tkGP9rc/vG7NMWReg6YU6p09P5zosR5clA==", null, false, "", false, "admin" });
+                values: new object[] { new Guid("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"), 0, "9a129ce1-0558-4858-8082-5f6b3e7063cf", "dzmitriy20magic@gmail.com", true, false, null, "DZMITRIY20MAGIC@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEKRUCl45kPAxCa0uo4vKjbh5VjEFaYdkEvpYU34fi4qJkVKLi7+E22E0okN26v3/Mg==", null, false, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -304,36 +266,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_UserId",
-                table: "Orders",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_OrderId",
-                table: "Products",
-                column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PurchaseDetails_ApplicationUserId",
-                table: "PurchaseDetails",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PurchaseDetails_OrderId",
-                table: "PurchaseDetails",
-                column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PurchaseDetails_ProductId",
-                table: "PurchaseDetails",
-                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -354,19 +286,19 @@ namespace CraftworkProject.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "PurchaseDetails");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "PurchaseDetails");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

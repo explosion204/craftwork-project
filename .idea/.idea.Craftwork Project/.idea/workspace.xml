@@ -18,133 +18,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd76b39-8ba4-4d35-8830-ca6b0cec1686" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Domain/IRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/BaseEntity.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Services/DataManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/ViewModels/SignUpViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/Account/Signup.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Domain/IUserManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/User.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/UserRole.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationUserManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/MappingProfile.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFCategory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFOrder.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFProduct.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFPurchaseDetail.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFUserRole.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/CategoryRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/OrderRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/PurchaseDetailRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Services/Implementations/DataManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Services/Interfaces/IDataManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/OrderViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/ProductViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/PurchaseDetailViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Service/ConfigureAppServices.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Service/ConfigureAuthServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Craftwork Project/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Craftwork Project/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Craftwork Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Craftwork Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Craftwork Project.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Controllers/CategoriesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/CategoriesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Controllers/OrdersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/OrdersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Controllers/ProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/ProductsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Controllers/PurchaseDetailsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/PurchaseDetailsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/ViewModels/UserViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/UserViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Categories/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Categories/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Categories/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Update.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Orders/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Orders/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Orders/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Update.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Products/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Products/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Products/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Update.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/PurchaseDetails/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/PurchaseDetails/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/PurchaseDetails/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Update.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Shared/_MainMenu.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Shared/_MainMenu.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Users/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Users/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/Users/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Update.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Views/_ViewStart.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/_ViewStart.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Craftwork Project.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/CraftworkProject.Web.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/DataManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Models/ApplicationUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Identity/ApplicationUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Models/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Category.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Models/Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Order.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Models/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Product.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Models/PurchaseDetail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/PurchaseDetail.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Repositories/EntityFramework/EFCategoryRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Repositories/EntityFramework/EFOrderRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Repositories/EntityFramework/EFProductRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Repositories/EntityFramework/EFPurchaseDetailRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Repositories/Interfaces/ICategoryRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Repositories/Interfaces/IOrderRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Repositories/Interfaces/IProductRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Domain/Repositories/Interfaces/IPurchaseDetailRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Migrations/20201001193903_init.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Migrations/20201001193903_init.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Migrations/20201001195126_second.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Migrations/20201001195126_second.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Service/AdminAreaAuth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Service/AdminAreaAuth.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Service/Config.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Service/Config.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/ViewModels/LoginViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/ViewModels/LoginViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Views/Account/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/Account/Login.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/Home/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Views/Shared/CssShared.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/Shared/CssShared.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Views/Shared/FooterShared.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/Shared/FooterShared.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Views/Shared/MetaShared.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/Shared/MetaShared.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Views/Shared/ScriptsShared.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/Shared/ScriptsShared.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Views/_ViewImports.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/_ViewImports.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/Views/_ViewStart.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Views/_ViewStart.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/categories_admin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/font-awesome.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/loginform.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/authform.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/mainstyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/mainstyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/material-design-iconic-font.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/material-design-iconic-font.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/searchbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/searchbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/skin-blue.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/skin-blue.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/vendor/AdminLTE.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/vendor/AdminLTE.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/vendor/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/vendor/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/vendor/dataTables.bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/vendor/dataTables.bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/vendor/ionicons.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/vendor/ionicons.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/vendor/jquery.dataTables.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/vendor/jquery.dataTables.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/vendor/select.dataTables.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/vendor/select.dataTables.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/css/vendor/select2.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/css/vendor/select2.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/fonts/FontAwesome.otf" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/fonts/FontAwesome.otf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/fonts/fontawesome-webfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/fonts/fontawesome-webfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/fonts/fontawesome-webfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/fonts/fontawesome-webfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/about-01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/about-01.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/about-02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/about-02.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/about-03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/about-03.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/about-04.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/about-04.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/about-05.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/about-05.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/about-06.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/about-06.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/dummy-img.png" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/dummy-img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/gallery/01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/gallery/01.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/gallery/02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/gallery/02.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/gallery/03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/gallery/03.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/gallery/04.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/gallery/04.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/gallery/05.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/gallery/05.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/gallery/06.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/gallery/06.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/gallery/07.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/gallery/07.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/gallery/08.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/gallery/08.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/img-01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/img-01.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/simple-house-01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/simple-house-01.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/img/simple-house-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/img/simple-house-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/loginform.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/authform.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/adminlte.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/adminlte.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/bootstrap.bundle.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/bootstrap.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/choices.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/choices.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/custom-materialize.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/custom-materialize.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/dataTables.buttons.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/dataTables.buttons.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/flatpickr.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/flatpickr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/jquery.dataTables.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/jquery.dataTables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/jquery.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/parallax.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/parallax.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/js/vendor/select2.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/js/vendor/select2.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Craftwork Project/wwwroot/signupfrom.html" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/signupfrom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/IRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/IRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Identity/ApplicationUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/BaseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Category.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Order.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Product.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/PurchaseDetail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/PurchaseDetail.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/CraftworkProject.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/CraftworkProject.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Migrations/20201002191052_initial.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Migrations/20201002191052_initial.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/ProductRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Services/CraftworkProject.Services.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Services/CraftworkProject.Services.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Services/DataManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/CategoriesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/CategoriesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/OrdersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/OrdersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/ProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/ProductsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/PurchaseDetailsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/PurchaseDetailsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/UserViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/UserViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Update.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Update.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Update.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Update.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/AccountController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/CraftworkProject.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/CraftworkProject.Web.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Service/AdminAreaAuth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Service/AdminAreaAuth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,79 +98,90 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D0228696-B9FC-4262-A62B-D47E2177138A/24/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Views/Account/Signup.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/3/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/ViewModels/SignUpViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6DF8B57F-11CD-48D1-9EFD-9623E18A39F1/C/Controller.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/85B739A8-30DD-4AAB-8776-49AB424D41C1/81/aa166642/UserManager`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/ViewModels/LoginViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4548C038-E0FD-4678-A83D-53D9C5058FA0/13/RoleManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CraftworkProject.Domain/IUserManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4548C038-E0FD-4678-A83D-53D9C5058FA0/1D/UserManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/1/IdentityRole.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/6/IdentityUserRole.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D0228696-B9FC-4262-A62B-D47E2177138A/F3/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/366E8AE0-1B9B-4017-9558-D9119070DE22/F/RazorPageOfT.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/70C6E57A-8249-4F3C-B229-F9CCDA65A029/7/ClaimsPrincipal.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/45212CA3-153F-478C-B9B1-60517BBB01B3/eb/a206858a/ICollection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/FDEE9ED9-C809-4C83-BD12-4B44803B9F5A/F/SignInManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/32054AB3-4C81-4CFE-B5C7-40D95EFA55EC/8/Queryable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/33D3E218-D40A-4945-A4E2-F89375128B97/C/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4548C038-E0FD-4678-A83D-53D9C5058FA0/13/RoleManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D0228696-B9FC-4262-A62B-D47E2177138A/11C/ResourceInvoker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/25/fa2c7ffa/IdentityUserRole`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/45212CA3-153F-478C-B9B1-60517BBB01B3/4e/a939c660/IEquatable`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/1/IdentityRole.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/EEE8FA28-D331-44D7-89B2-84DAE1CE6370/2/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/6/IdentityUserRole.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D0228696-B9FC-4262-A62B-D47E2177138A/F3/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CraftworkProject.Services/DataManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CraftworkProject.Services/Implementations/DataManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Views/Account/Login.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4548C038-E0FD-4678-A83D-53D9C5058FA0/8/IdentityBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/UserViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/45212CA3-153F-478C-B9B1-60517BBB01B3/eb/a206858a/ICollection.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/ProductRepository.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Properties/launchSettings.json" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/UserViewModel.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Create.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Index.cshtml" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Update.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Create.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Update.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Index.cshtml" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/OrderViewModel.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Models/BaseEntity.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Create.cshtml" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Update.cshtml" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Create.cshtml" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Update.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Index.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Create.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Update.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Shared/_Layout.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Service/AdminAreaAuth.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Views/Shared/_Layout.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Service/Config.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Views/Shared/MetaShared.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Views/Account/Signup.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Models/PurchaseDetail.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/CraftworkProject.Web.csproj" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Program.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/CraftworkProject.Infrastructure.csproj" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Services/IGetUsernameService.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Services/GetUsernameService.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Services/IUserService.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Services/UserService.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Index.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Services/IDataManagerService.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Models/ApplicationUser.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Identity/ApplicationUser.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Models/Order.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/DependencyInjection/ApplicationModule.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationDbContext.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/UsersController.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Controllers/AccountController.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Services/DependencyInjection/ApplicationModule.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/CategoryRepository.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Index.cshtml" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Index.cshtml" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Index.cshtml" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/ProductRepository.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/OrderRepository.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/PurchaseDetailRepository.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Create.cshtml" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Update.cshtml" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Index.cshtml" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Index.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Repository/DataManager.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Repository/Repository.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repository.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/DataManager.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Services/DataManagerService.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Services/DataManager.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/OrdersController.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Models/Category.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Models/Order.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Models/Product.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Models/PurchaseDetail.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Domain/IRepository.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Domain/IUserManager.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFCategory.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFOrder.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFProduct.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFPurchaseDetail.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFUser.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationUserManager.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/MappingProfile.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Services/Implementations/DataManager.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/CategoriesController.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/OrdersController.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/ProductsController.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/PurchaseDetailsController.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/UsersController.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/ProductViewModel.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/PurchaseDetailViewModel.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/UserViewModel.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Controllers/AccountController.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Program.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Service/ConfigureAuth.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Service/AdminAreaAuth.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Service/ConfigureAppServices.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Service/ConfigureAuthServices.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" />
       </list>
     </option>
@@ -365,6 +311,9 @@
       <workItem from="1601641759627" duration="10748000" />
       <workItem from="1601655202454" duration="3098000" />
       <workItem from="1601658308877" duration="7921000" />
+      <workItem from="1604606936867" duration="3604000" />
+      <workItem from="1604610734250" duration="280000" />
+      <workItem from="1604653966283" duration="19104000" />
     </task>
     <servers />
   </component>
@@ -393,123 +342,123 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="418" y="211" width="1084" height="734" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1601659036922" />
-    <state width="557" height="470" key="DebuggerActiveHint" timestamp="1601662137114">
+    <state width="557" height="470" key="DebuggerActiveHint" timestamp="1604677100511">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="557" height="464" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1601215282650" />
-    <state width="557" height="470" key="DebuggerActiveHint/0.27.1920.1053@0.27.1920.1053" timestamp="1601662137114" />
+    <state width="557" height="470" key="DebuggerActiveHint/0.27.1920.1053@0.27.1920.1053" timestamp="1604677100511" />
     <state x="838" y="418" width="424" height="491" key="FileChooserDialogImpl" timestamp="1601274535178">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="838" y="418" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1601274535178" />
-    <state width="1878" height="369" key="GridCell.Tab.0.bottom" timestamp="1601665450911">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom" timestamp="1604678404750">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450911" />
-    <state width="1878" height="369" key="GridCell.Tab.0.center" timestamp="1601665450910">
+    <state width="1878" height="277" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1604678404750" />
+    <state width="1878" height="277" key="GridCell.Tab.0.center" timestamp="1604678404749">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450910" />
-    <state width="1878" height="369" key="GridCell.Tab.0.left" timestamp="1601665450910">
+    <state width="1878" height="277" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1604678404749" />
+    <state width="1878" height="277" key="GridCell.Tab.0.left" timestamp="1604678404748">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450910" />
-    <state width="1878" height="369" key="GridCell.Tab.0.right" timestamp="1601665450911">
+    <state width="1878" height="277" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1604678404748" />
+    <state width="1878" height="277" key="GridCell.Tab.0.right" timestamp="1604678404750">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450911" />
-    <state width="1878" height="369" key="GridCell.Tab.1.bottom" timestamp="1601665450912">
+    <state width="1878" height="277" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1604678404750" />
+    <state width="1878" height="369" key="GridCell.Tab.1.bottom" timestamp="1604678397892">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450912" />
-    <state width="1878" height="369" key="GridCell.Tab.1.center" timestamp="1601665450911">
+    <state width="1878" height="369" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397892" />
+    <state width="1878" height="369" key="GridCell.Tab.1.center" timestamp="1604678397892">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450911" />
-    <state width="1878" height="369" key="GridCell.Tab.1.left" timestamp="1601665450911">
+    <state width="1878" height="369" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397892" />
+    <state width="1878" height="369" key="GridCell.Tab.1.left" timestamp="1604678397892">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450911" />
-    <state width="1878" height="369" key="GridCell.Tab.1.right" timestamp="1601665450912">
+    <state width="1878" height="369" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397892" />
+    <state width="1878" height="369" key="GridCell.Tab.1.right" timestamp="1604678397892">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450912" />
-    <state width="1878" height="369" key="GridCell.Tab.2.bottom" timestamp="1601665450913">
+    <state width="1878" height="369" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397892" />
+    <state width="1878" height="369" key="GridCell.Tab.2.bottom" timestamp="1604678397893">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.2.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450913" />
-    <state width="1878" height="369" key="GridCell.Tab.2.center" timestamp="1601665450912">
+    <state width="1878" height="369" key="GridCell.Tab.2.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397893" />
+    <state width="1878" height="369" key="GridCell.Tab.2.center" timestamp="1604678397893">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.2.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450912" />
-    <state width="1878" height="369" key="GridCell.Tab.2.left" timestamp="1601665450912">
+    <state width="1878" height="369" key="GridCell.Tab.2.center/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397893" />
+    <state width="1878" height="369" key="GridCell.Tab.2.left" timestamp="1604678397893">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.2.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450912" />
-    <state width="1878" height="369" key="GridCell.Tab.2.right" timestamp="1601665450913">
+    <state width="1878" height="369" key="GridCell.Tab.2.left/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397893" />
+    <state width="1878" height="369" key="GridCell.Tab.2.right" timestamp="1604678397893">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.2.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450913" />
-    <state width="1878" height="369" key="GridCell.Tab.3.bottom" timestamp="1601665450914">
+    <state width="1878" height="369" key="GridCell.Tab.2.right/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397893" />
+    <state width="1878" height="369" key="GridCell.Tab.3.bottom" timestamp="1604678397893">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.3.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450914" />
-    <state width="1878" height="369" key="GridCell.Tab.3.center" timestamp="1601665450913">
+    <state width="1878" height="369" key="GridCell.Tab.3.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397893" />
+    <state width="1878" height="369" key="GridCell.Tab.3.center" timestamp="1604678397893">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.3.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450913" />
-    <state width="1878" height="369" key="GridCell.Tab.3.left" timestamp="1601665450913">
+    <state width="1878" height="369" key="GridCell.Tab.3.center/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397893" />
+    <state width="1878" height="369" key="GridCell.Tab.3.left" timestamp="1604678397893">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.3.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450913" />
-    <state width="1878" height="369" key="GridCell.Tab.3.right" timestamp="1601665450914">
+    <state width="1878" height="369" key="GridCell.Tab.3.left/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397893" />
+    <state width="1878" height="369" key="GridCell.Tab.3.right" timestamp="1604678397893">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.3.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450914" />
-    <state width="1878" height="369" key="GridCell.Tab.4.bottom" timestamp="1601665450915">
+    <state width="1878" height="369" key="GridCell.Tab.3.right/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397893" />
+    <state width="1878" height="369" key="GridCell.Tab.4.bottom" timestamp="1604678397894">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884735" />
-    <state width="1878" height="369" key="GridCell.Tab.4.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450915" />
-    <state width="1878" height="369" key="GridCell.Tab.4.center" timestamp="1601665450914">
+    <state width="1878" height="369" key="GridCell.Tab.4.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397894" />
+    <state width="1878" height="369" key="GridCell.Tab.4.center" timestamp="1604678397894">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.4.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450914" />
-    <state width="1878" height="369" key="GridCell.Tab.4.left" timestamp="1601665450914">
+    <state width="1878" height="369" key="GridCell.Tab.4.center/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397894" />
+    <state width="1878" height="369" key="GridCell.Tab.4.left" timestamp="1604678397894">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.4.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450914" />
-    <state width="1878" height="369" key="GridCell.Tab.4.right" timestamp="1601665450915">
+    <state width="1878" height="369" key="GridCell.Tab.4.left/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397894" />
+    <state width="1878" height="369" key="GridCell.Tab.4.right" timestamp="1604678397894">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601217884734" />
-    <state width="1878" height="369" key="GridCell.Tab.4.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601665450915" />
+    <state width="1878" height="369" key="GridCell.Tab.4.right/0.27.1920.1053@0.27.1920.1053" timestamp="1604678397894" />
     <state x="555" y="288" width="800" height="537" key="Rider.ProjectTemplateDialog.Size" timestamp="1601655077737">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="288" width="800" height="537" key="Rider.ProjectTemplateDialog.Size/0.27.1920.1053@0.27.1920.1053" timestamp="1601655077737" />
-    <state x="779" y="263" width="352" height="587" key="RiderGenerateDialog" timestamp="1601655626970">
+    <state x="779" y="263" width="384" height="622" key="RiderGenerateDialog" timestamp="1604656264802">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="779" y="263" width="352" height="587" key="RiderGenerateDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1601655626970" />
+    <state x="779" y="263" width="384" height="622" key="RiderGenerateDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1604656264802" />
     <state x="559" y="292" width="992" height="737" key="SettingsEditor" timestamp="1601575638264">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -531,34 +480,27 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="624" y="252" key="run.anything.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1601290175433" />
-    <state x="623" y="255" width="672" height="687" key="search.everywhere.popup" timestamp="1601311845842">
+    <state x="623" y="255" width="672" height="687" key="search.everywhere.popup" timestamp="1604591519711">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601035387053" />
-    <state x="623" y="255" width="672" height="687" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1601311845842" />
+    <state x="623" y="255" width="672" height="687" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1604591519711" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/ProductsController.cs</url>
-          <line>64</line>
-          <properties documentPath="$PROJECT_DIR$/Craftwork Project/Areas/Admin/Controllers/ProductsController.cs" initialLine="64" />
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Index.cshtml</url>
-          <line>35</line>
-          <properties documentPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Index.cshtml" initialLine="36" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
+          <url>file://$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/OrdersController.cs</url>
+          <line>49</line>
+          <properties documentPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/OrdersController.cs" initialLine="53">
             <startOffsets>
-              <option value="-1" />
+              <option value="1548" />
             </startOffsets>
             <endOffsets>
-              <option value="-1" />
+              <option value="1594" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="28" />
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

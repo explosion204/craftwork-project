@@ -1,9 +1,9 @@
 using System;
-using System.Linq;
+using System.Threading.Tasks;
 using CraftworkProject.Domain;
-using CraftworkProject.Domain.Identity;
-using CraftworkProject.Services;
-using Microsoft.AspNetCore.Identity;
+using CraftworkProject.Domain.Models;
+using CraftworkProject.Services.Interfaces;
+using CraftworkProject.Web.Areas.Admin.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Areas.Admin.Controllers
@@ -11,36 +11,44 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class OrdersController : Controller
     {
-        private DataManager dataManager;
-        private UserManager<ApplicationUser> userManager;
-        public OrdersController(DataManager dataManager, UserManager<ApplicationUser> userManager)
+        private readonly IDataManager _dataManager;
+        private readonly IUserManager _userManager;
+        
+        public OrdersController(IDataManager dataManager, IUserManager userManager)
         {
-            this.dataManager = dataManager;
-            this.userManager = userManager;
+            _dataManager = dataManager;
+            _userManager = userManager;
         }
+        
         public IActionResult Index()
         {
-            return View(dataManager.Orders.GetAllEntities());
+            return View(_dataManager.OrderRepository.GetAllEntities());
         }
 
         public IActionResult Create()
         {
-            ViewBag.AllUsers = userManager.Users.ToList();
-            ViewBag.UserManager = userManager;    
-            return View();
+            ViewBag.AllUsers = _userManager.GetAllUsers();
+            return View(new OrderViewModel());
         }
         
         [HttpPost]
-        public IActionResult Create(Order order)
+        public async Task<IActionResult> Create(OrderViewModel model)
         {
             if (ModelState.IsValid)
             {
-                dataManager.Orders.SaveEntity(order);
+                User user = await _userManager.FindUser(model.UserId);
+                Order order = new Order()
+                {
+                    Processed = model.Processed,
+                    Finished = model.Finished,
+                    User = user
+                };
+                _dataManager.OrderRepository.SaveEntity(order);
                 return Redirect("/admin/orders");
             }
-            
-            ViewBag.AllUsers = userManager.Users.ToList();
-            return View(order);
+
+            ViewBag.AllUsers = _userManager.GetAllUsers();
+            return View(model);
         }
         
         [HttpPost]
@@ -48,7 +56,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         {
             try
             {
-                dataManager.Orders.DeleteEntity(id);
+                _dataManager.OrderRepository.DeleteEntity(id);
                 return true;
             }
             catch (Exception)
@@ -59,21 +67,38 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         
         public IActionResult Update(Guid id)
         {
-            ViewBag.AllUsers = userManager.Users.ToList();
-            return View(dataManager.Orders.GetEntity(id));
+            ViewBag.AllUsers = _userManager.GetAllUsers();
+
+            Order order = _dataManager.OrderRepository.GetEntity(id);
+            OrderViewModel viewModel = new OrderViewModel()
+            {
+                Id = order.Id,
+                UserId = order.User.Id,
+                Finished = order.Finished,
+                Processed = order.Processed
+            };
+            return View(viewModel);
         }
         
         [HttpPost]
-        public IActionResult Update(Order order)
+        public async Task<IActionResult> Update(OrderViewModel model)
         {
             if (ModelState.IsValid)
             {
-                dataManager.Orders.SaveEntity(order);
+                User user = await _userManager.FindUser(model.UserId);
+                Order order = new Order()
+                {
+                    Id = model.Id,
+                    Processed = model.Processed,
+                    Finished = model.Finished,
+                    User = user
+                };
+                _dataManager.OrderRepository.SaveEntity(order);
                 return Redirect("/admin/orders");
             }
-            
-            ViewBag.AllUsers = userManager.Users.ToList();
-            return View(order);
+
+            ViewBag.AllUsers = _userManager.GetAllUsers();
+            return View(model);
         }
     }
 }

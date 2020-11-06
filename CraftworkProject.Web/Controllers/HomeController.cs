@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CraftworkProject.Controllers
+namespace CraftworkProject.Web.Controllers
 {
     public class HomeController : Controller
     {

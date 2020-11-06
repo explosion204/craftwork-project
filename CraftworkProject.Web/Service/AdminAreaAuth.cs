@@ -29,5 +29,7 @@ namespace CraftworkProject.Web.Service
                 controller.Filters.Add(new AuthorizeFilter(policy));
             }
         }
+        
+        
     }
 }

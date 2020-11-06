@@ -1,9 +1,8 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using CraftworkProject.Domain.Identity;
+using CraftworkProject.Domain;
+using CraftworkProject.Domain.Models;
 using CraftworkProject.Web.Areas.Admin.ViewModels;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Areas.Admin.Controllers
@@ -11,30 +10,29 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class UsersController : Controller
     {
-        private UserManager<ApplicationUser> userManager;
-        private RoleManager<IdentityRole<Guid>> roleManager;
-        public UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<Guid>> roleManager)
+        private readonly IUserManager _userManager;
+        
+        public UsersController(IUserManager userManager)
         {
-            this.userManager = userManager;
-            this.roleManager = roleManager;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            ViewBag.userManager = userManager;
-            return View(userManager.Users);
+            ViewBag.userManager = _userManager;
+            return View(_userManager.GetAllUsers());
         }
 
         public IActionResult Create()
         {
-            ViewBag.AllRoles = roleManager.Roles.ToList();
+            ViewBag.AllRoles = _userManager.GetAllRoles();
             return View(new UserViewModel());
         }
         
         [HttpPost]
         public async Task<IActionResult> Create(UserViewModel model)
         {
-            ViewBag.AllRoles = roleManager.Roles.ToList();
+            ViewBag.AllRoles = _userManager.GetAllRoles();
 
             if (ModelState.IsValid)
             {
@@ -50,24 +48,20 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
 
                 if (ModelState.ErrorCount == 0)
                 {
-                    if (model.NewPassword.Equals(model.ConfirmNewPassword))
+                    if (model.NewPassword != null && model.NewPassword.Equals(model.ConfirmNewPassword))
                     {
-                        ApplicationUser newUser = new ApplicationUser()
+                        User newUser = new User()
                         {
-                            UserName = model.Username,
+                            Username = model.Username,
                             Email = model.Email,
                             EmailConfirmed = model.Verified
                         };
 
-                        var userCreation = await userManager.CreateAsync(newUser, model.NewPassword);
-                        if (userCreation.Succeeded)
+                        var result = await _userManager.CreateUser(newUser, model.NewPassword, model.RoleId);
+
+                        if (result)
                         {
-                            var userRole = await roleManager.FindByIdAsync(model.RoleId.ToString());
-                            var roleAssigning = await userManager.AddToRoleAsync(newUser, userRole.Name);
-                            if (roleAssigning.Succeeded)
-                            {
-                                return Redirect("/admin/users");
-                            }
+                            return Redirect("/admin/users");
                         }
                     }
                     else
@@ -88,49 +82,48 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<bool> Delete(Guid id)
         {
-            if (!userManager.GetUserId(User).Equals(id.ToString()))
+            Guid currentUserId = _userManager.GetUserId(User);
+            
+            if (!currentUserId.ToString().Equals(id.ToString()))
             {
-                ApplicationUser user = await userManager.FindByIdAsync(id.ToString());
-                await userManager.DeleteAsync(user);
+                _userManager.DeleteUser(id);
                 return true;
             }
-
+            
             return false;
         }
         
         public async Task<IActionResult> Update(Guid id)
         {
-            ApplicationUser user = await userManager.FindByIdAsync(id.ToString());
+            var user = await _userManager.FindUser(id);
             UserViewModel model = new UserViewModel()
             {
-                Username = user.UserName,
+                Username = user.Username,
                 Email = user.Email,
                 Verified = user.EmailConfirmed
             };
-            
-            ViewBag.AllRoles = roleManager.Roles.ToList();
-            ViewBag.RoleEditAllowed = !userManager.GetUserId(User).Equals(id.ToString());
+
+            ViewBag.AllRoles = _userManager.GetAllRoles();
+            ViewBag.RoleEditAllowed = !_userManager.GetUserId(User).ToString()?.Equals(id.ToString());
             return View(model);
         }
     
         [HttpPost]
         public async Task<IActionResult> Update(UserViewModel model)
         {
-            ApplicationUser user = await userManager.FindByNameAsync(model.Username);
-            ViewBag.RoleEditAllowed = !userManager.GetUserId(User).Equals(user.Id.ToString());
-            ViewBag.AllRoles = roleManager.Roles.ToList();
+            var user = await _userManager.FindUser(model.Username);
+            bool? roleEditAllowed = !_userManager.GetUserId(User).ToString()?.Equals(user.Id.ToString());
+            ViewBag.RoleEditAllowed = roleEditAllowed;
+            ViewBag.AllRoles = _userManager.GetAllRoles();
 
             if (ModelState.IsValid)
             {
                 user.Email = model.Email;
                 user.EmailConfirmed = model.Verified;
                 
-                if (!userManager.GetUserId(User).Equals(user.Id.ToString()))
+                if (roleEditAllowed ?? false)
                 {
-                    var userRoles = await userManager.GetRolesAsync(user);
-                    var newRole = await roleManager.FindByIdAsync(model.RoleId.ToString());
-                    await userManager.RemoveFromRoleAsync(user, userRoles[0]);
-                    await userManager.AddToRoleAsync(user, newRole.Name);
+                    _userManager.SetUserRole(user, model.RoleId);
                 }
 
                 if (!String.IsNullOrEmpty(model.NewPassword) && !String.IsNullOrEmpty(model.ConfirmNewPassword))
@@ -142,11 +135,10 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                         return View(model);
                     }
                     
-                    string newPasswordHash = userManager.PasswordHasher.HashPassword(user, model.NewPassword);
-                    user.PasswordHash = newPasswordHash;
+                    _userManager.SetUserPassword(user, model.NewPassword);
                 }
 
-                await userManager.UpdateAsync(user);
+                _userManager.UpdateUser(user);
 
                 return Redirect("/admin/users");
             }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
-using CraftworkProject.Domain;
-using CraftworkProject.Services;
+using CraftworkProject.Domain.Models;
+using CraftworkProject.Services.Interfaces;
+using CraftworkProject.Web.Areas.Admin.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Areas.Admin.Controllers
@@ -9,36 +10,43 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class PurchaseDetailsController : Controller
     {
-        private DataManager dataManager;
+        private IDataManager _dataManager;
 
-        public PurchaseDetailsController(DataManager dataManager)
+        public PurchaseDetailsController(IDataManager dataManager)
         {
-            this.dataManager = dataManager;
+            _dataManager = dataManager;
         }
         public IActionResult Index()
         {
-            return View(dataManager.PurchaseDetails.GetAllEntities());
+            return View(_dataManager.PurchaseDetailRepository.GetAllEntities());
         }
 
         public IActionResult Create()
         {
-            ViewBag.AllOrders = dataManager.Orders.GetAllEntities().ToList();
-            ViewBag.AllProducts = dataManager.Products.GetAllEntities().ToList();
-            return View();
+            ViewBag.AllOrders = _dataManager.OrderRepository.GetAllEntities().ToList();
+            ViewBag.AllProducts = _dataManager.ProductRepository.GetAllEntities().ToList();
+
+            return View(new PurchaseDetailViewModel());
         }
         
         [HttpPost]
-        public IActionResult Create(PurchaseDetail detail)
+        public IActionResult Create(PurchaseDetailViewModel model)
         {
             if (ModelState.IsValid)
             {
-                dataManager.PurchaseDetails.SaveEntity(detail);
+                PurchaseDetail detail = new PurchaseDetail()
+                {
+                    Order = _dataManager.OrderRepository.GetEntity(model.OrderId),
+                    Product = _dataManager.ProductRepository.GetEntity(model.ProductId),
+                    Amount = model.Amount
+                };
+                _dataManager.PurchaseDetailRepository.SaveEntity(detail);
                 return Redirect("/admin/purchasedetails");
             }
             
-            ViewBag.AllOrders = dataManager.Orders.GetAllEntities().ToList();
-            ViewBag.AllProducts = dataManager.Products.GetAllEntities().ToList();
-            return View(detail);
+            ViewBag.AllOrders = _dataManager.OrderRepository.GetAllEntities().ToList();
+            ViewBag.AllProducts = _dataManager.ProductRepository.GetAllEntities().ToList();
+            return View(model);
         }
         
         [HttpPost]
@@ -46,7 +54,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         {
             try
             {
-                dataManager.PurchaseDetails.DeleteEntity(id);
+                _dataManager.PurchaseDetailRepository.DeleteEntity(id);
                 return true;
             }
             catch (Exception)
@@ -57,23 +65,40 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         
         public IActionResult Update(Guid id)
         {
-            ViewBag.AllOrders = dataManager.Orders.GetAllEntities().ToList();
-            ViewBag.AllProducts = dataManager.Products.GetAllEntities().ToList();
-            return View(dataManager.PurchaseDetails.GetEntity(id));
+            ViewBag.AllOrders = _dataManager.OrderRepository.GetAllEntities().ToList();
+            ViewBag.AllProducts = _dataManager.ProductRepository.GetAllEntities().ToList();
+
+            PurchaseDetail detail = _dataManager.PurchaseDetailRepository.GetEntity(id);
+            PurchaseDetailViewModel viewModel = new PurchaseDetailViewModel()
+            {
+                Id = id,
+                OrderId = detail.Order.Id,
+                ProductId = detail.Product.Id,
+                Amount = detail.Amount
+            };
+            
+            return View(viewModel);
         }
         
         [HttpPost]
-        public IActionResult Update(PurchaseDetail detail)
+        public IActionResult Update(PurchaseDetailViewModel model)
         {
             if (ModelState.IsValid)
             {
-                dataManager.PurchaseDetails.SaveEntity(detail);
+                PurchaseDetail detail = new PurchaseDetail()
+                {
+                    Id = model.Id,
+                    Order = _dataManager.OrderRepository.GetEntity(model.OrderId),
+                    Product = _dataManager.ProductRepository.GetEntity(model.ProductId),
+                    Amount = model.Amount
+                };
+                _dataManager.PurchaseDetailRepository.SaveEntity(detail);
                 return Redirect("/admin/purchasedetails");
             }
             
-            ViewBag.AllOrders = dataManager.Orders.GetAllEntities().ToList();
-            ViewBag.AllProducts = dataManager.Products.GetAllEntities().ToList();
-            return View(detail);
+            ViewBag.AllOrders = _dataManager.OrderRepository.GetAllEntities().ToList();
+            ViewBag.AllProducts = _dataManager.ProductRepository.GetAllEntities().ToList();
+            return View(model);
         }
     }
 }

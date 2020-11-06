@@ -1,23 +1,20 @@
 ﻿using System.Threading.Tasks;
 using Craftwork_Project.ViewModels;
-using CraftworkProject.Domain.Identity;
+using CraftworkProject.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
-namespace CraftworkProject.Controllers
+namespace CraftworkProject.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IUserManager _userManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(IUserManager userManager)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
+            _userManager = userManager;
         }
 
         [AllowAnonymous]
@@ -34,18 +31,11 @@ namespace CraftworkProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await userManager.FindByNameAsync(model.Username);
-
-                if (user != null)
+                bool status = await _userManager.SignIn(model.Username, model.Password);
+                
+                if (status)
                 {
-                    await signInManager.SignOutAsync();
-                    SignInResult result =
-                        await signInManager.PasswordSignInAsync(user, model.Password, false, false);
-
-                    if (result.Succeeded)
-                    {
-                        return Redirect(returnUrl ?? "/");
-                    }
+                    return Redirect(returnUrl ?? "/");
                 }
                 
                 ModelState.AddModelError(nameof(LoginViewModel.Password), "Invalid login or password.");
@@ -53,10 +43,10 @@ namespace CraftworkProject.Controllers
 
             return View(model);
         }
-
-        public async Task<IActionResult> Logout()
+        
+        public IActionResult Logout()
         {
-            await signInManager.SignOutAsync();
+            _userManager.SignOut();
 
             return RedirectToAction("Index", "Home");
         }

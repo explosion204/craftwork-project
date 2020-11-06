@@ -1,4 +1,4 @@
-@model IQueryable<CraftworkProject.Domain.Identity.ApplicationUser>
+@model List<CraftworkProject.Domain.Models.User>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <section class="content-header">
@@ -31,10 +31,13 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Username)</td>
                         <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         <td>@Html.DisplayFor(modelItem => item.EmailConfirmed)</td>
-                        @if (!ViewBag.userManager.GetUserId(User).Equals(item.Id.ToString()))
+                        @{
+                            var id = ViewBag.userManager.GetUserId(User);
+                        }
+                        @if (!ViewBag.userManager.GetUserId(User).ToString().Equals(item.Id.ToString()))
                         {
                             <td><a href="/admin/users/update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
                         }

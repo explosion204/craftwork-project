@@ -1,6 +1,6 @@
 ﻿using System;
-using CraftworkProject.Domain;
-using CraftworkProject.Services;
+using CraftworkProject.Domain.Models;
+using CraftworkProject.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Areas.Admin.Controllers
@@ -8,16 +8,16 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class CategoriesController : Controller
     {
-        private readonly DataManager dataManager;
+        private readonly IDataManager _dataManager;
 
-        public CategoriesController(DataManager dataManager)
+        public CategoriesController(IDataManager dataManager)
         {
-            this.dataManager = dataManager;
+            _dataManager = dataManager;
         }
         
         public IActionResult Index()
         {
-            return View(dataManager.Categories.GetAllEntities());
+            return View(_dataManager.CategoryRepository.GetAllEntities());
         }
 
         public IActionResult Create()
@@ -30,7 +30,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                dataManager.Categories.SaveEntity(category);
+                _dataManager.CategoryRepository.SaveEntity(category);
                 return Redirect("/admin/categories");
             }
 
@@ -42,7 +42,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         {
             try
             {
-                dataManager.Categories.DeleteEntity(id);
+                _dataManager.CategoryRepository.DeleteEntity(id);
                 return true;
             }
             catch (Exception)
@@ -53,7 +53,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         
         public IActionResult Update(Guid id)
         {
-            return View(dataManager.Categories.GetEntity(id));
+            return View(_dataManager.CategoryRepository.GetEntity(id));
         }
 
         [HttpPost]
@@ -61,7 +61,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                dataManager.Categories.SaveEntity(category);
+                _dataManager.CategoryRepository.SaveEntity(category);
                 return Redirect("/admin/categories");
             }
 

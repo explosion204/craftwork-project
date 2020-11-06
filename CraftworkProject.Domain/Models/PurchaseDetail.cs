@@ -1,24 +1,13 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace CraftworkProject.Domain
+namespace CraftworkProject.Domain.Models
 {
     public class PurchaseDetail : BaseEntity
     {
-        [ForeignKey("Order")]
-        public Guid OrderId { get; set; }
-        
-        public Order Order { get; set; }
-        
-        [Required]
-        [ForeignKey("Product")]
-        public Guid ProductId { get; set; }
-        
-        public Product Product { get; set; }
-        
         [Required]
         public int Amount { get; set; }
 
+        public Order Order { get; set; }
+        public Product Product { get; set; }
     }
 }

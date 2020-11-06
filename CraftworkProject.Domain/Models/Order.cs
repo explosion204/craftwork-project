@@ -1,25 +1,17 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using CraftworkProject.Domain.Identity;
 
-namespace CraftworkProject.Domain
+namespace CraftworkProject.Domain.Models
 {
     public class Order : BaseEntity
     {
-        [Required]
-        [ForeignKey("User")]
-        public Guid UserId { get; set; }
-        
-        public ApplicationUser User { get; set; }
-
         [Required]
         public bool Processed { get; set; }
         
         [Required]
         public bool Finished { get; set; }
         
-        public List<Product> PurchaseDetails { get; set; }
+        public User User { get; set; }
+        public List<PurchaseDetail> PurchaseDetails { get; set; }
     }
 }

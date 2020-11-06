@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CraftworkProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201002191052_initial")]
+    [Migration("20201106114822_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,18 +21,16 @@ namespace CraftworkProject.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.0-rc.1.20451.13");
 
-            modelBuilder.Entity("CraftworkProject.Domain.Category", b =>
+            modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Desc")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -40,7 +38,76 @@ namespace CraftworkProject.Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("CraftworkProject.Domain.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Finished")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("Processed")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Desc")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("InStock")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFPurchaseDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PurchaseDetails");
+                });
+
+            modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,13 +176,13 @@ namespace CraftworkProject.Infrastructure.Migrations
                         {
                             Id = new Guid("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c654d5a-1752-4a97-b248-d8a1a150095c",
+                            ConcurrencyStamp = "9a129ce1-0558-4858-8082-5f6b3e7063cf",
                             Email = "dzmitriy20magic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DZMITRIY20MAGIC@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHKdlbtiVvvuImRV8WESQPF44FIpY2O6tkGP9rc/vG7NMWReg6YU6p09P5zosR5clA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKRUCl45kPAxCa0uo4vKjbh5VjEFaYdkEvpYU34fi4qJkVKLi7+E22E0okN26v3/Mg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -123,97 +190,7 @@ namespace CraftworkProject.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CraftworkProject.Domain.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("Finished")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Processed")
-                        .HasColumnType("boolean");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("CraftworkProject.Domain.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Desc")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("InStock")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uuid");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("CraftworkProject.Domain.PurchaseDetail", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("ApplicationUserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("PurchaseDetails");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
+            modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFUserRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -243,14 +220,14 @@ namespace CraftworkProject.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"),
-                            ConcurrencyStamp = "f389507d-b12f-48ac-87a7-61daff747d23",
+                            ConcurrencyStamp = "a357058a-334c-4f91-879c-51480947a5b9",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("3800721a-cf25-427e-b5e1-9c26710df0d5"),
-                            ConcurrencyStamp = "ce249f9b-af5f-4b25-8535-2f6d85f330a3",
+                            ConcurrencyStamp = "88aad9f0-3cca-47f4-8a37-1567e133c156",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -364,58 +341,9 @@ namespace CraftworkProject.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CraftworkProject.Domain.Order", b =>
-                {
-                    b.HasOne("CraftworkProject.Domain.Identity.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CraftworkProject.Domain.Product", b =>
-                {
-                    b.HasOne("CraftworkProject.Domain.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CraftworkProject.Domain.Order", null)
-                        .WithMany("PurchaseDetails")
-                        .HasForeignKey("OrderId");
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("CraftworkProject.Domain.PurchaseDetail", b =>
-                {
-                    b.HasOne("CraftworkProject.Domain.Identity.ApplicationUser", null)
-                        .WithMany("PurchaseDetails")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("CraftworkProject.Domain.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CraftworkProject.Domain.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                    b.HasOne("CraftworkProject.Infrastructure.Models.EFUserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -424,7 +352,7 @@ namespace CraftworkProject.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("CraftworkProject.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("CraftworkProject.Infrastructure.Models.EFUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -433,7 +361,7 @@ namespace CraftworkProject.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("CraftworkProject.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("CraftworkProject.Infrastructure.Models.EFUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -442,13 +370,13 @@ namespace CraftworkProject.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                    b.HasOne("CraftworkProject.Infrastructure.Models.EFUserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CraftworkProject.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("CraftworkProject.Infrastructure.Models.EFUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -457,26 +385,11 @@ namespace CraftworkProject.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("CraftworkProject.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("CraftworkProject.Infrastructure.Models.EFUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CraftworkProject.Domain.Category", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("CraftworkProject.Domain.Identity.ApplicationUser", b =>
-                {
-                    b.Navigation("PurchaseDetails");
-                });
-
-            modelBuilder.Entity("CraftworkProject.Domain.Order", b =>
-                {
-                    b.Navigation("PurchaseDetails");
                 });
 #pragma warning restore 612, 618
         }

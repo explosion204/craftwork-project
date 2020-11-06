@@ -1,12 +1,12 @@
 using System;
-using System.Linq;
-using CraftworkProject.Domain;
+using System.Collections.Generic;
+using CraftworkProject.Domain.Models;
 
 namespace CraftworkProject.Domain
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        IQueryable<T> GetAllEntities();
+        List<T> GetAllEntities();
         T GetEntity(Guid id);
         void SaveEntity(T entity);
         void DeleteEntity(Guid id);

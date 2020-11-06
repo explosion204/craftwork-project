@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Net.NetworkInformation;
 
 namespace CraftworkProject.Web.Areas.Admin.ViewModels
 {

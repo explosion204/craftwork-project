@@ -5,11 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-      <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0-rc.1.20451.17" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\CraftworkProject.Infrastructure\CraftworkProject.Infrastructure.csproj" />
     </ItemGroup>
 
