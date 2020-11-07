@@ -59,19 +59,10 @@ namespace CraftworkProject.Infrastructure
                 .ForMember("Processed", opt => opt.MapFrom(src => src.Processed))
                 .ForMember("Finished", opt => opt.MapFrom(src => src.Finished))
                 .ForMember("UserId", opt => opt.MapFrom(src => src.User.Id));
-            
+
             CreateMap<EFUser, User>()
                 .ForMember("Id", opt => opt.MapFrom(src => src.Id))
                 .ForMember("Username", opt => opt.MapFrom(src => src.UserName))
-                .ForMember("Email", opt => opt.MapFrom(src => src.Email))
-                .ForMember("EmailConfirmed", opt => opt.MapFrom(src => src.EmailConfirmed))
-                .ForMember("PasswordHash", opt => opt.MapFrom(src => src.PasswordHash))
-                .ForMember("PhoneNumber", opt => opt.MapFrom(src => src.PhoneNumber))
-                .ForMember("PhoneNumberConfirmed", opt => opt.MapFrom(src => src.PhoneNumberConfirmed));
-            
-            CreateMap<User, EFUser>()
-                .ForMember("Id", opt => opt.MapFrom(src => src.Id))
-                .ForMember("UserName", opt => opt.MapFrom(src => src.Username))
                 .ForMember("Email", opt => opt.MapFrom(src => src.Email))
                 .ForMember("EmailConfirmed", opt => opt.MapFrom(src => src.EmailConfirmed))
                 .ForMember("PasswordHash", opt => opt.MapFrom(src => src.PasswordHash))

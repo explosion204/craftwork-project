@@ -10,15 +10,20 @@ namespace CraftworkProject.Domain
     {
         List<User> GetAllUsers();
         List<UserRole> GetAllRoles();
+        Task<Guid> GetRoleId(string roleName);
+        Task<Guid> GetUserRoleId(Guid userId);
         Task<bool> CreateUser(User newUser, string password, Guid roleId);
         Task<User> FindUser(Guid id);
         Task<User> FindUser(string username);
         Guid GetUserId(ClaimsPrincipal user);
-        void UpdateUser(User user);
-        void DeleteUser(Guid id);
-        void SetUserRole(User user, Guid roleId);
-        void SetUserPassword(User user, string newPassword);
+        Task UpdateUser(User user);
+        Task DeleteUser(Guid id);
+        Task DeleteUser(string username);
+        Task SetUserRole(User user, Guid roleId);
+        Task SetUserPassword(User user, string newPassword);
         Task<bool> SignIn(string username, string password);
-        void SignOut();
+        Task<bool> ConfirmEmail(Guid userId, string token);
+        Task SignOut();
+        Task<string> GenerateEmailConfirmationToken(User user);
     }
 }

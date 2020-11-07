@@ -15,6 +15,7 @@ namespace CraftworkProject.Web
         public void ConfigureServices(IServiceCollection services)
         {
             Configuration.Bind("Project", new Config());
+            Configuration.Bind("Mailing", new MailConfig());
             ConfigureAppServices.Configure(services);
             ConfigureAuthServices.Configure(services);
         }

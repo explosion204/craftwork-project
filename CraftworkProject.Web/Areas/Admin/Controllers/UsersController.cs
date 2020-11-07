@@ -86,7 +86,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             
             if (!currentUserId.ToString().Equals(id.ToString()))
             {
-                _userManager.DeleteUser(id);
+                await _userManager.DeleteUser(id);
                 return true;
             }
             
@@ -96,11 +96,14 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Update(Guid id)
         {
             var user = await _userManager.FindUser(id);
+            var roleId = await _userManager.GetUserRoleId(id);
+            
             UserViewModel model = new UserViewModel()
             {
                 Username = user.Username,
                 Email = user.Email,
-                Verified = user.EmailConfirmed
+                Verified = user.EmailConfirmed,
+                RoleId = roleId
             };
 
             ViewBag.AllRoles = _userManager.GetAllRoles();
@@ -120,11 +123,6 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             {
                 user.Email = model.Email;
                 user.EmailConfirmed = model.Verified;
-                
-                if (roleEditAllowed ?? false)
-                {
-                    _userManager.SetUserRole(user, model.RoleId);
-                }
 
                 if (!String.IsNullOrEmpty(model.NewPassword) && !String.IsNullOrEmpty(model.ConfirmNewPassword))
                 {
@@ -135,11 +133,16 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                         return View(model);
                     }
                     
-                    _userManager.SetUserPassword(user, model.NewPassword);
+                    await _userManager.SetUserPassword(user, model.NewPassword);
+                }
+                
+                if (roleEditAllowed ?? false)
+                {
+                    await _userManager.SetUserRole(user, model.RoleId);
                 }
 
-                _userManager.UpdateUser(user);
-
+                await _userManager.UpdateUser(user);
+                
                 return Redirect("/admin/users");
             }
 

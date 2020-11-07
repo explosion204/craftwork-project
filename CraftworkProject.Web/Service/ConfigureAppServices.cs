@@ -16,20 +16,24 @@ namespace CraftworkProject.Web.Service
     {
         public static void Configure(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(Config.ConnectionString));
+            services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(Config.ConnectionString), 
+                ServiceLifetime.Transient);
             services.AddScoped<IRepository<Product>, ProductRepository>();
             services.AddScoped<IRepository<Category>, CategoryRepository>();
             services.AddScoped<IRepository<PurchaseDetail>, PurchaseDetailRepository>();
             services.AddScoped<IRepository<Order>, OrderRepository>();
             
-            services.AddTransient<IDataManager, DataManager>();
-            services.AddTransient<IUserManager>(x =>
+            services.AddScoped<IDataManager, DataManager>();
+            services.AddScoped<IUserManager>(x =>
                 new ApplicationUserManager(
                     x.GetRequiredService<UserManager<EFUser>>(), 
                     x.GetRequiredService<RoleManager<EFUserRole>>(), 
                     x.GetRequiredService<SignInManager<EFUser>>(), 
                     x.GetRequiredService<IMapper>()
                     )
+            );
+            services.AddTransient<IEmailService>(x => new EmailService(
+                MailConfig.Sender, MailConfig.SmtpServer, MailConfig.SmtpPort, MailConfig.Username, MailConfig.Password)
             );
             
             var mapperConfig = new MapperConfiguration(cfg =>

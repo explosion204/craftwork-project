@@ -20,10 +20,8 @@ namespace CraftworkProject.Domain.Models
         [Required]
         public string PasswordHash { get; set; }
         
-        [Required]
         public string PhoneNumber { get; set; }
         
-        [Required]
-        public string PhoneNumberConfirmed { get; set; }
+        public bool PhoneNumberConfirmed { get; set; }
     }
 }
