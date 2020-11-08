@@ -1,8 +1,14 @@
 using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Threading.Tasks;
 using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
+using CraftworkProject.Services.Interfaces;
 using CraftworkProject.Web.Areas.Admin.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Areas.Admin.Controllers
@@ -11,10 +17,14 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private readonly IUserManager _userManager;
+        private readonly IWebHostEnvironment _environment;
+        private readonly IImageService _imageService;
         
-        public UsersController(IUserManager userManager)
+        public UsersController(IUserManager userManager, IWebHostEnvironment environment, IImageService imageService)
         {
             _userManager = userManager;
+            _environment = environment;
+            _imageService = imageService;
         }
 
         public IActionResult Index()
@@ -50,13 +60,21 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 {
                     if (model.NewPassword != null && model.NewPassword.Equals(model.ConfirmNewPassword))
                     {
+                        string fileName = null;
+                        if (model.ProfilePicture != null)
+                        {
+                            fileName = await UploadFile(model.ProfilePicture);
+                        } 
+                        
                         User newUser = new User()
                         {
                             Username = model.Username,
                             Email = model.Email,
-                            EmailConfirmed = model.Verified
+                            EmailConfirmed = model.Verified,
+                            PhoneNumber = model.PhoneNumber,
+                            PhoneNumberConfirmed = model.PhoneNumberConfirmed,
+                            ProfilePicture = fileName
                         };
-
                         var result = await _userManager.CreateUser(newUser, model.NewPassword, model.RoleId);
 
                         if (result)
@@ -103,6 +121,8 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 Username = user.Username,
                 Email = user.Email,
                 Verified = user.EmailConfirmed,
+                PhoneNumber = user.PhoneNumber,
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed,
                 RoleId = roleId
             };
 
@@ -121,8 +141,17 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                string fileName = null;
+                if (model.ProfilePicture != null)
+                {
+                    fileName = await UploadFile(model.ProfilePicture);
+                } 
+                
                 user.Email = model.Email;
                 user.EmailConfirmed = model.Verified;
+                user.PhoneNumber = model.PhoneNumber;
+                user.PhoneNumberConfirmed = model.PhoneNumberConfirmed;
+                user.ProfilePicture = fileName;
 
                 if (!String.IsNullOrEmpty(model.NewPassword) && !String.IsNullOrEmpty(model.ConfirmNewPassword))
                 {
@@ -147,6 +176,16 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             }
 
             return View(model);
+        }
+
+        private async Task<string> UploadFile(IFormFile file)
+        {
+            string uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
+            string fileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
+            string filePath = Path.Combine(uploadDir, fileName);
+            
+            await _imageService.SaveImage(file, filePath);
+            return fileName;
         }
     }
 }

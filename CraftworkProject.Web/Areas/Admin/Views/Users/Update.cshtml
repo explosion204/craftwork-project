@@ -17,7 +17,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" method="post" action="/admin/users/update">
+        <form class="form-horizontal" method="post" action="/admin/users/update" enctype="multipart/form-data">
             <div class="box-body">
                 <div class="form-group">
                     <label asp-for="Username" class="col-sm-2 control-label">Username</label>
@@ -36,35 +36,53 @@
                         {
                             <select disabled asp-for="RoleId" asp-items="@(new SelectList(ViewBag.AllRoles, "Id", dataTextField: "Name"))" class="form-control"></select>
                         }
-                        <span asp-validation-for="RoleId"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="Email" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
                         <input asp-for="Email" type="email" class="form-control" name="Email" placeholder="Email">
-                        <span asp-validation-for="Email"></span>
+                        <span cstyle="display: block; margin-top: 10px" asp-validation-for="Email"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="NewPassword" class="col-sm-2 control-label">New password</label>
                     <div class="col-sm-10">
                         <input asp-for="NewPassword" type="password" class="form-control" name="NewPassword" placeholder="New password">
-                        <span asp-validation-for="NewPassword"></span>
+                        <span style="display: block; margin-top: 10px" asp-validation-for="NewPassword"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="ConfirmNewPassword" class="col-sm-2 control-label">Confirm new password</label>
                     <div class="col-sm-10">
                         <input asp-for="ConfirmNewPassword" type="password" class="form-control" name="ConfirmNewPassword" placeholder="Confirm new password">
-                        <span asp-validation-for="ConfirmNewPassword"></span>
+                        <span style="display: block; margin-top: 10px" asp-validation-for="ConfirmNewPassword"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="Verified" class="col-sm-2 control-label">Verified</label>
                     <div class="col-sm-10">
                         <input asp-for="Verified" type="checkbox" style="position: relative; top: 6px" name="Verified" placeholder="In stock">
-                        <span asp-validation-for="Verified"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="col-sm-2 control-label">Phone number</label>
+                    <div class="col-sm-10">
+                        <input asp-for="PhoneNumber" type="text" style="position: relative; top: 6px" class="form-control" name="PhoneNumber" placeholder="Phone number">
+                        <span style="display: block; margin-top: 10px" asp-validation-for="PhoneNumber"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumberConfirmed" class="col-sm-2 control-label">Phone number verified</label>
+                    <div class="col-sm-10">
+                        <input asp-for="PhoneNumberConfirmed" type="checkbox" style="position: relative; top: 6px" name="PhoneNumberConfirmed">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProfilePicture" class="col-sm-2 control-label">Profile Image</label>
+                    <div class="col-sm-10">
+                        <input asp-for="ProfilePicture" type="file" style="position: relative; top: 6px" name="ProfilePicture">
+                        <span style="display: block; margin-top: 10px" asp-validation-for="ProfilePicture"></span>
                     </div>
                 </div>
             </div>

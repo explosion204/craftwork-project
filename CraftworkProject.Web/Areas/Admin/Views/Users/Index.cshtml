@@ -23,6 +23,9 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Verified</th>
+                <th>Phone number</th>
+                <th>Phone number verified</th>
+                <th>Profile picture</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -34,6 +37,11 @@
                         <td>@Html.DisplayFor(modelItem => item.Username)</td>
                         <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         <td>@Html.DisplayFor(modelItem => item.EmailConfirmed)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)</td>
+                        <td>
+                            <img src="~/img/profile/@item.ProfilePicture" width="40" height="40" />
+                        </td>
                         @{
                             var id = ViewBag.userManager.GetUserId(User);
                         }

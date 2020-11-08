@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using CraftworkProject.Web.Service.Validation;
+using Microsoft.AspNetCore.Http;
 
 namespace CraftworkProject.Web.Areas.Admin.ViewModels
 {
@@ -28,5 +30,17 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         [Display(Name = "Verified")]
         public bool Verified { get; set; }
         
+        [Display(Name = "Phone number")]
+        [Phone(ErrorMessage = "Invalid phone number")]
+        public string PhoneNumber { get; set; }
+        
+        [Required]
+        [Display(Name = "Phone number verified")]
+        public bool PhoneNumberConfirmed { get; set; }
+        
+        [Display(Name = "Profile image")]
+        [AllowedExtensions(new string [] { ".jpg", ".jpeg", ".bmp" })]
+        [MaxFileSize(1024)] // kbytes 
+        public IFormFile ProfilePicture { get; set; }
     }
 }

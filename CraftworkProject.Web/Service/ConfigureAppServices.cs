@@ -32,9 +32,10 @@ namespace CraftworkProject.Web.Service
                     x.GetRequiredService<IMapper>()
                     )
             );
-            services.AddTransient<IEmailService>(x => new EmailService(
+            services.AddScoped<IEmailService>(x => new EmailService(
                 MailConfig.Sender, MailConfig.SmtpServer, MailConfig.SmtpPort, MailConfig.Username, MailConfig.Password)
             );
+            services.AddScoped<IImageService, ImageService>();
             
             var mapperConfig = new MapperConfiguration(cfg =>
             {

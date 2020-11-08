@@ -21,42 +21,39 @@
                     <label asp-for="Name" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
                         <input asp-for="Name" type="text" class="form-control" name="Name" placeholder="Name">
-                        <span asp-validation-for="Name"></span>
+                        <span style="display: block; margin-top: 10px" asp-validation-for="Name"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="Desc" class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
                         <input asp-for="Desc" type="text" class="form-control" name="Desc" placeholder="Description">
-                        <span asp-validation-for="Desc"></span>
+                        <span style="display: block; margin-top: 10px" asp-validation-for="Desc"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="Price" class="col-sm-2 control-label">Price</label>
                     <div class="col-sm-10">
                         <input asp-for="Price" type="text" class="form-control" name="Price" placeholder="Price">
-                        <span asp-validation-for="Price"></span>
+                        <span style="display: block; margin-top: 10px" asp-validation-for="Price"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="InStock" class="col-sm-2 control-label">In stock</label>
                     <div class="col-sm-10">
                         <input asp-for="InStock" type="checkbox" style="position: relative; top: 6px" name="InStock" placeholder="In stock">
-                        <span asp-validation-for="InStock"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="ImagePath" class="col-sm-2 control-label">Image path</label>
                     <div class="col-sm-10">
                         <input asp-for="ImagePath" type="text" class="form-control" name="ImagePath" placeholder="Image path">
-                        <span asp-validation-for="ImagePath"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="CategoryId" class="col-sm-2 control-label">Category</label>
                     <div class="col-sm-10">
                         <select asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.AllCategories, "Id",dataTextField: "Name"))" class="form-control"></select>
-                        <span asp-validation-for="CategoryId"></span>
                     </div>
                 </div>
                 <input asp-for="Id" type="hidden" name="Id" value="@Model.Id"/>
