@@ -21,6 +21,8 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>First name</th>
+                <th>Last name</th>
                 <th>Email</th>
                 <th>Verified</th>
                 <th>Phone number</th>
@@ -35,6 +37,8 @@
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Id)</td>
                         <td>@Html.DisplayFor(modelItem => item.Username)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LastName)</td>
                         <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         <td>@Html.DisplayFor(modelItem => item.EmailConfirmed)</td>
                         <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>

@@ -12,6 +12,12 @@ namespace CraftworkProject.Domain.Models
         public string Username { get; set; }
         
         [Required]
+        public string FirstName { get; set; }
+        
+        [Required]
+        public string LastName { get; set; }
+        
+        [Required]
         public string Email { get; set; }
         
         [Required]
@@ -23,5 +29,7 @@ namespace CraftworkProject.Domain.Models
         public string PhoneNumber { get; set; }
         
         public bool PhoneNumberConfirmed { get; set; }
+        
+        public string ProfilePicture { get; set; }
     }
 }

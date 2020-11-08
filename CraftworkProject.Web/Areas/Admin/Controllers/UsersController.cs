@@ -1,6 +1,4 @@
 using System;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using CraftworkProject.Domain;
@@ -69,6 +67,8 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                         User newUser = new User()
                         {
                             Username = model.Username,
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
                             Email = model.Email,
                             EmailConfirmed = model.Verified,
                             PhoneNumber = model.PhoneNumber,
@@ -119,6 +119,8 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             UserViewModel model = new UserViewModel()
             {
                 Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 Email = user.Email,
                 Verified = user.EmailConfirmed,
                 PhoneNumber = user.PhoneNumber,
@@ -145,8 +147,10 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 if (model.ProfilePicture != null)
                 {
                     fileName = await UploadFile(model.ProfilePicture);
-                } 
-                
+                }
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
                 user.Email = model.Email;
                 user.EmailConfirmed = model.Verified;
                 user.PhoneNumber = model.PhoneNumber;

@@ -3,15 +3,17 @@ using System;
 using CraftworkProject.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CraftworkProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201107175728_third")]
+    partial class third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,12 +127,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("text");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
 
@@ -183,13 +179,13 @@ namespace CraftworkProject.Infrastructure.Migrations
                         {
                             Id = new Guid("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88a41db2-a85b-45b8-9196-4cc0b9c1b79f",
+                            ConcurrencyStamp = "f250c39f-8e26-444e-bbaa-15d8e95f1b7e",
                             Email = "dzmitriy20magic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DZMITRIY20MAGIC@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJN/kdOdIm16l7bmXYjFtTfUuLRarri2b1EIqVV0+1zjF1pw4oNxecYZPjutyCAttw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELXB76nHGXfgkvYW2hLX38/6s0IWba/ZeGA1fLL4/g3EPIDHb3R++bFbbK4MDbUxpQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -227,14 +223,14 @@ namespace CraftworkProject.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"),
-                            ConcurrencyStamp = "b067d470-dce3-4f09-bed1-078db10335de",
+                            ConcurrencyStamp = "bf0a817e-cda7-44ac-930e-fa639b9288d1",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("3800721a-cf25-427e-b5e1-9c26710df0d5"),
-                            ConcurrencyStamp = "944c0baf-e9b1-4c42-89c1-d6c6bf8b58e2",
+                            ConcurrencyStamp = "c893b161-fea6-48ea-8068-323486f19aaa",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });

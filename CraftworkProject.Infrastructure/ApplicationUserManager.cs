@@ -33,7 +33,8 @@ namespace CraftworkProject.Infrastructure
         
         public List<User> GetAllUsers()
         {
-            return _mapper.Map<List<User>>(_userManager.Users.ToList());
+            var efUsers = _userManager.Users.ToList();
+            return _mapper.Map<List<User>>(efUsers);
         }
 
         public List<UserRole> GetAllRoles()
@@ -58,15 +59,17 @@ namespace CraftworkProject.Infrastructure
 
         public async Task<bool> CreateUser(User newUser, string password, Guid roleId)
         {
-            //var efUser = _mapper.Map<EFUser>(newUser);
             var efUser = new EFUser()
             {
                 Id = newUser.Id,
                 UserName = newUser.Username,
+                FirstName = newUser.FirstName,
+                LastName = newUser.LastName,
                 Email = newUser.Email,
                 EmailConfirmed = newUser.EmailConfirmed,
                 PhoneNumber = newUser.PhoneNumber,
-                PhoneNumberConfirmed = newUser.PhoneNumberConfirmed
+                PhoneNumberConfirmed = newUser.PhoneNumberConfirmed,
+                ProfilePicture = newUser.ProfilePicture
             };
             var userCreation = await _userManager.CreateAsync(efUser, password);
             
@@ -106,12 +109,14 @@ namespace CraftworkProject.Infrastructure
 
         public async Task UpdateUser(User user)
         {
-            //var efUser = _mapper.Map<EFUser>(user);
             var efUser = await _userManager.FindByIdAsync(user.Id.ToString());
+            efUser.FirstName = user.FirstName;
+            efUser.LastName = user.LastName;
             efUser.Email = user.Email;
             efUser.EmailConfirmed = user.EmailConfirmed;
             efUser.PhoneNumber = user.PhoneNumber;
             efUser.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
+            efUser.ProfilePicture = user.ProfilePicture;
             await _userManager.UpdateAsync(efUser);
         }
 

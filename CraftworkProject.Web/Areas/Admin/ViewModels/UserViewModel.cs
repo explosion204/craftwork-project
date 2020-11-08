@@ -12,6 +12,14 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         public string Username { get; set; }
         
         [Required]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+        
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+        
+        [Required]
         [Display(Name = "Role")]
         public Guid RoleId { get; set; }
 

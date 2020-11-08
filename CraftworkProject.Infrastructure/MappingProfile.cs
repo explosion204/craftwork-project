@@ -67,7 +67,8 @@ namespace CraftworkProject.Infrastructure
                 .ForMember("EmailConfirmed", opt => opt.MapFrom(src => src.EmailConfirmed))
                 .ForMember("PasswordHash", opt => opt.MapFrom(src => src.PasswordHash))
                 .ForMember("PhoneNumber", opt => opt.MapFrom(src => src.PhoneNumber))
-                .ForMember("PhoneNumberConfirmed", opt => opt.MapFrom(src => src.PhoneNumberConfirmed));
+                .ForMember("PhoneNumberConfirmed", opt => opt.MapFrom(src => src.PhoneNumberConfirmed))
+                .ForMember("ProfilePicture", opt => opt.MapFrom(src => src.ProfilePicture));
 
             CreateMap<EFUserRole, UserRole>()
                 .ForMember("Id", opt => opt.MapFrom(src => src.Id))
