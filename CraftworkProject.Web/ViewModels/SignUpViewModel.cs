@@ -1,13 +1,21 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Craftwork_Project.ViewModels
+namespace CraftworkProject.Web.ViewModels
 {
     public class SignUpViewModel
     {
         [Required]
         [Display(Name = "Username")]
         public string Username { get; set; }
+        
+        [Required]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
 
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+        
         [Required]
         [Display(Name = "Password")]
         [StringLength(64, MinimumLength = 8, ErrorMessage = "Passwords must be at least 8 characters.")]

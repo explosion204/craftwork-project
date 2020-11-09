@@ -1,37 +1,25 @@
-﻿@model LoginViewModel
+﻿@model CraftworkProject.Web.ViewModels.LoginViewModel
 
-<link href="/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-<link href="/css/font-awesome.min.css" rel="stylesheet" media="all">
-<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-<link href="/css/vendor/select2.min.css" rel="stylesheet" media="all">
-<link href="/css/authform.css" rel="stylesheet" media="all">
-
-<div class="wrapper wrapper--w680">
-    <div class="card card-4">
-        <div class="card-body">
-            <h2 class="title">Log in</h2>
-            <form method="post" action="/account/login?returnUrl=@ViewBag.returnUrl">
-                <div class="col-2">
-                    <div class="input-group">
-                        <label class="label" asp-for="Username">username</label>
-                        <input class="input--style-4" type="text" asp-for="Username">
-                        <span asp-validation-for="Username"></span>
-                    </div>
+<section class="login py-5 border-top-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8 align-item-center">
+                <div class="border">
+                    <h3 class="bg-gray p-4">Login Now</h3>
+                    <form method="post" action="/account/login?returnUrl=@ViewBag.returnUrl">
+                        <fieldset class="p-4">
+                            <input asp-for="Username" type="text" placeholder="Username" class="border p-3 w-100 my-2">
+                            <span asp-validation-for="Username"></span>
+                            <input asp-for="Password" type="password" placeholder="Password" class="border p-3 w-100">
+                            <span asp-validation-for="Password"></span>
+                            <button type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-2"
+                                    onclick="this.disabled = true; this.form.submit();">Log in</button>
+                            <a class="mt-3 d-block  text-primary" href="/account/forgotpassword">Forgot Password?</a>
+                            <a class="mt-3 d-inline-block text-primary" href="/account/signup">Register Now</a>
+                        </fieldset>
+                    </form>
                 </div>
-                <div class="col-2">
-                    <div class="input-group">
-                        <label class="label" asp-for="Password">password</label>
-                        <input class="input--style-4" type="password" asp-for="Password">
-                        <span asp-validation-for="Password"></span>
-                    </div>
-                </div>
-                <div class="p-t-15">
-                    <button class="btn btn--radius-2 btn--blue" type="submit" onclick="this.disabled = true; this.form.submit();">Log in</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-
-<script src="/js/vendor/select2.min.js"></script>
-<script src="/js/authform.js"></script>
+</section>

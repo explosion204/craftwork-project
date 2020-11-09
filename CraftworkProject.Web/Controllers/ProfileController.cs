@@ -1,12 +1,13 @@
-$HEADER$using Microsoft.AspNetCore.Mvc;
-namespace $NAMESPACE$
+using Microsoft.AspNetCore.Mvc;
+
+namespace CraftworkProject.Web.Controllers
 {
-  public class $CLASS$: Controller
-  {
-    // GET
-    public IActionResult Index()
+    public class ProfileController : Controller
     {
-	  $END$return View();
+        // GET
+        public IActionResult User()
+        {
+            return View();
+        }
     }
-  }
 }

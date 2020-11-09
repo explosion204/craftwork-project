@@ -113,7 +113,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         
         public async Task<IActionResult> Update(Guid id)
         {
-            var user = await _userManager.FindUser(id);
+            var user = await _userManager.FindUserById(id);
             var roleId = await _userManager.GetUserRoleId(id);
             
             UserViewModel model = new UserViewModel()
@@ -136,17 +136,17 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(UserViewModel model)
         {
-            var user = await _userManager.FindUser(model.Username);
+            var user = await _userManager.FindUserByName(model.Username);
             bool? roleEditAllowed = !_userManager.GetUserId(User).ToString()?.Equals(user.Id.ToString());
             ViewBag.RoleEditAllowed = roleEditAllowed;
             ViewBag.AllRoles = _userManager.GetAllRoles();
 
             if (ModelState.IsValid)
             {
-                string fileName = null;
                 if (model.ProfilePicture != null)
                 {
-                    fileName = await UploadFile(model.ProfilePicture);
+                    DeleteFile(user.ProfilePicture);
+                    user.ProfilePicture = await UploadFile(model.ProfilePicture);
                 }
 
                 user.FirstName = model.FirstName;
@@ -155,7 +155,6 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 user.EmailConfirmed = model.Verified;
                 user.PhoneNumber = model.PhoneNumber;
                 user.PhoneNumberConfirmed = model.PhoneNumberConfirmed;
-                user.ProfilePicture = fileName;
 
                 if (!String.IsNullOrEmpty(model.NewPassword) && !String.IsNullOrEmpty(model.ConfirmNewPassword))
                 {
@@ -166,12 +165,12 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                         return View(model);
                     }
                     
-                    await _userManager.SetUserPassword(user, model.NewPassword);
+                    await _userManager.SetUserPassword(user.Id, model.NewPassword);
                 }
                 
                 if (roleEditAllowed ?? false)
                 {
-                    await _userManager.SetUserRole(user, model.RoleId);
+                    await _userManager.SetUserRole(user.Id, model.RoleId);
                 }
 
                 await _userManager.UpdateUser(user);
@@ -190,6 +189,13 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             
             await _imageService.SaveImage(file, filePath);
             return fileName;
+        }
+
+        private void DeleteFile(string fileName)
+        {
+            string uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
+            string filePath = Path.Combine(uploadDir, fileName);
+            System.IO.File.Delete(filePath);
         }
     }
 }

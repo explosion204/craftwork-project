@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Craftwork_Project.ViewModels
+namespace CraftworkProject.Web.ViewModels
 {
     public class LoginViewModel
     {

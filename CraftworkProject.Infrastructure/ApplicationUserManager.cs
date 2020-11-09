@@ -86,16 +86,23 @@ namespace CraftworkProject.Infrastructure
             return false;
         }
 
-        public async Task<User> FindUser(Guid id)
+        public async Task<User> FindUserById(Guid id)
         {
             var efUser = await _userManager.FindByIdAsync(id.ToString());
 
             return _mapper.Map<User>(efUser);
         }
 
-        public async Task<User> FindUser(string username)
+        public async Task<User> FindUserByName(string username)
         {
             var efUser = await _userManager.FindByNameAsync(username);
+
+            return efUser != null ? _mapper.Map<User>(efUser) : null;
+        }
+
+        public async Task<User> FindUserByEmail(string email)
+        {
+            var efUser = await _userManager.FindByEmailAsync(email);
 
             return efUser != null ? _mapper.Map<User>(efUser) : null;
         }
@@ -140,9 +147,9 @@ namespace CraftworkProject.Infrastructure
             }
         }
 
-        public async Task SetUserRole(User user, Guid roleId)
+        public async Task SetUserRole(Guid userId, Guid roleId)
         {
-            var efUser = await _userManager.FindByIdAsync(user.Id.ToString());
+            var efUser = await _userManager.FindByIdAsync(userId.ToString());
             var userRoles = await _userManager.GetRolesAsync(efUser);
             var newRole = await _roleManager.FindByIdAsync(roleId.ToString());
             await _userManager.RemoveFromRoleAsync(efUser, userRoles[0]);
@@ -150,12 +157,20 @@ namespace CraftworkProject.Infrastructure
             await _userManager.UpdateAsync(efUser);
         }
 
-        public async Task SetUserPassword(User user, string newPassword)
+        public async Task SetUserPassword(Guid userId, string newPassword)
         {
-            var efUser = await _userManager.FindByIdAsync(user.Id.ToString());
+            var efUser = await _userManager.FindByIdAsync(userId.ToString());
             var token = await _userManager.GeneratePasswordResetTokenAsync(efUser);
             await _userManager.ResetPasswordAsync(efUser, token, newPassword);
             await _userManager.UpdateAsync(efUser);
+        }
+
+        public async Task<bool> ChangeUserPassword(Guid userId, string currentPassword, string newPassword)
+        {
+            var efUser = await _userManager.FindByIdAsync(userId.ToString());
+            var result = await _userManager.ChangePasswordAsync(efUser, currentPassword, newPassword);
+
+            return result.Succeeded;
         }
 
         public async Task<bool> SignIn(string username, string password)
@@ -190,16 +205,36 @@ namespace CraftworkProject.Infrastructure
             return false;
         }
 
+        public async Task<bool> ResetPassword(Guid userId, string token, string newPassword)
+        {
+            var efUser = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (efUser != null)
+            {
+                var status = await _userManager.ResetPasswordAsync(efUser, token, newPassword);
+                return status.Succeeded;
+            }
+
+            return false;
+        }
+
         public async Task SignOut()
         {
             await _signInManager.SignOutAsync();
         }
 
-        public async Task<string> GenerateEmailConfirmationToken(User user)
+        public async Task<string> GenerateEmailConfirmationToken(Guid userId)
         {
-            var efUser = await _userManager.FindByIdAsync(user.Id.ToString());
+            var efUser = await _userManager.FindByIdAsync(userId.ToString());
             
             return await _userManager.GenerateEmailConfirmationTokenAsync(efUser);
+        }
+
+        public async Task<string> GeneratePasswordResetToken(Guid userId)
+        {
+            var efUser = await _userManager.FindByIdAsync(userId.ToString());
+
+            return await _userManager.GeneratePasswordResetTokenAsync(efUser);
         }
     }
 }

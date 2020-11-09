@@ -43,6 +43,8 @@ namespace CraftworkProject.Web.Service
                 options.Conventions.Add(new AdminAreaAuth("Admin", "AdminArea"));
             })
             .AddSessionStateTempDataProvider();
+
+            services.AddSession();
         }
     }
 }

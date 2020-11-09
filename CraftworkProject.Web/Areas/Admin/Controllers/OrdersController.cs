@@ -36,7 +36,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await _userManager.FindUser(model.UserId);
+                User user = await _userManager.FindUserById(model.Id);
                 Order order = new Order()
                 {
                     Processed = model.Processed,
@@ -85,7 +85,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await _userManager.FindUser(model.UserId);
+                User user = await _userManager.FindUserById(model.UserId);
                 Order order = new Order()
                 {
                     Id = model.Id,

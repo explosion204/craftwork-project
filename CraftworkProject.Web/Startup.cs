@@ -30,10 +30,11 @@ namespace CraftworkProject.Web
 
             // setting up static files
             app.UseStaticFiles();
+            app.UseSession();
             
             // setting up routing
             app.UseRouting();
-            
+
             // setting up auth
             app.UseCookiePolicy();
             app.UseAuthentication();

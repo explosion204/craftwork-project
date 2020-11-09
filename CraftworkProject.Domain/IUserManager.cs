@@ -13,17 +13,21 @@ namespace CraftworkProject.Domain
         Task<Guid> GetRoleId(string roleName);
         Task<Guid> GetUserRoleId(Guid userId);
         Task<bool> CreateUser(User newUser, string password, Guid roleId);
-        Task<User> FindUser(Guid id);
-        Task<User> FindUser(string username);
+        Task<User> FindUserById(Guid id);
+        Task<User> FindUserByName(string username);
+        Task<User> FindUserByEmail(string email);
         Guid GetUserId(ClaimsPrincipal user);
         Task UpdateUser(User user);
         Task DeleteUser(Guid id);
         Task DeleteUser(string username);
-        Task SetUserRole(User user, Guid roleId);
-        Task SetUserPassword(User user, string newPassword);
+        Task SetUserRole(Guid userId, Guid roleId);
+        Task SetUserPassword(Guid userId, string newPassword);
+        Task<bool> ChangeUserPassword(Guid userId, string currentPassword, string newPassword);
         Task<bool> SignIn(string username, string password);
         Task<bool> ConfirmEmail(Guid userId, string token);
+        Task<bool> ResetPassword(Guid userId, string token, string newPassword);
         Task SignOut();
-        Task<string> GenerateEmailConfirmationToken(User user);
+        Task<string> GenerateEmailConfirmationToken(Guid userId);
+        Task<string> GeneratePasswordResetToken(Guid userId);
     }
 }
