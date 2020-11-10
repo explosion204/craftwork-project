@@ -1,0 +1,32 @@
+@model CraftworkProject.Web.ViewModels.ChangePhoneNumberViewModel
+
+<section class="login py-5 border-top-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8 align-item-center">
+                <div class="border">
+                    <h3 class="bg-gray p-4">Change Phone Number</h3>
+                    <form method="post" action="/account/changephonenumber">
+                        <fieldset class="p-4">
+                            <input hidden asp-for="UserId">
+                            @if (ViewBag.SmsSent)
+                            {
+                                <input id="phone-number" asp-for="PhoneNumber" type="tel" readonly placeholder="New phone number" class="border p-3 w-100 my-2">
+                                <input id="sms-code" asp-for="Code" pattern="\d{6}" maxlength="6" placeholder="Code from SMS" class="border p-3 w-100">
+                                <span asp-validation-for="Code"></span>
+                                <input id="submit-btn" type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-2" value="Send code">
+                            }
+                            else
+                            {
+                                <input id="phone-number" asp-for="PhoneNumber" type="text" placeholder="New phone number" class="border p-3 w-100 my-2">
+                                <span asp-validation-for="PhoneNumber"></span>
+                                <input disabled id="sms-code" asp-for="Code" pattern="\d{4}" maxlength="4" placeholder="Code from SMS" class="border p-3 w-100">
+                                <input id="submit-btn" type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-2" value="Send SMS">
+                            }
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

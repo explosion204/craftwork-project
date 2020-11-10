@@ -33,9 +33,12 @@ namespace CraftworkProject.Web.Service
                     )
             );
             services.AddScoped<IEmailService>(x => new EmailService(
-                MailConfig.Sender, MailConfig.SmtpServer, MailConfig.SmtpPort, MailConfig.Username, MailConfig.Password)
-            );
+                MailConfig.Sender, MailConfig.SmtpServer, MailConfig.SmtpPort, MailConfig.Username, MailConfig.Password
+            ));
             services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<ISmsService>(x => new SmsService(
+                TwilioConfig.Sender, TwilioConfig.AccountSid, TwilioConfig.AuthToken
+            ));
             
             var mapperConfig = new MapperConfiguration(cfg =>
             {

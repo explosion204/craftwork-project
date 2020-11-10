@@ -29,17 +29,20 @@ namespace CraftworkProject.Web.Controllers
         private readonly IUserManager _userManager;
         private readonly IEmailService _emailService;
         private readonly IImageService _imageService;
+        private readonly ISmsService _smsService;
         private readonly IWebHostEnvironment _environment;
 
         public AccountController(
             IUserManager userManager,
             IEmailService emailService, 
             IImageService imageService,
+            ISmsService smsService,
             IWebHostEnvironment environment)
         {
             _userManager = userManager;
             _emailService = emailService;
             _imageService = imageService;
+            _smsService = smsService;
             _environment = environment;
         }
 
@@ -55,6 +58,9 @@ namespace CraftworkProject.Web.Controllers
                 CurrentProfilePicture = user.ProfilePicture,
                 PhoneNumber = user.PhoneNumber
             };
+            ViewBag.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
+            ViewBag.Email = user.Email;
+            ViewBag.EmailConfirmed = user.EmailConfirmed;
 
             if (TempData["errors"] != null)
             {
@@ -158,8 +164,61 @@ namespace CraftworkProject.Web.Controllers
             TempData["errors"] = errors;
 
             return Redirect("/account");
-        }  
-        
+        }
+
+        public IActionResult ChangePhoneNumber()
+        {
+            ViewBag.SmsSent = false;
+            return View(new ChangePhoneNumberViewModel() { UserId = _userManager.GetUserId(User) });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePhoneNumber(ChangePhoneNumberViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userWithPhoneNumber = await _userManager.FindUserByPhoneNumber(model.PhoneNumber);
+                if (userWithPhoneNumber != null && userWithPhoneNumber.EmailConfirmed)
+                {
+                    ModelState.AddModelError(nameof(ChangePhoneNumberViewModel.PhoneNumber), "This phone number is already taken");
+                }
+
+                if (ModelState.ErrorCount == 0)
+                {
+                    if (!IsNullOrWhiteSpace(model.Code))
+                    {
+                        ViewBag.SmsSent = true;
+                        bool result = await _userManager.ConfirmPhoneNumber(model.UserId, model.Code);
+
+                        if (result)
+                        {
+                            return Redirect("/account");
+                        }
+
+                        ModelState.AddModelError(nameof(ChangePhoneNumberViewModel.Code), "Invalid code.");
+                        return View(model);
+                    }
+
+                    var user = await _userManager.FindUserById(model.UserId);
+                    var token = await _userManager.GenerateChangePhoneNumberToken(model.UserId, model.PhoneNumber);
+                    var body = $"Confirmation code: {token}";
+                    bool status = await _smsService.SendAsync(model.PhoneNumber, body);
+
+                    if (status)
+                    {
+                        user.PhoneNumber = model.PhoneNumber;
+                        await _userManager.UpdateUser(user);
+                    }
+
+                    ViewBag.SmsSent = true;
+                    return View(model);   
+                }
+            }
+
+            ViewBag.SmsSent = false;
+            return View(model);
+        }
+
         private async Task<string> UploadFile(IFormFile file)
         {
             string uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");

@@ -8,6 +8,7 @@ using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
 using CraftworkProject.Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CraftworkProject.Infrastructure
 {
@@ -103,6 +104,13 @@ namespace CraftworkProject.Infrastructure
         public async Task<User> FindUserByEmail(string email)
         {
             var efUser = await _userManager.FindByEmailAsync(email);
+
+            return efUser != null ? _mapper.Map<User>(efUser) : null;
+        }
+
+        public async Task<User> FindUserByPhoneNumber(string phoneNumber)
+        {
+            var efUser = await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == phoneNumber);
 
             return efUser != null ? _mapper.Map<User>(efUser) : null;
         }
@@ -205,6 +213,19 @@ namespace CraftworkProject.Infrastructure
             return false;
         }
 
+        public async Task<bool> ConfirmPhoneNumber(Guid userId, string token)
+        {
+            var efUser = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (efUser != null)
+            {
+                var status = await _userManager.ChangePhoneNumberAsync(efUser, efUser.PhoneNumber, token);
+                return status.Succeeded;
+            }
+
+            return false;
+        }
+
         public async Task<bool> ResetPassword(Guid userId, string token, string newPassword)
         {
             var efUser = await _userManager.FindByIdAsync(userId.ToString());
@@ -235,6 +256,13 @@ namespace CraftworkProject.Infrastructure
             var efUser = await _userManager.FindByIdAsync(userId.ToString());
 
             return await _userManager.GeneratePasswordResetTokenAsync(efUser);
+        }
+
+        public async Task<string> GenerateChangePhoneNumberToken(Guid userId, string phoneNumber)
+        {
+            var efUser = await _userManager.FindByIdAsync(userId.ToString());
+
+            return await _userManager.GenerateChangePhoneNumberTokenAsync(efUser, phoneNumber);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace CraftworkProject.Domain
         Task<User> FindUserById(Guid id);
         Task<User> FindUserByName(string username);
         Task<User> FindUserByEmail(string email);
+        Task<User> FindUserByPhoneNumber(string phoneNumber);
         Guid GetUserId(ClaimsPrincipal user);
         Task UpdateUser(User user);
         Task DeleteUser(Guid id);
@@ -25,9 +26,11 @@ namespace CraftworkProject.Domain
         Task<bool> ChangeUserPassword(Guid userId, string currentPassword, string newPassword);
         Task<bool> SignIn(string username, string password);
         Task<bool> ConfirmEmail(Guid userId, string token);
+        Task<bool> ConfirmPhoneNumber(Guid userId, string token);
         Task<bool> ResetPassword(Guid userId, string token, string newPassword);
         Task SignOut();
         Task<string> GenerateEmailConfirmationToken(Guid userId);
         Task<string> GeneratePasswordResetToken(Guid userId);
+        Task<string> GenerateChangePhoneNumberToken(Guid userId, string phoneNumber);
     }
 }
