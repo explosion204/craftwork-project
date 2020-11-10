@@ -1,4 +1,9 @@
-$HEADER$namespace $NAMESPACE$
+using System.Threading.Tasks;
+
+namespace CraftworkProject.Services.Interfaces
 {
-  public interface $INTERFACE$ {$END$}
+    public interface ISmsService
+    {
+        Task<bool> SendAsync(string receiver, string message);
+    }
 }
