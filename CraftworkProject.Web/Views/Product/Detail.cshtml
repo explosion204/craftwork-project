@@ -1,0 +1,196 @@
+@using CraftworkProject.Domain.Models
+@model CraftworkProject.Web.ViewModels.ProductViewModel
+
+<section class="section bg-gray">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<!-- Left sidebar -->
+			<div class="col-md-8">
+				<div class="product-details">
+					<h1 class="product-title">@Model.Name</h1>
+					<div class="product-meta">
+						<ul class="list-inline">
+							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">@Model.Category.Name</a></li>
+						</ul>
+						<div class="product-rating"></div>
+					</div>
+					
+					<div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
+						<img class="img-fluid w-100" src="~/img/product/@Model.ImagePath" alt="product-img">
+					</div>
+					
+					<div class="content mt-5 pt-5">
+						@* <div class="col-md-12"> *@
+						@* 	<div class="sidebar"> *@
+						@* 		<div class="widget price text-center"> *@
+						@* 			<h4>Price</h4> *@
+						@* 			<p>$@Model.Price</p> *@
+						@* 			<br/> *@
+						@* 			<input type="number" class="form-control bg-white justify-content-center" min="1"> *@
+						@* 			<a href="" class="btn btn-transparent-white">Add To Cart</a> *@
+						@* 		</div> *@
+						@* 	</div> *@
+						@* </div> *@
+
+						<div class="media">
+							<div class="media-body">
+								<h3 class="tab-title">Product Description</h3>
+								<p>@Model.Desc</p>
+							</div>
+						</div>
+						
+						<div class="product-review">
+							<div class="review-submission">
+								@if (@Model.CurrentUserReviewExists)
+								{
+									<h3 class="tab-title">Update your review</h3>
+								}
+								else
+								{
+									<h3 class="tab-title">Submit your review</h3>
+								}
+                        		
+								<div class="my-rating"></div>
+								<br/>
+								<div class="review-submit">
+									<form method="post" action="/product/submitreview" class="row">
+										<input hidden asp-for="ProductId">
+										<input hidden asp-for="ReviewId">
+										<div class="col-12">
+											<input asp-for="ReviewTitle" type="text" name="ReviewTitle" id="RevitTitle" class="form-control" placeholder="Title">
+											<span asp-validation-for="ReviewTitle"></span>
+										</div>
+										<div class="col-12">
+											<textarea asp-for="ReviewText" name="ReviewText" id="ReviewText" rows="10" class="form-control" placeholder="Text"></textarea>
+											<span asp-validation-for="ReviewText"></span>
+										</div>
+										<div class="col-12">
+											<input type="submit" class="btn btn-main" value="Sumbit">
+										</div>
+									</form>
+								</div>
+							</div>
+							<br/>
+							<h3 class="tab-title">All reviews</h3>
+							@foreach (var review in @Model.Reviews)
+							{
+								<div class="media">
+									<!-- Avatar -->
+									<div class="image d-flex justify-content-center">
+										<img src="/img/profile/@review.User.ProfilePicture" alt="" class="">
+									</div>
+									<div class="media-body">
+										<!-- Ratings -->
+										@switch (review.Rating)
+										{
+											case 1:
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												break;
+											case 2:
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												break;
+											case 3:
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												break;
+											case 4:
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star-o"></i></span>
+												break;
+											case 5:
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												<span><i class="fa fa-star"></i></span>
+												break;
+										}
+										<div class="name">
+											<h5>@review.User.Username</h5>
+										</div>
+										<div class="date">
+											<p>@review.PublicationDate</p>
+										</div>
+										<div class="review-comment">
+											<h5>@review.Title</h5>
+											<p class="review-text">@review.Text</p>
+										</div>
+									</div>
+								</div>
+							}
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div>
+					<div class="widget price text-center">
+						<h4>Price</h4>
+						<p>$@Model.Price</p>
+					</div>
+
+					<div class="widget cart text-center">
+						<div class="input-group justify-content-center">
+                          <input type="button" value="-" class="button-minus" data-field="quantity">
+                          <input type="number" step="1" max="" value="1" name="quantity" class="quantity-field">
+                          <input type="button" value="+" class="button-plus" data-field="quantity">
+                        </div>
+						<a href="" class="btn btn-block btn-transparent-white">Add To Cart</a>
+					</div>
+
+				</div>
+	        </div>
+			
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+
+<script>
+	$(document).ready(function () {
+		document.cookie = @Model.ReviewRating;
+        $('.my-rating').starRating({
+		  totalStars: 5,
+		  emptyColor: 'lightgray',
+		  hoverColor: 'black',
+		  activeColor: 'black',
+		  useFullStars: true,
+		  initialRating: @Model.ReviewRating,
+		  strokeWidth: 0,
+		  useGradient: false,
+		  minRating: 1,
+		  disableAfterRate: false,
+		  ratedColor: 'black',
+		  callback: function(currentRating, $el) {
+			document.cookie='userRating=' + currentRating;
+		  }
+		});
+        
+		$('.product-rating').starRating({
+		  totalStars: 5,
+		  emptyColor: 'lightgray',
+		  activeColor: 'black',
+		  initialRating: @Model.Rating,
+		  readOnly: true,
+		  strokeWidth: 0,
+		  ratedColor: 'black',
+		  starSize: 18
+		});
+	});
+</script>

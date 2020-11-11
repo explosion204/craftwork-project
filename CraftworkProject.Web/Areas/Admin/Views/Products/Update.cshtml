@@ -15,7 +15,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" method="post" action="/admin/products/update">
+        <form class="form-horizontal" method="post" action="/admin/products/update" enctype="multipart/form-data">
             <div class="box-body">
                 <div class="form-group">
                     <label asp-for="Name" class="col-sm-2 control-label">Name</label>
@@ -44,10 +44,11 @@
                         <input asp-for="InStock" type="checkbox" style="position: relative; top: 6px" name="InStock" placeholder="In stock">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="ImagePath" class="col-sm-2 control-label">Image path</label>
+               <div class="form-group">
+                    <label asp-for="Image" class="col-sm-2 control-label">Product Image</label>
                     <div class="col-sm-10">
-                        <input asp-for="ImagePath" type="text" class="form-control" name="ImagePath" placeholder="Image path">
+                        <input asp-for="Image" type="file" style="position: relative; top: 6px" name="Image">
+                        <span style="display: block; margin-top: 10px" asp-validation-for="Image"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -57,6 +58,7 @@
                     </div>
                 </div>
                 <input asp-for="Id" type="hidden" name="Id" value="@Model.Id"/>
+                <input asp-for="ImagePath" type="hidden">
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

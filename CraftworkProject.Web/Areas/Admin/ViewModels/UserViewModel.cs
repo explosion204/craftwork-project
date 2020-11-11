@@ -47,7 +47,7 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         public bool PhoneNumberConfirmed { get; set; }
         
         [Display(Name = "Profile image")]
-        [AllowedExtensions(new string [] { ".jpg", ".jpeg", ".bmp" })]
+        [AllowedExtensions(new [] { ".jpg", ".jpeg", ".bmp" })]
         [MaxFileSize(1024)] // kbytes 
         public IFormFile ProfilePicture { get; set; }
     }

@@ -22,6 +22,7 @@ namespace CraftworkProject.Web.Service
             services.AddScoped<IRepository<Category>, CategoryRepository>();
             services.AddScoped<IRepository<PurchaseDetail>, PurchaseDetailRepository>();
             services.AddScoped<IRepository<Order>, OrderRepository>();
+            services.AddScoped<IRepository<Review>, ReviewRepository>();
             
             services.AddScoped<IDataManager, DataManager>();
             services.AddScoped<IUserManager>(x =>
@@ -29,6 +30,7 @@ namespace CraftworkProject.Web.Service
                     x.GetRequiredService<UserManager<EFUser>>(), 
                     x.GetRequiredService<RoleManager<EFUserRole>>(), 
                     x.GetRequiredService<SignInManager<EFUser>>(), 
+                    x.GetRequiredService<IRepository<Review>>(),
                     x.GetRequiredService<IMapper>()
                     )
             );

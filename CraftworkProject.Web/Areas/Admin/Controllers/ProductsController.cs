@@ -1,8 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using CraftworkProject.Domain.Models;
 using CraftworkProject.Services.Interfaces;
 using CraftworkProject.Web.Areas.Admin.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Areas.Admin.Controllers
@@ -11,10 +15,14 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly IDataManager _dataManager;
+        private readonly IImageService _imageService;
+        private readonly IWebHostEnvironment _environment;
 
-        public ProductsController(IDataManager dataManager)
+        public ProductsController(IDataManager dataManager, IImageService imageService, IWebHostEnvironment environment)
         {
             _dataManager = dataManager;
+            _imageService = imageService;
+            _environment = environment;
         }
         public IActionResult Index()
         {
@@ -28,16 +36,22 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductViewModel model)
+        public async Task<IActionResult> Create(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
+                string fileName = null;
+                if (model.Image != null)
+                {
+                    fileName = await UploadFile(model.Image);
+                } 
+                
                 Product product = new Product()
                 {
                     Name = model.Name,
                     Category = _dataManager.CategoryRepository.GetEntity(model.CategoryId),
                     Desc = model.Desc,
-                    ImagePath = model.ImagePath,
+                    ImagePath = fileName,
                     InStock = model.InStock,
                     Price = model.Price
                 };
@@ -82,7 +96,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(ProductViewModel model)
+        public async Task<IActionResult> Update(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -92,16 +106,42 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                     Name = model.Name,
                     Category = _dataManager.CategoryRepository.GetEntity(model.CategoryId),
                     Desc = model.Desc,
-                    ImagePath = model.ImagePath,
                     InStock = model.InStock,
-                    Price = model.Price
+                    Price = model.Price,
+                    ImagePath = model.ImagePath
                 };
+                
+                if (model.Image != null)
+                {
+                    if (model.ImagePath != null)
+                        DeleteFile(model.ImagePath);
+                    product.ImagePath = await UploadFile(model.Image);
+                } 
+                
+
                 _dataManager.ProductRepository.SaveEntity(product);
                 return Redirect("/admin/products"); 
             }
 
             ViewBag.AllCategories = _dataManager.CategoryRepository.GetAllEntities().ToList();
             return View(model);
+        }
+        
+        private async Task<string> UploadFile(IFormFile file)
+        {
+            string uploadDir = Path.Combine(_environment.WebRootPath, "img/product");
+            string fileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
+            string filePath = Path.Combine(uploadDir, fileName);
+            
+            await _imageService.SaveImage(file, filePath);
+            return fileName;
+        }
+
+        private void DeleteFile(string fileName)
+        {
+            string uploadDir = Path.Combine(_environment.WebRootPath, "img/product");
+            string filePath = Path.Combine(uploadDir, fileName);
+            System.IO.File.Delete(filePath);
         }
     }
 }

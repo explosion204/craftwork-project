@@ -9,5 +9,6 @@ namespace CraftworkProject.Services.Interfaces
         IRepository<Product> ProductRepository { get; set; }
         IRepository<PurchaseDetail> PurchaseDetailRepository { get; set; }
         IRepository<Order> OrderRepository { get; set; }
+        IRepository<Review> ReviewRepository { get; set; }
     }
 }

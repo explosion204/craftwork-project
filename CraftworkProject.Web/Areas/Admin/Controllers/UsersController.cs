@@ -44,6 +44,12 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                var userWithEmail = await _userManager.FindUserByEmail(model.Email);
+                if (userWithEmail != null && userWithEmail.EmailConfirmed)
+                {
+                    ModelState.AddModelError(nameof(UserViewModel.Email), "This email is already taken");
+                }
+                
                 if (String.IsNullOrEmpty(model.NewPassword))
                 {
                     ModelState.AddModelError(nameof(UserViewModel.NewPassword), "This field must be not empty");

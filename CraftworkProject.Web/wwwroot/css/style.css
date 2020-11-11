@@ -1645,6 +1645,7 @@ ul.pagination .active a {
   padding: 30px;
   margin-bottom: 30px;
   border-radius: 2px;
+  word-break: break-word;
 }
 
 .product-review .review-submission h5 {
@@ -1819,12 +1820,12 @@ ul.pagination .active a {
   width: 100%;
 }
 
-.widget.coupon {
+.widget.cart {
   background: #5672f9;
   padding: 35px 30px 40px 30px;
 }
 
-.widget.coupon p {
+.widget.cart p {
   font-size: 20px;
   line-height: 1.4;
   color: #fff;
@@ -2700,4 +2701,69 @@ form textarea {
   text-decoration: none;
 }
 
+
+
 /*# sourceMappingURL=maps/style.css.map */
+
+input,
+textarea {
+  border: 1px solid #eeeeee;
+  box-sizing: border-box;
+  margin: 0;
+  outline: none;
+  padding: 10px;
+}
+
+input[type="button"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.input-group {
+  clear: both;
+  margin-bottom: 15px;
+  margin-left: 8px;
+  position: relative;
+}
+
+.input-group input[type='button'] {
+  background-color: #eeeeee;
+  min-width: 38px;
+  width: auto;
+  transition: all 300ms ease;
+}
+
+.input-group .button-minus,
+.input-group .button-plus {
+  font-weight: bold;
+  height: 38px;
+  padding: 0;
+  width: 38px;
+  position: relative;
+}
+
+.input-group .quantity-field {
+  position: relative;
+  height: 38px;
+  left: -6px;
+  text-align: center;
+  width: 62px;
+  display: inline-block;
+  font-size: 13px;
+  margin: 0 0 5px;
+  resize: vertical;
+}
+
+.button-plus {
+  left: -13px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+}

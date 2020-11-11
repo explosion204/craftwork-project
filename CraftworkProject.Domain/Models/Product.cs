@@ -18,6 +18,10 @@ namespace CraftworkProject.Domain.Models
         
         [Required]
         public string ImagePath { get; set; }
+        
+        public double Rating { get; set; }
+        
+        public int RatesCount { get; set; }
 
         public Category Category { get; set; }
     }

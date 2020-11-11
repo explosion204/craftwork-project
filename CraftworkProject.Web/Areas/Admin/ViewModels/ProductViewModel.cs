@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using CraftworkProject.Web.Service.Validation;
+using Microsoft.AspNetCore.Http;
 
 namespace CraftworkProject.Web.Areas.Admin.ViewModels
 {
@@ -20,7 +22,10 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         [Required]
         public bool InStock { get; set; }
         
-        [Required]
+        [Display(Name = "Product image")]
+        [AllowedExtensions(new string [] { ".jpg", ".jpeg", ".png" })]
+        public IFormFile Image { get; set; }
+        
         public string ImagePath { get; set; }
 
         [Required]
