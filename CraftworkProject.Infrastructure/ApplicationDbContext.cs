@@ -20,6 +20,26 @@ namespace CraftworkProject.Infrastructure
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<EFCategory>()
+                .HasMany<EFProduct>()
+                .WithOne()
+                .HasForeignKey(e => e.CategoryId);
+
+            builder.Entity<EFUser>()
+                .HasMany<EFOrder>()
+                .WithOne()
+                .HasForeignKey(e => e.UserId);
+
+            builder.Entity<EFOrder>()
+                .HasMany<EFPurchaseDetail>()
+                .WithOne()
+                .HasForeignKey(e => e.OrderId);
+
+            builder.Entity<EFProduct>()
+                .HasMany<EFPurchaseDetail>()
+                .WithOne()
+                .HasForeignKey(e => e.ProductId);
+
             builder.Entity<EFUserRole>().HasData(new EFUserRole()
             {
                 Id = Guid.Parse("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"),
