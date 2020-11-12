@@ -11,5 +11,7 @@ namespace CraftworkProject.Infrastructure.Models
         public decimal Price { get; set; }
         public bool InStock { get; set; }
         public string ImagePath { get; set; }
+        public double Rating { get; set; }
+        public int RatesCount { get; set; }
     }
 }

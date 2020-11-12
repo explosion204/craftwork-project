@@ -24,7 +24,9 @@ namespace CraftworkProject.Infrastructure
                 .ForMember("Desc", opt => opt.MapFrom(src => src.Desc))
                 .ForMember("Price", opt => opt.MapFrom(src => src.Price))
                 .ForMember("InStock", opt => opt.MapFrom(src => src.InStock))
-                .ForMember("ImagePath", opt => opt.MapFrom(src => src.ImagePath));
+                .ForMember("ImagePath", opt => opt.MapFrom(src => src.ImagePath))
+                .ForMember("Rating", opt => opt.MapFrom(src => src.Rating))
+                .ForMember("RatesCount", opt => opt.MapFrom(src => src.RatesCount));
 
             CreateMap<Product, EFProduct>()
                 .ForMember("Id", opt => opt.MapFrom(src => src.Id))
@@ -33,7 +35,9 @@ namespace CraftworkProject.Infrastructure
                 .ForMember("Desc", opt => opt.MapFrom(src => src.Desc))
                 .ForMember("Price", opt => opt.MapFrom(src => src.Price))
                 .ForMember("InStock", opt => opt.MapFrom(src => src.InStock))
-                .ForMember("ImagePath", opt => opt.MapFrom(src => src.ImagePath));
+                .ForMember("ImagePath", opt => opt.MapFrom(src => src.ImagePath))
+                .ForMember("Rating", opt => opt.MapFrom(src => src.Rating))
+                .ForMember("RatesCount", opt => opt.MapFrom(src => src.RatesCount));
 
             CreateMap<PurchaseDetail, EFPurchaseDetail>()
                 .ForMember("Id", opt => opt.MapFrom(src => src.Id))
@@ -59,6 +63,22 @@ namespace CraftworkProject.Infrastructure
                 .ForMember("Processed", opt => opt.MapFrom(src => src.Processed))
                 .ForMember("Finished", opt => opt.MapFrom(src => src.Finished))
                 .ForMember("UserId", opt => opt.MapFrom(src => src.User.Id));
+
+            CreateMap<EFReview, Review>()
+                .ForMember("Id", opt => opt.MapFrom(src => src.Id))
+                .ForMember("Title", opt => opt.MapFrom(src => src.Title))
+                .ForMember("Text", opt => opt.MapFrom(src => src.Text))
+                .ForMember("Rating", opt => opt.MapFrom(src => src.Rating))
+                .ForMember("PublicationDate", opt => opt.MapFrom(src => src.PublicationDate));
+
+            CreateMap<Review, EFReview>()
+                .ForMember("Id", opt => opt.MapFrom(src => src.Id))
+                .ForMember("Title", opt => opt.MapFrom(src => src.Title))
+                .ForMember("Text", opt => opt.MapFrom(src => src.Text))
+                .ForMember("Rating", opt => opt.MapFrom(src => src.Rating))
+                .ForMember("UserId", opt => opt.MapFrom(src => src.User.Id))
+                .ForMember("ProductId", opt => opt.MapFrom(src => src.Product.Id))
+                .ForMember("PublicationDate", opt => opt.MapFrom(src => src.PublicationDate));
 
             CreateMap<EFUser, User>()
                 .ForMember("Id", opt => opt.MapFrom(src => src.Id))

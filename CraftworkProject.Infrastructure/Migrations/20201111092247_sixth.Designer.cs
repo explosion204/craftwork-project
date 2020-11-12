@@ -3,15 +3,17 @@ using System;
 using CraftworkProject.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CraftworkProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201111092247_sixth")]
+    partial class sixth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,9 +130,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("PublicationDate")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<int>("Rating")
                         .HasColumnType("integer");
 
@@ -144,8 +143,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Reviews");
                 });
@@ -228,13 +225,13 @@ namespace CraftworkProject.Infrastructure.Migrations
                         {
                             Id = new Guid("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0849fcf9-c14a-4b6e-8db1-99fade560f70",
+                            ConcurrencyStamp = "b0135de2-eba0-4805-8b6c-4fd15a1a1772",
                             Email = "dzmitriy20magic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DZMITRIY20MAGIC@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHYZJXXNnAzPejwUH1jVzKWuvm0ehwaVRGirmzC6ojpbGnUb9wv7C0P++w2+b07A+Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKOVjQ7/5SpuOy9+tFALXW9oeF0uXkEB+cl1j+y1qd46f9BlhN6VoYafwQVrAg4r5Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -272,14 +269,14 @@ namespace CraftworkProject.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"),
-                            ConcurrencyStamp = "fe6516ff-6839-4a6a-b6fe-a0c56423a1ba",
+                            ConcurrencyStamp = "540431bf-5b15-408e-b785-e3368f164b4c",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("3800721a-cf25-427e-b5e1-9c26710df0d5"),
-                            ConcurrencyStamp = "f8981ec6-2022-4607-98e3-9ab8ae806bff",
+                            ConcurrencyStamp = "db0461c7-46c2-48c5-9a87-8d903ff22934",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -419,15 +416,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CraftworkProject.Infrastructure.Models.EFProduct", null)
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFReview", b =>
-                {
                     b.HasOne("CraftworkProject.Infrastructure.Models.EFProduct", null)
                         .WithMany()
                         .HasForeignKey("ProductId")

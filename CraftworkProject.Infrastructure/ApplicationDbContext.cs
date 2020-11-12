@@ -1,5 +1,4 @@
 ﻿using System;
-using CraftworkProject.Domain;
 using CraftworkProject.Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -13,6 +12,7 @@ namespace CraftworkProject.Infrastructure
         public DbSet<EFProduct> Products { get; set; }
         public DbSet<EFPurchaseDetail> PurchaseDetails { get; set; }
         public DbSet<EFOrder> Orders { get; set; }
+        public DbSet<EFReview> Reviews { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -37,6 +37,11 @@ namespace CraftworkProject.Infrastructure
 
             builder.Entity<EFProduct>()
                 .HasMany<EFPurchaseDetail>()
+                .WithOne()
+                .HasForeignKey(e => e.ProductId);
+
+            builder.Entity<EFProduct>()
+                .HasMany<EFReview>()
                 .WithOne()
                 .HasForeignKey(e => e.ProductId);
 

@@ -54,9 +54,11 @@ namespace CraftworkProject.Infrastructure.Repositories
         public void DeleteEntity(Guid id)
         {
             var efCategory = _context.Categories.FirstOrDefault(x => x.Id == id);
-
+            //var efProducts = _context.Products.Where(x => x.CategoryId == id);
+            
             if (efCategory != null)
             {
+                //_context.Products.RemoveRange(efProducts);
                 _context.Categories.Remove(efCategory);
             }
 

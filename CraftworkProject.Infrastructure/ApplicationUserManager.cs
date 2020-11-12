@@ -17,18 +17,21 @@ namespace CraftworkProject.Infrastructure
         private readonly UserManager<EFUser> _userManager;
         private readonly RoleManager<EFUserRole> _roleManager;
         private readonly SignInManager<EFUser> _signInManager;
+        private readonly IRepository<Review> _reviewRepository;
         private readonly IMapper _mapper;
 
         public ApplicationUserManager(
             UserManager<EFUser> userManager, 
             RoleManager<EFUserRole> roleManager, 
             SignInManager<EFUser> signInManager, 
+            IRepository<Review> reviewRepository,
             IMapper mapper
         )
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _reviewRepository = reviewRepository;
             _mapper = mapper;
         }
         
@@ -142,6 +145,7 @@ namespace CraftworkProject.Infrastructure
             if (efUser != null)
             {
                 await _userManager.DeleteAsync(efUser);
+                CascadeDeleteReviews(efUser);
             }
         }
 
@@ -152,6 +156,17 @@ namespace CraftworkProject.Infrastructure
             if (efUser != null)
             {
                 await _userManager.DeleteAsync(efUser);
+                CascadeDeleteReviews(efUser);
+            }
+        }
+
+        private void CascadeDeleteReviews(EFUser efUser)
+        {
+            var associatedReviews = _reviewRepository.GetAllEntities().Where(x => x.User.Id == efUser.Id);
+
+            foreach (var review in associatedReviews)
+            {
+                _reviewRepository.DeleteEntity(review.Id);
             }
         }
 
