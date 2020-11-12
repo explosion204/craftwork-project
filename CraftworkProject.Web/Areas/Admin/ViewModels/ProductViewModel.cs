@@ -14,6 +14,10 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         public string Name { get; set; }
         
         [Required]
+        [MaxLength(100)]
+        public string ShortDesc { get; set; }
+        
+        [Required]
         public string Desc { get; set; }
         
         [Required]
@@ -23,7 +27,7 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         public bool InStock { get; set; }
         
         [Display(Name = "Product image")]
-        [AllowedExtensions(new string [] { ".jpg", ".jpeg", ".png" })]
+        [AllowedExtensions(new [] { ".jpg", ".jpeg", ".png" })]
         public IFormFile Image { get; set; }
         
         public string ImagePath { get; set; }

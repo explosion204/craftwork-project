@@ -8,6 +8,10 @@ namespace CraftworkProject.Domain.Models
         public string Name { get; set; }
         
         [Required]
+        [MaxLength(100)]
+        public string ShortDesc { get; set; }
+        
+        [Required]
         public string Desc { get; set; }
         
         [Required]

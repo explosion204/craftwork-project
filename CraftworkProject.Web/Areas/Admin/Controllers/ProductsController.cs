@@ -50,6 +50,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 {
                     Name = model.Name,
                     Category = _dataManager.CategoryRepository.GetEntity(model.CategoryId),
+                    ShortDesc = model.ShortDesc,
                     Desc = model.Desc,
                     ImagePath = fileName,
                     InStock = model.InStock,
@@ -87,6 +88,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 Id = id,
                 CategoryId = product.Category.Id,
                 Name = product.Name,
+                ShortDesc = product.ShortDesc,
                 Desc = product.Desc,
                 Price = product.Price,
                 InStock = product.InStock,
@@ -105,6 +107,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                     Id = model.Id,
                     Name = model.Name,
                     Category = _dataManager.CategoryRepository.GetEntity(model.CategoryId),
+                    ShortDesc = model.ShortDesc,
                     Desc = model.Desc,
                     InStock = model.InStock,
                     Price = model.Price,
