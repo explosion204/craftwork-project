@@ -40,6 +40,11 @@ namespace CraftworkProject.Infrastructure.Repositories
             var category = _mapper.Map<Category>(efCategory);
             category.Products = _mapper.Map<List<Product>>(_context.Products.Where(x => x.CategoryId == category.Id));
             
+            foreach (var product in category.Products)
+            {
+                product.Category = category;
+            }
+            
             return category;
         }
 
