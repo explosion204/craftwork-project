@@ -1648,6 +1648,14 @@ ul.pagination .active a {
   word-break: break-word;
 }
 
+.product-review .media .media-body .selected {
+  color: #5672f9;
+}
+
+.product-review .media .media-body {
+  color: lightgray;
+}
+
 .product-review .review-submission h5 {
   font-size: 16px;
   color: #888;

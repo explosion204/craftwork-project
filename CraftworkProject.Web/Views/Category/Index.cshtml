@@ -1,0 +1,161 @@
+@model CraftworkProject.Web.ViewModels.CategoryViewModel
+
+<section class="section-sm">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="search-result bg-gray">
+					<h2>@Model.Name</h2>
+					<p>@Model.Products.Count products in stock</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="category-sidebar">
+					<div class="widget category-list">
+						<h4 class="widget-header">All Category</h4>
+						<ul class="category-list">
+							@foreach (var category in Model.AllCategories)
+							{
+								<li><a href="/category?id=@category.Id">@category.Name<span>@category.Products.Count</span></a></li>
+							}
+						</ul>
+					</div>
+				</div>
+			</div>
+		<div class="col-md-9">
+			<div class="category-search-filter"></div>
+			
+			<div class="product-grid-list">
+				<div class="row mt-30">
+					<!-- product card -->
+						@foreach (var product in Model.Products)
+						{
+							<div class="col-sm-12 col-lg-4 col-md-6">
+								<div class="product-item bg-light">
+									<div class="card">
+										<div class="thumb-content">
+											<div class="price">$@product.Price</div>
+											<a href="/product?id=@product.Id">
+												<img class="card-img-top img-fluid" src="/img/product/@product.ImagePath" alt="Product image">
+											</a>
+										</div>
+										<div class="card-body">
+											<h4 class="card-title"><a href="/product?id=@product.Id">@product.Name</a></h4>
+											<ul class="list-inline product-meta">
+												<li class="list-inline-item">
+													<a href="/category?id=@product.Category.Id"><i class="fa fa-folder-open-o"></i>@product.Category.Name</a>
+												</li>
+											</ul>
+											<p class="card-text">@product.ShortDesc</p>
+											<div class="product-ratings">
+												<ul class="list-inline">
+													@switch (Math.Round(product.Rating))
+													{
+														case 0:
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															break;
+														case 1:
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															break;
+														case 2:
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															break;
+														case 3: 
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															break;
+														case 4:
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item"><i class="fa fa-star"></i></li>
+															break;
+														case 5: 
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+															break;
+													}
+												</ul>
+											</div>
+										</div>
+									</div>	
+								</div>	
+							</div>
+						}
+				</div>
+			</div>
+			<div class="pagination justify-content-center">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item">
+							@if (Model.PageViewModel.HasPreviousPage)
+							{
+								<a class="page-link" href="/category?id=@Model.Id&page=@(Model.PageViewModel.PageNumber - 1)" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							}
+							else
+							{
+								<a class="page-link" href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							}
+						</li>
+						@for (int i = 1; i <= Model.PageViewModel.TotalPages; i++)
+						{
+							if (i == Model.PageViewModel.PageNumber)
+							{
+								<li class="page-item active"><a class="page-link" href="/category?id=@Model.Id&page=@i">@i</a></li>
+							}
+							else
+							{
+								<li class="page-item"><a class="page-link" href="/category?id=@Model.Id&page=@i">@i</a></li>
+							}
+						}
+
+							<li class="page-item">
+								@if (Model.PageViewModel.HasNextPage)
+	                            {
+		                            <a class="page-link" href="/category?id=@Model.Id&page=@(Model.PageViewModel.PageNumber + 1)" aria-label="Next">
+			                            <span aria-hidden="true">&raquo;</span>
+			                            <span class="sr-only">Next</span>
+		                            </a>
+	                            }
+								else
+								{
+									<a class="page-link" href="#" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+									</a>
+								}
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

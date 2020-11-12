@@ -19,9 +19,9 @@ namespace CraftworkProject.Web.Controllers
             _dataManager = dataManager;
             _userManager = userManager;
         }
-        public IActionResult Detail(Guid id)
+        public IActionResult Index(Guid id)
         {
-            Product product = _dataManager.ProductRepository.GetEntity(id);
+            var product = _dataManager.ProductRepository.GetEntity(id);
             var reviews = _dataManager.ReviewRepository.GetAllEntities().Where(x => x.Product.Id == id).ToList();
             var currentUserId = _userManager.GetUserId(User);
             var currentUserReview = reviews.FirstOrDefault(x => x.User.Id == currentUserId);
@@ -87,7 +87,7 @@ namespace CraftworkProject.Web.Controllers
                 v => v.Errors.Count != 0 ? v.Errors[0].ErrorMessage : string.Empty).ToList();
             TempData["errors"] = errors;
 
-            return Redirect($"/product/detail?id={model.ProductId}");
+            return Redirect($"/product?id={model.ProductId}");
         }
     }
 }
