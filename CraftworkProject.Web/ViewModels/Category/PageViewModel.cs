@@ -1,6 +1,6 @@
 using System;
 
-namespace CraftworkProject.Web.ViewModels
+namespace CraftworkProject.Web.ViewModels.Category
 {
     public class PageViewModel
     {

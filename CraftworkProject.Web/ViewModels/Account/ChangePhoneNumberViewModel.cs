@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CraftworkProject.Web.ViewModels
+namespace CraftworkProject.Web.ViewModels.Account
 {
     public class ChangePhoneNumberViewModel
     {

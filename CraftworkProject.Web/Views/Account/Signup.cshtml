@@ -1,33 +1,33 @@
-@model CraftworkProject.Web.ViewModels.SignUpViewModel
+@model CraftworkProject.Web.ViewModels.Account.SignUpViewModel
 
 <section class="login py-5 border-top-1">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-5 col-md-8 align-item-center">
-                    <div class="border border">
-                        <h3 class="bg-gray p-4">Sign Up Now</h3>
-                        <form method="post" action="/account/signup?returnUrl=@ViewBag.returnUrl">
-                            <fieldset class="p-4">
-                                <input asp-for="Username" type="text" placeholder="Username" class="border p-3 w-100 my-2">
-                                <span asp-validation-for="Username"></span>
-                                <input asp-for="FirstName" type="text" placeholder="First Name" class="border p-3 w-100">
-                                <span asp-validation-for="FirstName"></span>
-                                <input asp-for="LastName" type="text" placeholder="Last Name" class="border p-3 w-100 my-2">
-                                <span asp-validation-for="LastName"></span>
-                                <input asp-for="Password" type="password" placeholder="Password" class="border p-3 w-100">
-                                <span asp-validation-for="Password"></span>
-                                <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" class="border p-3 w-100 my-2">
-                                <span asp-validation-for="ConfirmPassword"></span>
-                                <input asp-for="Email" type="email" placeholder="Email" class="border p-3 w-100">
-                                <span asp-validation-for="Email"></span>
-                                <input asp-for="ConfirmEmail" type="email" placeholder="Confirm Email" class="border p-3 w-100 my-2">
-                                <span asp-validation-for="ConfirmEmail"></span>
-                                <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold"
-                                        >Register Now</button>
-                            </fieldset>
-                        </form>
-                    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8 align-item-center">
+                <div class="border border">
+                    <h3 class="bg-gray p-4">Sign Up Now</h3>
+                    <form method="post" action="/account/signup?returnUrl=@ViewBag.returnUrl">
+                        <fieldset class="p-4">
+                            <input asp-for="Username" type="text" placeholder="Username" class="border p-3 w-100 my-2">
+                            <span asp-validation-for="Username"></span>
+                            <input asp-for="FirstName" type="text" placeholder="First Name" class="border p-3 w-100">
+                            <span asp-validation-for="FirstName"></span>
+                            <input asp-for="LastName" type="text" placeholder="Last Name" class="border p-3 w-100 my-2">
+                            <span asp-validation-for="LastName"></span>
+                            <input asp-for="Password" type="password" placeholder="Password" class="border p-3 w-100">
+                            <span asp-validation-for="Password"></span>
+                            <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" class="border p-3 w-100 my-2">
+                            <span asp-validation-for="ConfirmPassword"></span>
+                            <input asp-for="Email" type="email" placeholder="Email" class="border p-3 w-100">
+                            <span asp-validation-for="Email"></span>
+                            <input asp-for="ConfirmEmail" type="email" placeholder="Confirm Email" class="border p-3 w-100 my-2">
+                            <span asp-validation-for="ConfirmEmail"></span>
+                            <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold"
+                                    >Register Now</button>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>

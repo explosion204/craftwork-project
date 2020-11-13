@@ -8,7 +8,7 @@ using CraftworkProject.Domain.Models;
 using CraftworkProject.Services.Interfaces;
 using CraftworkProject.Web.Areas.Admin.ViewModels;
 using CraftworkProject.Web.Service.ActionFilters;
-using CraftworkProject.Web.ViewModels;
+using CraftworkProject.Web.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using static System.String;
-using UserViewModel = CraftworkProject.Web.ViewModels.UserViewModel;
+using UserViewModel = CraftworkProject.Web.ViewModels.Account.UserViewModel;
 
 namespace CraftworkProject.Web.Controllers
 {

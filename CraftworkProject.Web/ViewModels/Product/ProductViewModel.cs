@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CraftworkProject.Domain.Models;
 
-namespace CraftworkProject.Web.ViewModels
+namespace CraftworkProject.Web.ViewModels.Product
 {
     public class ProductViewModel
     {
@@ -15,7 +15,7 @@ namespace CraftworkProject.Web.ViewModels
         public string ImagePath { get; set; }
         public double Rating { get; set; }
         public int RatesCount { get; set; }
-        public Category Category { get; set; }
+        public Domain.Models.Category Category { get; set; }
         public List<Review> Reviews { get; set; }
         public bool CurrentUserReviewExists { get; set; }
         

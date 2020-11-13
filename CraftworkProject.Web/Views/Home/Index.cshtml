@@ -1,134 +1,81 @@
-﻿<section class="hero-area bg-1 text-center overly">
-	<!-- Container Start -->
+﻿@model CraftworkProject.Web.ViewModels.Home.HomeViewModel
+
+<section class="hero-area bg-1 text-center overly">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<!-- Header Contetnt -->
+				
 				<div class="content-block">
 					<h1>Craftwork Project</h1>
 					<p>Join the millions of bastards who buy and sell from each other <br> everyday in local communities around the world</p>
 				</div>
-				<!-- Advance Search -->
+				
 				<div class="advance-search">
-						<div class="container">
-							<div class="row justify-content-center">
-								<div class="col-lg-12 col-md-12 align-content-center">
-										<form>
-											<div class="form-row">
-												<div class="form-group col-md-4">
-													<input type="text" class="form-control my-2 my-lg-1" id="inputtext4" placeholder="What are you looking for">
-												</div>
-												<div class="form-group col-md-6">
-													<select class="w-100 form-control mt-lg-1 mt-md-2">
-														<option>Category 1</option>
-														<option>Category 2</option>
-														<option>Category 3</option>
-														<option>Category 4</option>
-													</select>
-												</div>
-												<div class="form-group col-md-2 align-self-center">
-													<button type="submit" class="btn btn-primary">Search Now</button>
-												</div>
-											</div>
-										</form>
+					<div class="container">
+						<div class="row justify-content-center">
+							<div class="col-lg-12 col-md-12 align-content-center">
+								<form method="post" action="/home/search">
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											<input asp-for="SearchViewModel.Query" type="text" class="form-control my-2 my-lg-1" id="inputtext4" placeholder="What are you looking for">
+										</div>
+										<div class="form-group col-md-6">
+											<select asp-for="SearchViewModel.Filter" class="w-100 form-control mt-lg-1 mt-md-2">
+												<option value="@null">All Categories</option>
+
+												@foreach (var category in Model.AllCategories)
+												{
+													<option value="@category.Id">@category.Name</option>
+												}
+											</select>
+										</div>
+										<div class="form-group col-md-2 align-self-center">
+											<button type="submit" class="btn btn-primary">Search Now</button>
+										</div>
 									</div>
-								</div>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
-			
+				
+				
 			</div>
 		</div>
 	</div>
-	<!-- Container End -->
 </section>
 
-<!--==========================================
-=            All Category Section            =
-===========================================-->
-
-<section class=" section">
-	<!-- Container Start -->
+<section class="section">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<!-- Section title -->
+				
 				<div class="section-title">
 					<h2>All Categories</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, provident!</p>
 				</div>
-				<div class="row">	
-					<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						<div class="category-block">
-							
-							<div class="header">
-								<i class="fa fa-laptop icon-bg-8"></i> 
-								<h4>Services</h4>
+				
+				<div class="row">
+					@foreach (var category in Model.AllCategories)
+					{
+						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+							<div class="category-block">
+								<div class="header">
+									<h4><a href="/category?id=@category.Id">@category.Name</a></h4>
+								</div>
+								<h6>Best rated products</h6>
+								<ul class="category-list">
+									@foreach (var product in @category.BestRatedProducts)
+									{
+										<li><a href="/product?id=@product.Id">@product.Name<span>@product.Rating</span></a></li>
+									}
+								</ul>
 							</div>
-							<h6>Best rated products</h6>
-							<ul class="category-list" >
-								<li><a href="category.html">Product 1<span>4.1</span></a></li>
-								<li><a href="category.html">Product 1<span>4.0</span></a></li>
-								<li><a href="category.html">Product 1<span>3.9</span></a></li>
-								<li><a href="category.html">Product 1<span>3.8</span></a></li>
-							</ul>
 						</div>
-					</div> <!-- /Category List -->
-					<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						<div class="category-block">
-							
-							<div class="header">
-								<i class="fa fa-laptop icon-bg-8"></i> 
-								<h4>Services</h4>
-							</div>
-							<h6>Best rated products</h6>
-							<ul class="category-list" >
-								<li><a href="category.html">Product 1<span>4.1</span></a></li>
-								<li><a href="category.html">Product 1<span>4.0</span></a></li>
-								<li><a href="category.html">Product 1<span>3.9</span></a></li>
-								<li><a href="category.html">Product 1<span>3.8</span></a></li>
-							</ul>
-						</div>
-					</div> <!-- /Category List -->
-					<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						<div class="category-block">
-							
-							<div class="header">
-								<i class="fa fa-laptop icon-bg-8"></i> 
-								<h4>Services</h4>
-							</div>
-							<h6>Best rated products</h6>
-							<ul class="category-list" >
-								<li><a href="category.html">Product 1<span>4.1</span></a></li>
-								<li><a href="category.html">Product 1<span>4.0</span></a></li>
-								<li><a href="category.html">Product 1<span>3.9</span></a></li>
-								<li><a href="category.html">Product 1<span>3.8</span></a></li>
-							</ul>
-						</div>
-					</div> <!-- /Category List -->
-					<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						<div class="category-block">
-							
-							<div class="header">
-								<i class="fa fa-laptop icon-bg-8"></i> 
-								<h4>Services</h4>
-							</div>
-							<h6>Best rated products</h6>
-							<ul class="category-list" >
-								<li><a href="category.html">Product 1<span>4.1</span></a></li>
-								<li><a href="category.html">Product 1<span>4.0</span></a></li>
-								<li><a href="category.html">Product 1<span>3.9</span></a></li>
-								<li><a href="category.html">Product 1<span>3.8</span></a></li>
-							</ul>
-						</div>
-					</div> <!-- /Category List -->
-					
+					}
 				</div>
+				
 			</div>
 		</div>
 	</div>
-	<!-- Container End -->
 </section>

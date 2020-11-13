@@ -1,19 +1,18 @@
-@model CraftworkProject.Web.ViewModels.UserViewModel
+@model CraftworkProject.Web.ViewModels.Account.UserViewModel
 
 <section class="user-profile section">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
 				<div class="sidebar">
-					<!-- User Widget -->
+
 					<div class="widget user">
-						<!-- User Image -->
 						<div class="image d-flex justify-content-center">
 							<img src="~/img/profile/@Model.CurrentProfilePicture" alt="" class="">
 						</div>
-						<!-- User Name -->
 						<h5 class="text-center">@Model.Username</h5>
 					</div>
+					
 					<div class="widget user-dashboard-menu">
 						<ul>
 							<li class="active"><a href="dashboard-my-ads.html"><i class="fa"></i>Reviews<span>5</span></a></li>
@@ -23,15 +22,17 @@
 							<li><a href="/account/logout"><i class="fa fa-cog"></i> Logout</a></li>
 						</ul>
 					</div>
+					
 				</div>
 			</div>
+			
 			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
-				<!-- Edit Profile Welcome Text -->
+				
 				<div class="widget welcome-message">
 					<h2>Edit profile</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
 				</div>
-				<!-- Edit Personal Info -->
+
 				<div class="row">
 					<div class="col-lg-6 col-md-6">
 						<div class="widget personal-info">
@@ -147,6 +148,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>

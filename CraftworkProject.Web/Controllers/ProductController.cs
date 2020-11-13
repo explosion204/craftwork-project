@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
 using CraftworkProject.Services.Interfaces;
-using CraftworkProject.Web.ViewModels;
+using CraftworkProject.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Controllers
@@ -26,7 +26,7 @@ namespace CraftworkProject.Web.Controllers
             var currentUserId = _userManager.GetUserId(User);
             var currentUserReview = reviews.FirstOrDefault(x => x.User.Id == currentUserId);
 
-            var viewModel = new ProductViewModel()
+            var viewModel = new ProductViewModel
             {
                 ProductId = id,
                 Name = product.Name,
@@ -77,6 +77,7 @@ namespace CraftworkProject.Web.Controllers
                     Text = model.ReviewText,
                     Rating = int.Parse(Request.Cookies["userRating"]),
                     Product = _dataManager.ProductRepository.GetEntity(model.ProductId),
+                    PublicationDate = DateTime.Now,
                     User = await _userManager.FindUserById(_userManager.GetUserId(User))
                 };
                 

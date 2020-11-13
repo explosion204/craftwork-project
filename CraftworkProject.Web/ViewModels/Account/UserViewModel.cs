@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using CraftworkProject.Web.Service.Validation;
 using Microsoft.AspNetCore.Http;
 
-namespace CraftworkProject.Web.ViewModels
+namespace CraftworkProject.Web.ViewModels.Account
 {
     public class UserViewModel
     {
