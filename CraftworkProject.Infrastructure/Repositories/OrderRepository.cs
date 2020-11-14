@@ -33,9 +33,21 @@ namespace CraftworkProject.Infrastructure.Repositories
             {
                 pair.Order.User =
                     _mapper.Map<User>(_userManager.Users.FirstOrDefault(x => x.Id == pair.EFOrder.UserId));
-                pair.Order.PurchaseDetails =
-                    _mapper.Map<List<PurchaseDetail>>(
-                        _context.PurchaseDetails.Where(x => x.OrderId == pair.EFOrder.Id));
+
+                var efPurchaseDetails = _context.PurchaseDetails
+                    .Where(x => x.OrderId == pair.EFOrder.Id)
+                    .ToList();
+                
+                var purchaseDetails = new List<PurchaseDetail>();
+                
+                foreach (var efDetail in efPurchaseDetails)
+                {
+                    var detail = _mapper.Map<PurchaseDetail>(efDetail);
+                    detail.Product = _mapper.Map<Product>(_context.Products.First(x => x.Id == efDetail.ProductId));
+                    purchaseDetails.Add(detail);
+                }
+
+                pair.Order.PurchaseDetails = purchaseDetails;
             }
 
             return orders;
@@ -46,9 +58,20 @@ namespace CraftworkProject.Infrastructure.Repositories
             var efOrder = _context.Orders.FirstOrDefault(x => x.Id == id);
             var order = _mapper.Map<Order>(efOrder);
             order.User = _mapper.Map<User>(_userManager.Users.FirstOrDefault(x => x.Id == efOrder.UserId));
-            order.PurchaseDetails =
-                _mapper.Map<List<PurchaseDetail>>(_context.PurchaseDetails.Where(x => x.OrderId == efOrder.Id));
+            var efPurchaseDetails = _context.PurchaseDetails
+                .Where(x => x.OrderId == efOrder.Id)
+                .ToList();
+                
+            var purchaseDetails = new List<PurchaseDetail>();
+                
+            foreach (var efDetail in efPurchaseDetails)
+            {
+                var detail = _mapper.Map<PurchaseDetail>(efDetail);
+                detail.Product = _mapper.Map<Product>(_context.Products.First(x => x.Id == efDetail.ProductId));
+                purchaseDetails.Add(detail);
+            }
 
+            order.PurchaseDetails = purchaseDetails;
             return order;
         }
 

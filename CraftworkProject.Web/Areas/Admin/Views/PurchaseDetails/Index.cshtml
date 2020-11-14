@@ -31,7 +31,7 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Order.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.OrderId)</td>
                         <td>@Html.DisplayFor(modelItem => item.Product.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.Amount)</td>
                         <td><a href="/admin/purchasedetails/update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>

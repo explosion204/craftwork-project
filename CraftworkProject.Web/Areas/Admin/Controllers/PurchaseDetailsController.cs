@@ -36,7 +36,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             {
                 PurchaseDetail detail = new PurchaseDetail()
                 {
-                    Order = _dataManager.OrderRepository.GetEntity(model.OrderId),
+                    OrderId = model.Id,
                     Product = _dataManager.ProductRepository.GetEntity(model.ProductId),
                     Amount = model.Amount
                 };
@@ -72,7 +72,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             PurchaseDetailViewModel viewModel = new PurchaseDetailViewModel()
             {
                 Id = id,
-                OrderId = detail.Order.Id,
+                OrderId = detail.OrderId,
                 ProductId = detail.Product.Id,
                 Amount = detail.Amount
             };
@@ -88,7 +88,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 PurchaseDetail detail = new PurchaseDetail()
                 {
                     Id = model.Id,
-                    Order = _dataManager.OrderRepository.GetEntity(model.OrderId),
+                    OrderId = model.OrderId,
                     Product = _dataManager.ProductRepository.GetEntity(model.ProductId),
                     Amount = model.Amount
                 };

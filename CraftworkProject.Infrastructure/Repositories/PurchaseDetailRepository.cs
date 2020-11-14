@@ -29,8 +29,6 @@ namespace CraftworkProject.Infrastructure.Repositories
                 (efPurchaseDetail, purchaseDetail) => new
                     {EFPurchaseDetail = efPurchaseDetail, PurchaseDetail = purchaseDetail}))
             {
-                pair.PurchaseDetail.Order =
-                    _mapper.Map<Order>(_context.Orders.FirstOrDefault(x => x.Id == pair.EFPurchaseDetail.OrderId));
                 pair.PurchaseDetail.Product =
                     _mapper.Map<Product>(
                         _context.Products.FirstOrDefault(x => x.Id == pair.EFPurchaseDetail.ProductId));
@@ -43,8 +41,6 @@ namespace CraftworkProject.Infrastructure.Repositories
         {
             var efPurchaseDetail = _context.PurchaseDetails.FirstOrDefault(x => x.Id == id);
             var purchaseDetail = _mapper.Map<PurchaseDetail>(efPurchaseDetail);
-            purchaseDetail.Order =
-                _mapper.Map<Order>(_context.Orders.FirstOrDefault(x => x.Id == efPurchaseDetail.OrderId));
             purchaseDetail.Product =
                 _mapper.Map<Product>(_context.Products.FirstOrDefault(x => x.Id == efPurchaseDetail.ProductId));
 

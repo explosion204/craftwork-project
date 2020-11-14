@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CraftworkProject.Domain.Models
 {
@@ -7,7 +8,7 @@ namespace CraftworkProject.Domain.Models
         [Required]
         public int Amount { get; set; }
 
-        public Order Order { get; set; }
+        public Guid OrderId { get; set; }
         public Product Product { get; set; }
     }
 }

@@ -47,12 +47,13 @@ namespace CraftworkProject.Infrastructure
 
             CreateMap<EFPurchaseDetail, PurchaseDetail>()
                 .ForMember("Id", opt => opt.MapFrom(src => src.Id))
-                .ForMember("Amount", opt => opt.MapFrom(src => src.Amount));
+                .ForMember("Amount", opt => opt.MapFrom(src => src.Amount))
+                .ForMember("OrderId", opt => opt.MapFrom(src => src.OrderId));
 
             CreateMap<PurchaseDetail, EFPurchaseDetail>()
                 .ForMember("Id", opt => opt.MapFrom(src => src.Id))
                 .ForMember("Amount", opt => opt.MapFrom(src => src.Amount))
-                .ForMember("OrderId", opt => opt.MapFrom(src => src.Order.Id))
+                .ForMember("OrderId", opt => opt.MapFrom(src => src.OrderId))
                 .ForMember("ProductId", opt => opt.MapFrom(src => src.Product.Id));
 
             CreateMap<EFOrder, Order>()

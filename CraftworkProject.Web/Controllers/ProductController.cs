@@ -25,6 +25,21 @@ namespace CraftworkProject.Web.Controllers
             var reviews = _dataManager.ReviewRepository.GetAllEntities().Where(x => x.Product.Id == id).ToList();
             var currentUserId = _userManager.GetUserId(User);
             var currentUserReview = reviews.FirstOrDefault(x => x.User.Id == currentUserId);
+            var reviewSubmitAllowed = false;
+            
+            if (User.Identity.IsAuthenticated)
+            {
+                var userFinishedOrders = _dataManager.OrderRepository.GetAllEntities()
+                    .Where(x => x.User.Id == currentUserId && x.Finished);
+
+                foreach (var order in userFinishedOrders)
+                {
+                    if (order.PurchaseDetails.FirstOrDefault(x => x.Product.Id == id) != null)
+                    {
+                        reviewSubmitAllowed = true;
+                    }
+                }
+            }
 
             var viewModel = new ProductViewModel
             {
@@ -39,6 +54,7 @@ namespace CraftworkProject.Web.Controllers
                 Rating = product.Rating,
                 RatesCount = product.RatesCount,
                 Reviews = reviews,
+                ReviewSubmitAllowed = reviewSubmitAllowed,
                 ReviewId = currentUserReview?.Id ?? default,
                 ReviewTitle = currentUserReview?.Title ?? "",
                 ReviewText = currentUserReview?.Text ?? "",

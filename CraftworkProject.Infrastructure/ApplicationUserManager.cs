@@ -122,7 +122,7 @@ namespace CraftworkProject.Infrastructure
         {
             var efUser = _userManager.Users.FirstOrDefault(x => x.UserName == user.Identity.Name);
 
-            return efUser.Id;
+            return efUser?.Id ?? default;
         }
 
         public async Task UpdateUser(User user)

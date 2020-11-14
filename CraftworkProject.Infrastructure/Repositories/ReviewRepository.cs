@@ -64,6 +64,19 @@ namespace CraftworkProject.Infrastructure.Repositories
                 efProduct.Rating = (efProduct.Rating * efProduct.RatesCount + efReview.Rating) / (efProduct.RatesCount + 1);
                 efProduct.RatesCount++;
                 
+                // trying my hard to catch damn bug
+                try
+                {
+                    if (efProduct.RatesCount < 1)
+                    {
+                        throw new Exception();
+                    } 
+                }
+                catch (Exception)
+                {
+                    var str = "BREAKPOINT";
+                }
+
                 _context.Entry(efReview).State = EntityState.Added;
             }
             else
@@ -95,6 +108,18 @@ namespace CraftworkProject.Infrastructure.Repositories
                     ? (efProduct.Rating * efProduct.RatesCount - efReview.Rating) / (efProduct.RatesCount - 1)
                     : 0;
                 efProduct.RatesCount--;
+                
+                try
+                {
+                    if (efProduct.RatesCount < 0)
+                    {
+                        throw new Exception();
+                    } 
+                }
+                catch (Exception)
+                {
+                    var str = "BREAKPOINT";
+                }
                 
                 _context.Reviews.Remove(efReview);
             }
