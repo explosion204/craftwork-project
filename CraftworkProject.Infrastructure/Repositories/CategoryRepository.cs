@@ -48,22 +48,22 @@ namespace CraftworkProject.Infrastructure.Repositories
             return category;
         }
 
-        public void SaveEntity(Category entity)
+        public Guid SaveEntity(Category entity)
         {
             var efCategory = _mapper.Map<EFCategory>(entity);
 
             _context.Entry(efCategory).State = efCategory.Id == default ? EntityState.Added : EntityState.Modified;
             _context.SaveChanges();
+
+            return efCategory.Id;
         }
 
         public void DeleteEntity(Guid id)
         {
             var efCategory = _context.Categories.FirstOrDefault(x => x.Id == id);
-            //var efProducts = _context.Products.Where(x => x.CategoryId == id);
             
             if (efCategory != null)
             {
-                //_context.Products.RemoveRange(efProducts);
                 _context.Categories.Remove(efCategory);
             }
 

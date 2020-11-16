@@ -51,7 +51,7 @@ namespace CraftworkProject.Infrastructure.Repositories
             return review;
         }
 
-        public void SaveEntity(Review entity)
+        public Guid SaveEntity(Review entity)
         {
             EFReview efReview;
             var efProduct = _mapper.Map<EFProduct>(entity.Product);
@@ -95,6 +95,8 @@ namespace CraftworkProject.Infrastructure.Repositories
             
             _context.Entry(efProduct).State = EntityState.Modified;
             _context.SaveChanges();
+
+            return efReview.Id;
         }
 
         public void DeleteEntity(Guid id)

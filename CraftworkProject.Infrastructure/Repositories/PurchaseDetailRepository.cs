@@ -47,12 +47,14 @@ namespace CraftworkProject.Infrastructure.Repositories
             return purchaseDetail;
         }
 
-        public void SaveEntity(PurchaseDetail entity)
+        public Guid SaveEntity(PurchaseDetail entity)
         {
             var efPurchaseDetail = _mapper.Map<EFPurchaseDetail>(entity);
 
             _context.Entry(efPurchaseDetail).State = efPurchaseDetail.Id == default ? EntityState.Added : EntityState.Modified;
             _context.SaveChanges();
+
+            return entity.Id;
         }
 
         public void DeleteEntity(Guid id)

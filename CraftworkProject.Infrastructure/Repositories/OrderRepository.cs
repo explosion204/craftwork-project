@@ -75,12 +75,14 @@ namespace CraftworkProject.Infrastructure.Repositories
             return order;
         }
 
-        public void SaveEntity(Order entity)
+        public Guid SaveEntity(Order entity)
         {
             var efOrder = _mapper.Map<EFOrder>(entity);
 
             _context.Entry(efOrder).State = efOrder.Id == default ? EntityState.Added : EntityState.Modified;
             _context.SaveChanges();
+
+            return efOrder.Id;
         }
 
         public void DeleteEntity(Guid id)

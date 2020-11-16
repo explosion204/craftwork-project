@@ -8,7 +8,7 @@ namespace CraftworkProject.Domain
     {
         List<T> GetAllEntities();
         T GetEntity(Guid id);
-        void SaveEntity(T entity);
+        Guid SaveEntity(T entity);
         void DeleteEntity(Guid id);
     }
 }

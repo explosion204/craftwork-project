@@ -45,12 +45,14 @@ namespace CraftworkProject.Infrastructure.Repositories
             return product;
         }
 
-        public void SaveEntity(Product entity)
+        public Guid SaveEntity(Product entity)
         {
             var efProduct = _mapper.Map<EFProduct>(entity);
 
             _context.Entry(efProduct).State = efProduct.Id == default ? EntityState.Added : EntityState.Modified;
             _context.SaveChanges();
+
+            return efProduct.Id;
         }
 
         public void DeleteEntity(Guid id)
