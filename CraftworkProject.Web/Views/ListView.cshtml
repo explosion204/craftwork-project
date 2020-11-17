@@ -8,6 +8,7 @@
 				<div class="col-md-12">
 					<div class="search-result bg-gray">
 						<h2>@Model.Name</h2>
+						<h5>@Model.Desc</h5>
 						<p>@Model.Products.Count products in stock</p>
 					</div>
 				</div>
@@ -75,10 +76,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="category-search-filter">
-					@Model.Desc
-				</div>
-
+				
 				<div class="product-grid-list">
 					<div class="row mt-30">
 						@foreach (var product in Model.Products)

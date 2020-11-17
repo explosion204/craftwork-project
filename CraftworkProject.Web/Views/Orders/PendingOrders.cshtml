@@ -1,0 +1,162 @@
+@model List<CraftworkProject.Domain.Models.Order>
+
+<section class="dashboard section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+        <div class="sidebar">
+
+          <div class="widget user">
+            <div class="image d-flex justify-content-center">
+              <img src="~/img/profile/@ViewData["profileImagePath"]" alt="" class="">
+            </div>
+            <h5 class="text-center">@ViewData["username"]</h5>
+          </div>
+      		
+          <div class="widget user-dashboard-menu">
+            <ul>
+							<li><a href="#"><i class="fa"></i>Profile</a></li>
+              <li class="active"><a href="#"><i class="fa"></i>Pending orders<span>@ViewData["pendingOrdersCount"]</span></a></li>
+              <li><a href="/orders/canceledorders"><i class="fa"></i>Canceled orders<span>@ViewData["canceledOrdersCount"]</span></a></li>
+							<li><a href="/orders/finishedorders"><i class="fa "></i>Finished orders<span>@ViewData["finishedOrdersCount"]</span></a></li>
+							<li><a href="/account/logout"><i class="fa fa-cog"></i> Logout</a></li>
+            </ul>
+          </div>
+      		
+        </div>
+      </div>
+      
+      <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+        <div class="widget dashboard-container my-adslist">
+          <h3 class="widget-header">Pending orders</h3>
+          <table class="table table-responsive product-dashboard-table">
+            <thead>
+            <tr>
+              <th class="text-center">Details</th>
+              <th class="text-center">Order ID</th>
+              <th class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+              @foreach (var order in Model)
+              {
+                <tr>
+                  <td class="product-details">
+                    <span><strong>Total products: </strong>@order.PurchaseDetails.Count()</span>
+                    <span><strong>Total price: </strong>@order.PurchaseDetails.Sum(x => x.Product.Price)$</span>
+                    <span><strong>Date: </strong><time>@order.Created</time> </span>
+                  </td>
+                  <td class="product-category"><span>@order.Id</span></td>
+                  <td class="action" data-title="Action">
+                    <div class="">
+                      <ul class="list-inline justify-content-center">
+                        <li class="list-inline-item">
+                          <a data-toggle="tooltip" data-placement="top" title="View" class="view" href="#"
+                             onclick="getOrder('@order.Id')">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              }
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function getOrder(orderId) {
+    $.ajax({
+      type: 'GET',
+      url: '/orders/getorder',
+      data: {
+        orderId: orderId
+      },
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      async: false, // idk but in debug environment cannot receive json response when async is true
+                    // maybe in production it will be OK?
+      success: function (response) {
+        $(makeModal(response['purchaseDetails'])).modal('show');
+      },
+      error: function (response) {
+        alert('ERROR');
+      },
+      failure: function (response) {
+        alert('FAILURE');
+      },
+    });
+  }
+  
+  
+  function makeModal(details) {
+    let html = `<div id="myModal" class="modal fade" role="dialog" aria-labelledby="exampleModalCenterTitle">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>View order</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>        
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="widget dashboard-container my-adslist">
+            <table class="table table-responsive product-dashboard-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Product Title</th>
+                  <th class="text-center">Quantity</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+                <tbody>`;
+    
+     for (let i = 0; i < details.length; i++) {
+       let detail = details[i];
+       
+       html += `<tr>
+                  <td class="product-thumb">
+                    <img style="padding: 10%;" width="80px" height="auto" src="/img/product/` + detail['product']['imagePath'] + `" alt="image">
+                  </td>  
+                    <td class="product-details">
+                      <h3 class="title">` + detail['product']['name'] + `</h3>
+                      <h4>` + detail['product']['shortDesc'] + `</h4>
+                    </td>
+                    <td>
+                      <div class="text-center">` + detail['amount'] + ` x ` + detail['product']['price'] + `$</div>
+                    </td>
+                    <td class="action" data-title="Action">
+                      <div class="">
+                        <ul class="list-inline justify-content-center">
+                          <li class="list-inline-item">
+                            <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="/product?id=` + detail['product']['id'] + `">
+                              <i class="fa fa-eye"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                </tr>`
+     }
+     html += `                </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+     </div>`;
+     
+     return html;
+    }
+</script>

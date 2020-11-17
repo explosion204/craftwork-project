@@ -15,10 +15,10 @@
 					
 					<div class="widget user-dashboard-menu">
 						<ul>
-							<li class="active"><a href="dashboard-my-ads.html"><i class="fa"></i>Reviews<span>5</span></a></li>
-							<li><a href="#"><i class="fa"></i>Wishlist<span>5</span></a></li>
-							<li><a href="#"><i class="fa"></i>Pending orders<span>12</span></a></li>
-							<li><a href="#"><i class="fa "></i>Finished orders<span>23</span></a></li>
+							<li class="active"><a href="#"><i class="fa"></i>Profile</a></li>
+							<li><a href="/orders/pendingorders"><i class="fa"></i>Pending orders<span>@ViewData["pendingOrdersCount"]</span></a></li>
+							<li><a href="/orders/canceledorders"><i class="fa"></i>Canceled orders<span>@ViewData["canceledOrdersCount"]</span></a></li>
+							<li><a href="/orders/finishedorders"><i class="fa "></i>Finished orders<span>@ViewData["finishedOrdersCount"]</span></a></li>
 							<li><a href="/account/logout"><i class="fa fa-cog"></i> Logout</a></li>
 						</ul>
 					</div>
@@ -37,7 +37,7 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="widget personal-info">
 							<h3 class="widget-header user">Edit Personal Information</h3>
-							<form method="post" action="/account/changepersonalinfo" enctype="multipart/form-data">
+							<form method="post" action="/profile/changepersonalinfo" enctype="multipart/form-data">
 								<input hidden asp-for="Id">
 								<input hidden asp-for="Username">
 								<input hidden asp-for="CurrentPassword">
@@ -68,7 +68,7 @@
 						<!-- Change Password -->
 						<div class="widget change-password">
 							<h3 class="widget-header user">Change Password</h3>
-							<form method="post" action="/account/changepassword">
+							<form method="post" action="/profile/changepassword">
 								<input hidden asp-for="Id">
 								<input hidden asp-for="Username">
 								<input hidden asp-for="FirstName">
@@ -110,7 +110,7 @@
 									<label for="zip-code">Phone Number <b>(Not Confirmed)</b></label>
 								}
 								<input readonly type="text" class="form-control" id="zip-code" value="@Model.PhoneNumber">
-								<a href="/account/changephonenumber" class="btn btn-transparent my-4">Change</a>
+								<a href="/profile/changephonenumber" class="btn btn-transparent my-4">Change</a>
 							</div>
 						</div>
 					</div>

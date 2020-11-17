@@ -9,6 +9,7 @@ namespace CraftworkProject.Web.ViewModels.Product
     {
         public Guid ProductId { get; set; }
         public string Name { get; set; }
+        public string ShortDesc { get; set; }
         public string Desc { get; set; }
         public decimal Price { get; set; }
         public bool InStock { get; set; }
@@ -19,6 +20,7 @@ namespace CraftworkProject.Web.ViewModels.Product
         public List<Review> Reviews { get; set; }
         public bool CurrentUserReviewExists { get; set; }
         
+        public bool ReviewSubmitAllowed { get; set; }
         public Guid ReviewId { get; set; }
         
         [Required]

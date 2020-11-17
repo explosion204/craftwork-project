@@ -1,25 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
 using CraftworkProject.Services.Interfaces;
-using CraftworkProject.Web.Areas.Admin.ViewModels;
-using CraftworkProject.Web.Service.ActionFilters;
 using CraftworkProject.Web.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using static System.String;
-using UserViewModel = CraftworkProject.Web.ViewModels.Account.UserViewModel;
 
 namespace CraftworkProject.Web.Controllers
 {
@@ -28,214 +14,16 @@ namespace CraftworkProject.Web.Controllers
     {
         private readonly IUserManager _userManager;
         private readonly IEmailService _emailService;
-        private readonly IImageService _imageService;
-        private readonly ISmsService _smsService;
-        private readonly IWebHostEnvironment _environment;
 
         public AccountController(
             IUserManager userManager,
-            IEmailService emailService, 
-            IImageService imageService,
-            ISmsService smsService,
-            IWebHostEnvironment environment)
+            IEmailService emailService
+        )
         {
             _userManager = userManager;
             _emailService = emailService;
-            _imageService = imageService;
-            _smsService = smsService;
-            _environment = environment;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var user = await _userManager.FindUserByName(User.Identity.Name);
-            var viewModel = new UserViewModel()
-            {
-                Id = user.Id,
-                Username = user.Username,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                CurrentProfilePicture = user.ProfilePicture,
-                PhoneNumber = user.PhoneNumber
-            };
-            ViewBag.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
-            ViewBag.Email = user.Email;
-            ViewBag.EmailConfirmed = user.EmailConfirmed;
-
-            if (TempData["errors"] != null)
-            {
-                var errors = (string[]) TempData["errors"];
-                foreach (var error in errors)
-                {
-                    if (error.Contains("first", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        ModelState.AddModelError(nameof(viewModel.FirstName), error);
-                    }
-
-                    if (error.Contains("last", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        ModelState.AddModelError(nameof(viewModel.LastName), error);
-                    }
-
-                    if (error.Contains("file", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        ModelState.AddModelError(nameof(viewModel.ProfilePicture), error);
-                    }
-
-                    if (error.Contains("current password", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        ModelState.AddModelError(nameof(viewModel.CurrentPassword), error);
-                    }
-                    else if (error.Contains("password", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        ModelState.AddModelError(nameof(viewModel.NewPassword), "Passwords do not match");
-                        ModelState.AddModelError(nameof(viewModel.ConfirmNewPassword), "Passwords do not match");   
-                    }
-                }
-            }
-
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ChangePersonalInfo(UserViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindUserById(model.Id);
-                var updatedUser = new User()
-                {
-                    Id = model.Id,
-                    Username = model.Username,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = user.Email,
-                    EmailConfirmed = user.EmailConfirmed,
-                    PasswordHash = user.PasswordHash,
-                    PhoneNumber = user.PhoneNumber,
-                    PhoneNumberConfirmed = user.PhoneNumberConfirmed,
-                    ProfilePicture = user.ProfilePicture
-                };
-
-                if (model.ProfilePicture != null)
-                {
-                    DeleteFile(user.ProfilePicture);
-                    updatedUser.ProfilePicture = await UploadFile(model.ProfilePicture);
-                }
-                
-                await _userManager.UpdateUser(updatedUser);
-                return Redirect("/account");
-            }
-
-            var errors = ModelState.Values.Select(
-                v => v.Errors.Count != 0 ? v.Errors[0].ErrorMessage : Empty).ToList();
-            TempData["errors"] = errors;
-
-            return Redirect("/account");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ChangePassword(UserViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindUserById(model.Id);
-
-                if (model.NewPassword.Equals(model.ConfirmNewPassword))
-                {
-                    bool status = await _userManager.ChangeUserPassword(model.Id, model.CurrentPassword, model.NewPassword);
-
-                    if (status)
-                    {
-                        return Redirect("/account");
-                    }
-
-                    ModelState.AddModelError(nameof(UserViewModel.CurrentPassword), "Incorrect current password.");
-                }
-                else
-                {
-                    ModelState.AddModelError(nameof(UserViewModel.NewPassword), "Passwords do not match");
-                    ModelState.AddModelError(nameof(UserViewModel.ConfirmNewPassword), "Passwords do not match");   
-                }
-            }
-            
-            var errors = ModelState.Values.Select(
-                v => v.Errors.Count != 0 ? v.Errors[0].ErrorMessage : Empty).ToList();
-            TempData["errors"] = errors;
-
-            return Redirect("/account");
-        }
-
-        public IActionResult ChangePhoneNumber()
-        {
-            ViewBag.SmsSent = false;
-            return View(new ChangePhoneNumberViewModel() { UserId = _userManager.GetUserId(User) });
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ChangePhoneNumber(ChangePhoneNumberViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var userWithPhoneNumber = await _userManager.FindUserByPhoneNumber(model.PhoneNumber);
-                if (userWithPhoneNumber != null && userWithPhoneNumber.EmailConfirmed)
-                {
-                    ModelState.AddModelError(nameof(ChangePhoneNumberViewModel.PhoneNumber), "This phone number is already taken");
-                }
-
-                if (ModelState.ErrorCount == 0)
-                {
-                    if (!IsNullOrWhiteSpace(model.Code))
-                    {
-                        ViewBag.SmsSent = true;
-                        bool result = await _userManager.ConfirmPhoneNumber(model.UserId, model.Code);
-
-                        if (result)
-                        {
-                            return Redirect("/account");
-                        }
-
-                        ModelState.AddModelError(nameof(ChangePhoneNumberViewModel.Code), "Invalid code.");
-                        return View(model);
-                    }
-
-                    var user = await _userManager.FindUserById(model.UserId);
-                    var token = await _userManager.GenerateChangePhoneNumberToken(model.UserId, model.PhoneNumber);
-                    var body = $"Confirmation code: {token}";
-                    bool status = await _smsService.SendAsync(model.PhoneNumber, body);
-
-                    if (status)
-                    {
-                        user.PhoneNumber = model.PhoneNumber;
-                        await _userManager.UpdateUser(user);
-                    }
-
-                    ViewBag.SmsSent = true;
-                    return View(model);   
-                }
-            }
-
-            ViewBag.SmsSent = false;
-            return View(model);
-        }
-
-        private async Task<string> UploadFile(IFormFile file)
-        {
-            string uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
-            string fileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
-            string filePath = Path.Combine(uploadDir, fileName);
-            
-            await _imageService.SaveImage(file, filePath);
-            return fileName;
-        }
-
-        private void DeleteFile(string fileName)
-        {
-            string uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
-            string filePath = Path.Combine(uploadDir, fileName);
-            System.IO.File.Delete(filePath);
-        }
-        
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
@@ -314,22 +102,22 @@ namespace CraftworkProject.Web.Controllers
                     ModelState.AddModelError(nameof(SignUpViewModel.Username), "This username is already taken.");
                 }
                 
-                if (IsNullOrEmpty(model.Password))
+                if (string.IsNullOrEmpty(model.Password))
                 {
                     ModelState.AddModelError(nameof(SignUpViewModel.Password), "This field must be not empty");
                 }
 
-                if (IsNullOrEmpty(model.ConfirmPassword))
+                if (string.IsNullOrEmpty(model.ConfirmPassword))
                 {
                     ModelState.AddModelError(nameof(SignUpViewModel.ConfirmPassword), "This field must be not empty");
                 }
 
-                if (IsNullOrEmpty(model.Email))
+                if (string.IsNullOrEmpty(model.Email))
                 {
                     ModelState.AddModelError(nameof(SignUpViewModel.Email), "This field must be not empty");
                 }
 
-                if (IsNullOrEmpty(model.ConfirmEmail))
+                if (string.IsNullOrEmpty(model.ConfirmEmail))
                 {
                     ModelState.AddModelError(nameof(SignUpViewModel.ConfirmEmail), "This field must be not empty");
                 }

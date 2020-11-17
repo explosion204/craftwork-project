@@ -1,0 +1,89 @@
+@model CraftworkProject.Web.ViewModels.Cart.CartViewModel
+
+<section class="dashboard section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-2 col-lg-8">
+                <div class="widget dashboard-container my-adslist">
+                    <h3 class="widget-header">Cart</h3>
+                    @if (Model.Products.Count != 0)
+                    {
+                        <table class="table table-responsive product-dashboard-table">
+                        <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Title</th>
+                            <th class="text-center">Category</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var product in Model.Products)
+                        {
+                            <tr>
+                                <td class="product-thumb">
+                                    <img width="80px" height="auto" src="/img/product/@product.ImagePath" alt="image">
+                                </td>
+                                <td class="product-details">
+                                    <h3 class="title">@product.Name</h3>
+                                    <h4>@product.ShortDesc</h4>
+                                </td>
+                                <td class="product-category"><span class="categories">@product.Category.Name</span></td>
+                                <td>
+                                    <div class="text-center">@Model.Quantities[Model.Products.IndexOf(product)] x @product.Price$"</div>
+                                </td>
+                                <td class="action" data-title="Action">
+                                    <div class="">
+                                        <ul class="list-inline justify-content-center">
+                                            <li class="list-inline-item">
+                                                <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="/product?id=@product.Id">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a onclick="deleteItem('@product.Id.ToString()')" class="delete" data-toggle="tooltip" data-placement="top" title="Delete" href="">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                    }
+                    else
+                    {
+                        <p class="text-center">Cart is empty</p>    
+                    }
+                    @if (Model.MakeOrderAllowed)
+                    {
+                        <button id="make-order" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold">Order now</button>
+                    }
+                    else
+                    {
+                        <button disabled class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold disabled">Order now</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function deleteItem(id) {    
+      $.ajax({
+        type: 'POST',
+        dataType: 'text',
+        url: '/cart/delete',
+        data: {
+          itemId: id
+        },
+        success: function (result) {
+            window.location.replace('/cart');
+        }
+      });
+    }
+</script>

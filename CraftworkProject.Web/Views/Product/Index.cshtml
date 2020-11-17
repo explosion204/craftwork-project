@@ -26,38 +26,46 @@
 						</div>
 						
 						<div class="product-review">
-							<div class="review-submission">
-								@if (@Model.CurrentUserReviewExists)
-								{
-									<h3 class="tab-title">Update your review</h3>
-								}
-								else
-								{
-									<h3 class="tab-title">Submit your review</h3>
-								}
-                        		
-								<div class="my-rating"></div>
-								<br/>
-								<div class="review-submit">
-									<form method="post" action="/product/submitreview" class="row">
-										<input hidden asp-for="ProductId">
-										<input hidden asp-for="ReviewId">
-										<div class="col-12">
-											<input asp-for="ReviewTitle" type="text" name="ReviewTitle" id="RevitTitle" class="form-control" placeholder="Title">
-											<span asp-validation-for="ReviewTitle"></span>
-										</div>
-										<div class="col-12">
-											<textarea asp-for="ReviewText" name="ReviewText" id="ReviewText" rows="10" class="form-control" placeholder="Text"></textarea>
-											<span asp-validation-for="ReviewText"></span>
-										</div>
-										<div class="col-12">
-											<input type="submit" class="btn btn-main" value="Sumbit">
-										</div>
-									</form>
+							@if (Model.ReviewSubmitAllowed)
+							{
+								<div class="review-submission">
+									@if (@Model.CurrentUserReviewExists)
+									{
+										<h3 class="tab-title">Update your review</h3>
+									}
+									else
+									{
+										<h3 class="tab-title">Submit your review</h3>
+									}
+
+									<div class="my-rating"></div>
+									<br/>
+									<div class="review-submit">
+										<form method="post" action="/product/submitreview" class="row">
+											<input hidden asp-for="ProductId">
+											<input hidden asp-for="ReviewId">
+											<div class="col-12">
+												<input asp-for="ReviewTitle" type="text" name="ReviewTitle" id="RevitTitle" class="form-control" placeholder="Title">
+												<span asp-validation-for="ReviewTitle"></span>
+											</div>
+											<div class="col-12">
+												<textarea asp-for="ReviewText" name="ReviewText" id="ReviewText" rows="10" class="form-control" placeholder="Text"></textarea>
+												<span asp-validation-for="ReviewText"></span>
+											</div>
+											<div class="col-12">
+												<input type="submit" class="btn btn-main" value="Sumbit">
+											</div>
+										</form>
+									</div>
 								</div>
-							</div>
-							<br/>
+								<br/>
+							}
 							<h3 class="tab-title">All reviews</h3>
+							@if (Model.Reviews.Count == 0)
+							{
+								<h4 class="text-center">No one have rated this product... Want to be first?</h4>	
+							}
+							
 							@foreach (var review in @Model.Reviews)
 							{
 								<div class="media">
@@ -132,13 +140,13 @@
 
 					<div class="widget cart text-center">
 						<div class="input-group justify-content-center">
-                          <input type="button" value="-" class="button-minus" data-field="quantity">
-                          <input type="number" step="1" max="" value="1" name="quantity" class="quantity-field">
-                          <input type="button" value="+" class="button-plus" data-field="quantity">
-                        </div>
-						<a href="" class="btn btn-block btn-transparent-white">Add To Cart</a>
+							<input type="button" value="-" class="button-minus" data-field="quantity">
+							<input id="count" type="number" step="1" max="" value="1" name="quantity" class="quantity-field">
+							<input type="button" value="+" class="button-plus" data-field="quantity">
+						</div>
+						<input hidden id="product-id" type="text" value="@Model.ProductId.ToString()">
+						<a id="add-to-cart" class="add-to-cart btn btn-block btn-transparent-white text-white">Add To Cart</a>
 					</div>
-
 				</div>
 	        </div>
 			
@@ -149,32 +157,34 @@
 <script>
 	$(document).ready(function () {
 		document.cookie = @Model.ReviewRating;
+		
         $('.my-rating').starRating({
-		  totalStars: 5,
-		  emptyColor: 'lightgray',
-		  hoverColor: '#5672f9',
-		  activeColor: '#5672f9',
-		  useFullStars: true,
-		  initialRating: @Model.ReviewRating,
-		  strokeWidth: 0,
-		  useGradient: false,
-		  minRating: 1,
-		  disableAfterRate: false,
-		  ratedColor: '#5672f9',
-		  callback: function(currentRating, $el) {
-			document.cookie='userRating=' + currentRating;
-		  }
+		  	totalStars: 5,
+		  	emptyColor: 'lightgray',
+		  	hoverColor: '#5672f9',
+		  	activeColor: '#5672f9',
+		  	useFullStars: true,
+		  	initialRating: @Model.ReviewRating,
+		  	strokeWidth: 0,
+		  	useGradient: false,
+		  	minRating: 1,
+		  	disableAfterRate: false,
+		  	ratedColor: '#5672f9',
+		  	callback: function(currentRating, $el) {
+				document.cookie='userRating=' + currentRating;
+		  	}
 		});
         
 		$('.product-rating').starRating({
-		  totalStars: 5,
-		  emptyColor: 'lightgray',
-		  activeColor: '#5672f9',
-		  initialRating: @Model.Rating,
-		  readOnly: true,
-		  strokeWidth: 0,
-		  ratedColor: '#5672f9',
-		  starSize: 18
+			totalStars: 5,
+		  	emptyColor: 'lightgray',
+		  	activeColor: 'black',
+		 	hoverColor: 'black',
+		  	initialRating: @Model.Rating,
+		  	readOnly: true,
+		  	strokeWidth: 0,
+		  	ratedColor: 'black',
+		  	starSize: 18
 		});
 	});
 </script>

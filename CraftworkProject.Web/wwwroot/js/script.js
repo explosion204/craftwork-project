@@ -60,4 +60,43 @@ $(document).ready(function () {
     
     window.location.replace(redirectUrl);
   });
+  
+  $('#add-to-cart').on('click', function () {
+    $('#add-to-cart').off('click');
+    let cartStr = window.sessionStorage.getItem("cart");
+    let cart = (cartStr != null) ? JSON.parse(cartStr) : [];
+    let productId = $('#product-id').val();
+
+    let i;
+    for (i = 0; i < $('#count').val(); i++) {
+      cart.push(productId);
+    }
+    
+    $.ajax({
+      type: 'POST',
+      dataType: 'text',
+      url: '/cart/setcart',
+      data: {
+        jArray: JSON.stringify(cart)
+      },
+      success: function (result) {
+        window.location.replace('/cart');
+      }
+    });
+    
+  });
+  
+  $('#make-order').on('click', function () {
+    $('#make-order').off('click');
+    
+    $.ajax({
+      type: 'POST',
+      dataType: 'text',
+      url: '/cart/makeorder',
+      data: {},
+      success: function (result) {
+        window.location.replace('/cart/success');
+      }
+    });
+  });
 });

@@ -2771,6 +2771,10 @@ input::-webkit-inner-spin-button {
   left: -13px;
 }
 
+.modal-lg {
+  max-width: 80% !important;
+}
+
 input[type="number"] {
   -moz-appearance: textfield;
   -webkit-appearance: none;
