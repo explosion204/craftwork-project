@@ -10,6 +10,9 @@ namespace CraftworkProject.Domain.Models
         public bool Processed { get; set; }
         
         [Required]
+        public bool Canceled { get; set; }
+        
+        [Required]
         public bool Finished { get; set; }
         
         public User User { get; set; }

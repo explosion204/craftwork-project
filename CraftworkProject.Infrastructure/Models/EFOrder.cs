@@ -7,6 +7,7 @@ namespace CraftworkProject.Infrastructure.Models
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public bool Processed { get; set; }
+        public bool Canceled { get; set; }
         public bool Finished { get; set; }
     }
 }

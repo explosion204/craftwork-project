@@ -40,6 +40,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 Order order = new Order()
                 {
                     Processed = model.Processed,
+                    Canceled = model.Canceled,
                     Finished = model.Finished,
                     User = user
                 };
@@ -75,6 +76,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 Id = order.Id,
                 UserId = order.User.Id,
                 Finished = order.Finished,
+                Canceled = order.Canceled,
                 Processed = order.Processed
             };
             return View(viewModel);
@@ -90,6 +92,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 {
                     Id = model.Id,
                     Processed = model.Processed,
+                    Canceled = model.Canceled,
                     Finished = model.Finished,
                     User = user
                 };

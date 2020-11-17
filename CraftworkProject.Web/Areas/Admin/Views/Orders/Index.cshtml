@@ -22,6 +22,7 @@
                 <th>Id</th>
                 <th>User</th>
                 <th>Processed</th>
+                <th>Canceled</th>
                 <th>Finished</th>
                 <th>Action</th>
             </tr>
@@ -33,6 +34,7 @@
                         <td>@Html.DisplayFor(modelItem => item.Id)</td>
                         <td>@Html.DisplayFor(modelItem => item.User.Username)</td>
                         <td>@Html.DisplayFor(modelItem => item.Processed)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Canceled)</td>
                         <td>@Html.DisplayFor(modelItem => item.Finished)</td>
                         <td><a href="/admin/orders/update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
                     </tr>

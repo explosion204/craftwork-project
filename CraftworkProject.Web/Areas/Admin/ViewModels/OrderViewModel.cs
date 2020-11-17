@@ -15,6 +15,9 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         public bool Processed { get; set; }
         
         [Required]
+        public bool Canceled { get; set; }
+        
+        [Required]
         public bool Finished { get; set; }
     }
 }
