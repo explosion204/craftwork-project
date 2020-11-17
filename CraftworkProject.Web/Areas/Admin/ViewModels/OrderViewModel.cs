@@ -11,6 +11,8 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         [Required]
         public Guid UserId { get; set; }
         
+        public DateTime Created { get; set; }
+        
         [Required]
         public bool Processed { get; set; }
         

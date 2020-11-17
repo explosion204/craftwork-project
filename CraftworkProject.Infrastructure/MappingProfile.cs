@@ -58,12 +58,14 @@ namespace CraftworkProject.Infrastructure
 
             CreateMap<EFOrder, Order>()
                 .ForMember("Id", opt => opt.MapFrom(src => src.Id))
+                .ForMember("Created", opt => opt.MapFrom(src => src.Created))
                 .ForMember("Processed", opt => opt.MapFrom(src => src.Processed))
                 .ForMember("Canceled", opt => opt.MapFrom(src => src.Canceled))
                 .ForMember("Finished", opt => opt.MapFrom(src => src.Finished));
 
             CreateMap<Order, EFOrder>()
                 .ForMember("Id", opt => opt.MapFrom(src => src.Id))
+                .ForMember("Created", opt => opt.MapFrom(src => src.Created))
                 .ForMember("Processed", opt => opt.MapFrom(src => src.Processed))
                 .ForMember("Canceled", opt => opt.MapFrom(src => src.Canceled))
                 .ForMember("Finished", opt => opt.MapFrom(src => src.Finished))

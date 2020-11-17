@@ -39,6 +39,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 User user = await _userManager.FindUserById(model.UserId);
                 Order order = new Order()
                 {
+                    Created = DateTime.Now,
                     Processed = model.Processed,
                     Canceled = model.Canceled,
                     Finished = model.Finished,
@@ -74,6 +75,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             OrderViewModel viewModel = new OrderViewModel()
             {
                 Id = order.Id,
+                Created = order.Created,
                 UserId = order.User.Id,
                 Finished = order.Finished,
                 Canceled = order.Canceled,
@@ -91,6 +93,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 Order order = new Order()
                 {
                     Id = model.Id,
+                    Created = model.Created,
                     Processed = model.Processed,
                     Canceled = model.Canceled,
                     Finished = model.Finished,

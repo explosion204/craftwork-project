@@ -23,5 +23,7 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         
         [Required]
         public Guid ProductId { get; set; }
+        
+        public Guid PublicationDate { get; set; }
     }
 }

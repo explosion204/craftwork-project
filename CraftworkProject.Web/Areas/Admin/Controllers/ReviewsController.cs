@@ -102,7 +102,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 Text = review.Text,
                 Rating = review.Rating,
                 ProductId = review.Product.Id,
-                UserId = review.User.Id
+                UserId = review.User.Id,
             };
             
             return View(viewModel);

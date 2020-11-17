@@ -21,6 +21,7 @@
             <tr>
                 <th>Id</th>
                 <th>User</th>
+                <th>Created</th>
                 <th>Processed</th>
                 <th>Canceled</th>
                 <th>Finished</th>
@@ -33,6 +34,7 @@
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Id)</td>
                         <td>@Html.DisplayFor(modelItem => item.User.Username)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Created)</td>
                         <td>@Html.DisplayFor(modelItem => item.Processed)</td>
                         <td>@Html.DisplayFor(modelItem => item.Canceled)</td>
                         <td>@Html.DisplayFor(modelItem => item.Finished)</td>
