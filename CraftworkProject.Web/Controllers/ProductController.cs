@@ -22,6 +22,10 @@ namespace CraftworkProject.Web.Controllers
         public IActionResult Index(Guid id)
         {
             var product = _dataManager.ProductRepository.GetEntity(id);
+
+            if (product == null)
+                return Redirect("/error/404");
+            
             var reviews = _dataManager.ReviewRepository.GetAllEntities().Where(x => x.Product.Id == id).ToList();
             var currentUserId = _userManager.GetUserId(User);
             var currentUserReview = reviews.FirstOrDefault(x => x.User.Id == currentUserId);

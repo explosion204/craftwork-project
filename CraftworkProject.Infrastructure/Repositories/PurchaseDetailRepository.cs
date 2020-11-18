@@ -40,6 +40,10 @@ namespace CraftworkProject.Infrastructure.Repositories
         public PurchaseDetail GetEntity(Guid id)
         {
             var efPurchaseDetail = _context.PurchaseDetails.FirstOrDefault(x => x.Id == id);
+
+            if (efPurchaseDetail == null)
+                return null;
+            
             var purchaseDetail = _mapper.Map<PurchaseDetail>(efPurchaseDetail);
             purchaseDetail.Product =
                 _mapper.Map<Product>(_context.Products.FirstOrDefault(x => x.Id == efPurchaseDetail.ProductId));

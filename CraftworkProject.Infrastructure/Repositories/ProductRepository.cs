@@ -38,6 +38,10 @@ namespace CraftworkProject.Infrastructure.Repositories
         public Product GetEntity(Guid id)
         {
             var efProduct = _context.Products.FirstOrDefault(x => x.Id == id);
+
+            if (efProduct == null)
+                return null;
+            
             var product = _mapper.Map<Product>(efProduct);
             product.Category =
                 _mapper.Map<Category>(_context.Categories.FirstOrDefault(x => x.Id == efProduct.CategoryId));

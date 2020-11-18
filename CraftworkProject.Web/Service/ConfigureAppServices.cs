@@ -1,3 +1,4 @@
+using System.IO;
 using AutoMapper;
 using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
@@ -6,15 +7,17 @@ using CraftworkProject.Infrastructure.Models;
 using CraftworkProject.Infrastructure.Repositories;
 using CraftworkProject.Services.Implementations;
 using CraftworkProject.Services.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CraftworkProject.Web.Service
 {
     public static class ConfigureAppServices
     {
-        public static void Configure(IServiceCollection services)
+        public static void Configure(IServiceCollection services, IWebHostEnvironment env)
         {
             services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(Config.ConnectionString), 
                 ServiceLifetime.Transient);
@@ -41,6 +44,12 @@ namespace CraftworkProject.Web.Service
             services.AddScoped<ISmsService>(x => new SmsService(
                 TwilioConfig.Sender, TwilioConfig.AccountSid, TwilioConfig.AuthToken
             ));
+            services.AddLogging(opt =>
+            {
+                opt.AddConsole();
+                opt.AddFile(Path.Combine(env.WebRootPath, "logs", "all.log"));
+                opt.AddFile(Path.Combine(env.WebRootPath, "logs", "error.log"), LogLevel.Error);
+            });
             services.AddSingleton<IUserConnectionManager, UserConnectionManager>();
             
             var mapperConfig = new MapperConfiguration(cfg =>

@@ -56,6 +56,10 @@ namespace CraftworkProject.Infrastructure.Repositories
         public Order GetEntity(Guid id)
         {
             var efOrder = _context.Orders.FirstOrDefault(x => x.Id == id);
+
+            if (efOrder == null)
+                return null;
+            
             var order = _mapper.Map<Order>(efOrder);
             order.User = _mapper.Map<User>(_userManager.Users.FirstOrDefault(x => x.Id == efOrder.UserId));
             var efPurchaseDetails = _context.PurchaseDetails

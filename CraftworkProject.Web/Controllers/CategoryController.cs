@@ -21,6 +21,9 @@ namespace CraftworkProject.Web.Controllers
         {
             var category = _dataManager.CategoryRepository.GetEntity(id);
 
+            if (category == null)
+                return Redirect("/error/404");
+
             var products = order switch
             {
                 "highestRating" => category.Products

@@ -44,6 +44,10 @@ namespace CraftworkProject.Infrastructure.Repositories
         public Review GetEntity(Guid id)
         {
             var efReview = _context.Reviews.FirstOrDefault(x => x.Id == id);
+
+            if (efReview == null)
+                return null;
+            
             var review = _mapper.Map<Review>(efReview);
             review.User = _mapper.Map<User>(_userManager.Users.FirstOrDefault(x => x.Id == efReview.UserId));
             review.Product = _mapper.Map<Product>(_context.Products.FirstOrDefault(x => x.Id == efReview.ProductId));

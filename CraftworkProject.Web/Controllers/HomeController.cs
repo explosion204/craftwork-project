@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CraftworkProject.Services.Interfaces;
 using CraftworkProject.Web.ViewModels;
@@ -18,6 +19,7 @@ namespace CraftworkProject.Web.Controllers
         public IActionResult Index()
         {
             var allCategories = new List<CategoryViewModel>();
+            throw new Exception("Fuck you!");
 
             foreach (var category in _dataManager.CategoryRepository.GetAllEntities().ToList())
             {
