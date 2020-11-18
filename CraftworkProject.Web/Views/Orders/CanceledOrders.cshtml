@@ -91,8 +91,6 @@
       },
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      async: false, // idk but in debug environment cannot receive json response when async is true
-                    // maybe in production it will be OK?
       success: function (response) {
         $(makeModal(response['purchaseDetails'])).modal('show');
       },

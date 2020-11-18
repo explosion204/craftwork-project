@@ -104,17 +104,17 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         }
         
         [HttpPost]
-        public async Task<bool> Delete(Guid id)
+        public async Task<IActionResult> Delete(string id)
         {
             Guid currentUserId = _userManager.GetUserId(User);
             
-            if (!currentUserId.ToString().Equals(id.ToString()))
+            if (!currentUserId.ToString().Equals(id))
             {
                 await _userManager.DeleteUser(id);
-                return true;
+                return Json(new {success = true});
             }
             
-            return false;
+            return Json(new {success = false});
         }
         
         public async Task<IActionResult> Update(Guid id)

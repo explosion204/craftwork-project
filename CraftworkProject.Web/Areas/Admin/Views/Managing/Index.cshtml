@@ -1,0 +1,152 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<CraftworkProject.Domain.Models.Order>
+
+<section class="content-header">
+    <h1>
+    Orders
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Manage orders</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>User</th>
+                <th>Products</th>
+                <th>Total price</th>
+                <th>Created</th>
+                <th>Processed</th>
+                <th>Canceled</th>
+                <th>Finished</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.User.Username)</td>
+                        <td>
+                            @foreach (var detail in item.PurchaseDetails)
+                            {
+                                <p>
+                                    <a href="/product?id=@detail.Product.Id">@detail.Product.Name</a>
+                                    @detail.Amount x @detail.Product.Price$
+                                </p>
+                            }
+                        </td>
+                        <td>@item.PurchaseDetails.Sum(x => x.Product.Price * x.Amount)$</td>
+                        <td>@Html.DisplayFor(modelItem => item.Created)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Processed)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Canceled)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Finished)</td>
+                        <td>
+                            @if (!item.Processed && !item.Canceled && !item.Finished)
+                            {
+                                <a href="#" onclick="confirmOrder('@item.Id')">Confirm</a>
+                            }
+                            @if (item.Processed && !item.Canceled && !item.Finished)
+                            {
+                                <a href="#" onclick="finishOrder('@item.Id')">Finish</a> @:| <a href="#" onclick="cancelOrder('@item.Id')">Cancel</a>
+                            }
+                            @if (item.Processed && item.Canceled && !item.Finished)
+                            {
+                                <a href="#" onclick="restoreOrder('@item.Id')">Restore</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+<!-- page script -->
+<script>
+    $(function () {
+        $('#example1').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    text: 'New order',
+                    
+                    action: function ( e, dt, node, config ) {
+                        window.location.replace('/admin/orders/create')
+                    }
+                }
+            ]
+        });
+    });
+    
+    function confirmOrder(id) {    
+      $.ajax({
+        type: 'POST',
+        dataType: 'text',
+        url: '/admin/managing/confirmorder',
+        data: {
+          id: id
+        },
+        success: function (result) {
+            window.location.replace('/admin/managing');
+        }
+      });
+    }
+    
+    function cancelOrder(id) {    
+      $.ajax({
+        type: 'POST',
+        dataType: 'text',
+        url: '/admin/managing/cancelorder',
+        data: {
+          id: id
+        },
+        success: function (result) {
+            window.location.replace('/admin/managing');
+        }
+      });
+    }
+    
+    function restoreOrder(id) {    
+      $.ajax({
+        type: 'POST',
+        dataType: 'text',
+        url: '/admin/managing/restoreorder',
+        data: {
+          id: id
+        },
+        success: function (result) {
+            window.location.replace('/admin/managing');
+        }
+      });
+    }
+    
+    function finishOrder(id) {    
+      $.ajax({
+        type: 'POST',
+        dataType: 'text',
+        url: '/admin/managing/finishorder',
+        data: {
+          id: id
+        },
+        success: function (result) {
+            window.location.replace('/admin/managing');
+        }
+      });
+    }
+</script>

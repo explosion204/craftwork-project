@@ -38,16 +38,16 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public bool Delete(Guid id)
+        public IActionResult Delete(string id)
         {
             try
             {
-                _dataManager.CategoryRepository.DeleteEntity(id);
-                return true;
+                _dataManager.CategoryRepository.DeleteEntity(Guid.Parse(id));
+                return Json(new {success = true});
             }
             catch (Exception)
             {
-                return false;
+                return Json(new {success = false});
             }
         }
         
