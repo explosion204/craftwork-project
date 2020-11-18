@@ -41,12 +41,16 @@ namespace CraftworkProject.Web.Service
             services.AddScoped<ISmsService>(x => new SmsService(
                 TwilioConfig.Sender, TwilioConfig.AccountSid, TwilioConfig.AuthToken
             ));
+            services.AddSingleton<IUserConnectionManager, UserConnectionManager>();
             
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
             });
             services.AddSingleton(typeof(IMapper), mapperConfig.CreateMapper());
+
+            services.AddSignalR();
+            services.AddSignalRCore();
         }
     }
 }

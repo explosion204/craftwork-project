@@ -1,3 +1,4 @@
+using CraftworkProject.Web.Hubs;
 using CraftworkProject.Web.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,8 +47,8 @@ namespace CraftworkProject.Web
             {
                 endpoints.MapControllerRoute("default", "{controller=home}/{action=index}");
                 endpoints.MapControllerRoute("admin", "{area:exists}/{controller=categories}/{action=index}/{id?}");
+                endpoints.MapHub<NotificationHub>("/NotificationHub");
             });
-            
         }
     }
 }

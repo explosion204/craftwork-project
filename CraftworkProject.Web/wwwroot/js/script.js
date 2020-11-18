@@ -99,4 +99,40 @@ $(document).ready(function () {
       }
     });
   });
+
+  function makeNotificationModal(text) {
+    let html = `<div id="myModal" class="modal fade" role="dialog" aria-labelledby="exampleModalCenterTitle">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4>Notification</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>        
+              </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">` + text + `</p>     
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+    return html;
+  }
+  
+  const connection = new signalR.HubConnectionBuilder().withUrl('/NotificationHub').build();
+  connection.on('notifyOrderConfirmed', function () {
+    $(makeNotificationModal('Your order has been confirmed! We contact you as soon as possible.')).modal('show');
+  });
+  connection.on('notifyOrderCanceled', function () {
+    $(makeNotificationModal('Your order has been canceled! Contact our support to resolve this issue.')).modal('show');
+  });
+  connection.on('notifyOrderFinished', function () {
+    $(makeNotificationModal('Your order has been finished! Thank you for your purchase!')).modal('show');
+  });
+  connection.start();
 });

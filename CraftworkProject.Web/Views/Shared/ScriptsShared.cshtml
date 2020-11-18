@@ -9,5 +9,71 @@
 <script src="/plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script src="/plugins/smoothscroll/SmoothScroll.min.js"></script>
 <script src="/plugins/star-rating-svg/jquery.star-rating-svg.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
 <script src="/js/script.js"></script>
+
+<script>
+      function makeOrderModal(details) {
+        let html = `<div id="myModal" class="modal fade" role="dialog" aria-labelledby="exampleModalCenterTitle">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4>View order</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>        
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="widget dashboard-container my-adslist">
+                <table class="table table-responsive product-dashboard-table">
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Product Title</th>
+                      <th class="text-center">Quantity</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                    <tbody>`;
+    
+        for (let i = 0; i < details.length; i++) {
+          let detail = details[i];
+    
+          html += `<tr>
+                      <td class="product-thumb">
+                        <img style="padding: 10%;" width="80px" height="auto" src="/img/product/` + detail['product']['imagePath'] + `" alt="image">
+                      </td>  
+                        <td class="product-details">
+                          <h3 class="title">` + detail['product']['name'] + `</h3>
+                          <h4>` + detail['product']['shortDesc'] + `</h4>
+                        </td>
+                        <td>
+                          <div class="text-center">` + detail['amount'] + ` x ` + detail['product']['price'] + `$</div>
+                        </td>
+                        <td class="action" data-title="Action">
+                          <div class="">
+                            <ul class="list-inline justify-content-center">
+                              <li class="list-inline-item">
+                                <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="/product?id=` + detail['product']['id'] + `">
+                                  <i class="fa fa-eye"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </td>
+                    </tr>`
+        }
+        html += `                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+         </div>`;
+    
+        return html;
+      }
+</script>
