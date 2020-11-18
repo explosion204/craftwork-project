@@ -16,9 +16,9 @@
           <div class="widget user-dashboard-menu">
             <ul>
 							<li><a href="/profile"><i class="fa"></i>Profile</a></li>
-              <li class="active"><a href="#"><i class="fa"></i>Pending orders<span>@ViewData["pendingOrdersCount"]</span></a></li>
+              <li><a href="/orders/pendingorders"><i class="fa"></i>Pending orders<span>@ViewData["pendingOrdersCount"]</span></a></li>
               <li><a href="/orders/canceledorders"><i class="fa"></i>Canceled orders<span>@ViewData["canceledOrdersCount"]</span></a></li>
-							<li><a href="/orders/finishedorders"><i class="fa "></i>Finished orders<span>@ViewData["finishedOrdersCount"]</span></a></li>
+							<li class="active"><a href="#"><i class="fa "></i>Finished orders<span>@ViewData["finishedOrdersCount"]</span></a></li>
 							<li><a href="/account/logout"><i class="fa fa-cog"></i> Logout</a></li>
             </ul>
           </div>
@@ -28,7 +28,7 @@
       
       <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
         <div class="widget dashboard-container my-adslist">
-          <h3 class="widget-header">Pending orders</h3>
+          <h3 class="widget-header">Canceled orders</h3>
           
           @if (Model.Count != 0)
           {

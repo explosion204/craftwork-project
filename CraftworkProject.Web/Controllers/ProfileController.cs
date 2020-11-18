@@ -58,7 +58,7 @@ namespace CraftworkProject.Web.Controllers
 
             ViewData["pendingOrdersCount"] = userOrders.Count(x => x.Processed && !x.Canceled && !x.Finished);
             ViewData["canceledOrdersCount"] = userOrders.Count(x => x.Processed && x.Canceled && !x.Finished);
-            ViewData["finishedOrdersCount"] = userOrders.Count(x => x.Processed && !x.Canceled && !x.Finished);
+            ViewData["finishedOrdersCount"] = userOrders.Count(x => x.Processed && !x.Canceled && x.Finished);
 
             if (TempData["errors"] != null)
             {
