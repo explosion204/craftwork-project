@@ -6,20 +6,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot" />
+      <Folder Include="wwwroot\img\product" />
+      <Folder Include="wwwroot\img\profile" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="10.1.1" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />
+      <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-rc.1.20451.13" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0-rc.1.20451.13">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0-rc.1.20451.14" />
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0-rc1" />
+      <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -93,11 +97,28 @@
       <_ContentIncludedByDefault Remove="wwwroot\dist\js\demo.js" />
       <_ContentIncludedByDefault Remove="wwwroot\dist\js\pages\dashboard.js" />
       <_ContentIncludedByDefault Remove="wwwroot\dist\js\pages\dashboard2.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\gallery\01.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\gallery\02.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\gallery\03.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\gallery\04.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\gallery\05.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\gallery\06.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\gallery\07.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\gallery\08.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\plugins\rating\rating.js" />
+      <_ContentIncludedByDefault Remove="Views\Profile\User.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\CraftworkProject.Infrastructure\CraftworkProject.Infrastructure.csproj" />
       <ProjectReference Include="..\CraftworkProject.Services\CraftworkProject.Services.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="wwwroot\img\about-02.jpg" />
+      <Content Remove="wwwroot\img\about-03.jpg" />
+      <Content Remove="wwwroot\img\about-05.jpg" />
+      <Content Remove="wwwroot\img\about-06.jpg" />
     </ItemGroup>
 
 </Project>
