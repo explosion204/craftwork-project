@@ -23,14 +23,14 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v1
 
-      - name: Move aws-deployment-manifest to work directory
-        run: mv $(pwd)/.github/workflows/deployment-conf/aws-windows-deployment-manifest.json ${{ env.WORK_DIR }}
+      - name: Copy aws-deployment-manifest to work directory
+        run: cp $(pwd)/.github/workflows/deployment-conf/aws-windows-deployment-manifest.json ${{ env.WORK_DIR }}
              
-      - name: Move web.config to work directory
-        run: mv $(pwd)/.github/workflows/deployment-conf/web.config ${{ env.WORK_DIR }}
+      - name: Copy web.config to work directory
+        run: cp $(pwd)/.github/workflows/deployment-conf/web.config ${{ env.WORK_DIR }}
 
-      - name: Move static files folder to work directory
-        run: mv $(pwd)/CraftworkProject.Web/wwwroot ${{ env.WORK_DIR }}
+      - name: Copy static files folder to work directory
+        run: cp $(pwd)/CraftworkProject.Web/wwwroot ${{ env.WORK_DIR }}
 
       - name: Setting up application config json
         run: |
