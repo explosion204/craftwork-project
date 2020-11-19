@@ -12,16 +12,44 @@ env:
   ENV_NAME: "CraftworkProjectWeb-env"
   PACKAGE_NAME: "craftwork-app-${{ github.sha }}.zip"
   AWS_REGION: "us-west-2"
-  WORK_DIR: $(pwd)/CraftworkProject.Web/bin/Debug/netcoreapp3.1
+  WORK_DIR: $(pwd)/CraftworkProject.Web/bin/Release/netcoreapp3.1
   
 
 jobs:
-  AWS-deployment:
+  build:
     runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        
+    - name: Install dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ForDeployment
+        path: ./
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
     
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v1
+      - name: Download artifact
+        uses: actions/download-artifact@v1.0.0
+        with:
+          name: ForDeployment
+
+      - name: Retreive project files from artifact folder
+        run: cp -r $(pwd)/ForDeployment/. $(pwd)
 
       - name: Copy aws-deployment-manifest to work directory
         run: cp $(pwd)/.github/workflows/deployment-conf/aws-windows-deployment-manifest.json ${{ env.WORK_DIR }}
@@ -57,7 +85,7 @@ jobs:
         run: |
             aws elasticbeanstalk create-application-version \
             --application-name ${{ env.APP_NAME }} \
-            --source-bundle S3Bucket="${{ env.S3_BUCKET_NAME }}",S3Key="${{ env.PACKAGE_NAME }}" \
+            --source-bundle S3Bucket="${{ env.S3_BUCKET_NAME }}", S3Key="${{ env.PACKAGE_NAME }}" \
             --version-label "ver-${{ github.sha }}" \
             --description "CommitSHA-${{ github.sha }}"
 
