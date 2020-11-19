@@ -2,9 +2,9 @@ name: deployment
 
 on:
   push:
-    branches: [ test_deploy ]
+    branches: [ master ]
   pull_request:
-    branches: [ test_deploy ]
+    branches: [ master ]
 
 env:
   S3_BUCKET_NAME: "elasticbeanstalk-us-west-2-559355273819"
@@ -53,12 +53,13 @@ jobs:
       - name: Copy package to s3 bucket
         run: cd ${{ env.WORK_DIR }} && aws s3 cp ${{ env.PACKAGE_NAME }} s3://${{ env.S3_BUCKET_NAME }}/
 
-      - name: Create new ElasticBeanstalk Applicaiton Version
+      - name: Create new ElasticBeanstalk applicaiton version
         run: |
             aws elasticbeanstalk create-application-version \
             --application-name ${{ env.APP_NAME }} \
             --source-bundle S3Bucket="${{ env.S3_BUCKET_NAME }}",S3Key="${{ env.PACKAGE_NAME }}" \
             --version-label "ver-${{ github.sha }}" \
             --description "CommitSHA-${{ github.sha }}"
-      - name: Deploy our new Application Version
+
+      - name: Deploy  new application version
         run: aws elasticbeanstalk update-environment --environment-name ${{ env.ENV_NAME }} --version-label "ver-${{ github.sha }}"
