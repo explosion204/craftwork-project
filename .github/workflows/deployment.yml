@@ -1,0 +1,64 @@
+name: deployment
+
+on:
+  push:
+    branches: [ test_deploy ]
+  pull_request:
+    branches: [ test_deploy ]
+
+env:
+  S3_BUCKET_NAME: "elasticbeanstalk-us-west-2-559355273819"
+  APP_NAME: "CraftworkProjectWeb"
+  ENV_NAME: "CraftworkProjectWeb-env"
+  PACKAGE_NAME: "craftwork-app-${{ github.sha }}.zip"
+  AWS_REGION: "us-west-2"
+  WORK_DIR: $(pwd)/CraftworkProject.Web/bin/Debug/netcoreapp3.1
+  
+
+jobs:
+  AWS-deployment:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v1
+
+      - name: Move aws-deployment-manifest to work directory
+        run: mv $(pwd)/.github/workflows/deployment-conf/aws-windows-deployment-manifest.json ${{ env.WORK_DIR }}
+             
+      - name: Move web.config to work directory
+        run: mv $(pwd)/.github/workflows/deployment-conf/web.config ${{ env.WORK_DIR }}
+
+      - name: Move static files folder to work directory
+        run: mv $(pwd)/CraftworkProject.Web/wwwroot ${{ env.WORK_DIR }}
+
+      - name: Setting up application config json
+        run: |
+          cd ${{ env.WORK_DIR }} \
+          && echo "`jq '.Project.ConnectionString="${{ secrets.DB_CONNECTION_STRING }}"' appsettings.json`" > appsettings.json \
+          && echo "`jq '.Mailing.Password="${{ secrets.MAILING_PASSWORD }}"' appsettings.json`" > appsettings.json \
+          && echo "`jq '.Twilio.AccountSid="${{ secrets.TWILIO_ACCOUNT_SID }}"' appsettings.json`" > appsettings.json \
+          && echo "`jq '.Twilio.AuthToken="${{ secrets.TWILIO_AUTH_TOKEN }}"' appsettings.json`" > appsettings.json
+        
+      - name: Create zip package
+        run: cd ${{ env.WORK_DIR }} && zip -r ${{ env.PACKAGE_NAME }} ./
+        
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+        
+      - name: Copy package to s3 bucket
+        run: cd ${{ env.WORK_DIR }} && aws s3 cp ${{ env.PACKAGE_NAME }} s3://${{ env.S3_BUCKET_NAME }}/
+
+      - name: Create new ElasticBeanstalk Applicaiton Version
+        run: |
+            aws elasticbeanstalk create-application-version \
+            --application-name ${{ env.APP_NAME }} \
+            --source-bundle S3Bucket="${{ env.S3_BUCKET_NAME }}",S3Key="${{ env.PACKAGE_NAME }}" \
+            --version-label "ver-${{ github.sha }}" \
+            --description "CommitSHA-${{ github.sha }}"
+      - name: Deploy our new Application Version
+        run: aws elasticbeanstalk update-environment --environment-name ${{ env.ENV_NAME }} --version-label "ver-${{ github.sha }}"

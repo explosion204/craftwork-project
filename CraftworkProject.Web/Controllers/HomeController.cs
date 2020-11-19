@@ -19,7 +19,6 @@ namespace CraftworkProject.Web.Controllers
         public IActionResult Index()
         {
             var allCategories = new List<CategoryViewModel>();
-            throw new Exception("Fuck you!");
 
             foreach (var category in _dataManager.CategoryRepository.GetAllEntities().ToList())
             {

@@ -6,11 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\img\product" />
-      <Folder Include="wwwroot\img\profile" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="AutoMapper" Version="10.1.1" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />
@@ -107,6 +102,9 @@
       <_ContentIncludedByDefault Remove="wwwroot\img\gallery\08.jpg" />
       <_ContentIncludedByDefault Remove="wwwroot\plugins\rating\rating.js" />
       <_ContentIncludedByDefault Remove="Views\Profile\User.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\logs\all-20201118.log" />
+      <_ContentIncludedByDefault Remove="wwwroot\logs\all-20201119.log" />
+      <_ContentIncludedByDefault Remove="wwwroot\logs\error-20201118.log" />
     </ItemGroup>
 
     <ItemGroup>
