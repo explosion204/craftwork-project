@@ -49,6 +49,8 @@ namespace CraftworkProject.Web.Controllers
                 CurrentProfilePicture = user.ProfilePicture,
                 PhoneNumber = user.PhoneNumber
             };
+            
+            // TODO: ViewBag -> ViewData & modify tests
             ViewBag.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
             ViewBag.Email = user.Email;
             ViewBag.EmailConfirmed = user.EmailConfirmed;
@@ -101,7 +103,7 @@ namespace CraftworkProject.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindUserById(model.Id);
-                var updatedUser = new User()
+                var updatedUser = new User
                 {
                     Id = model.Id,
                     Username = model.Username,
@@ -129,7 +131,7 @@ namespace CraftworkProject.Web.Controllers
                 v => v.Errors.Count != 0 ? v.Errors[0].ErrorMessage : string.Empty).ToList();
             TempData["errors"] = errors;
 
-            return Redirect("/account");
+            return Redirect("/profile");
         }
         
         [HttpPost]
@@ -137,11 +139,9 @@ namespace CraftworkProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindUserById(model.Id);
-
                 if (model.NewPassword.Equals(model.ConfirmNewPassword))
                 {
-                    bool status = await _userManager.ChangeUserPassword(model.Id, model.CurrentPassword, model.NewPassword);
+                    var status = await _userManager.ChangeUserPassword(model.Id, model.CurrentPassword, model.NewPassword);
 
                     if (status)
                     {
@@ -166,6 +166,7 @@ namespace CraftworkProject.Web.Controllers
 
         public IActionResult ChangePhoneNumber()
         {
+            // TODO: ViewBag -> ViewData & modify tests
             ViewBag.SmsSent = false;
             return View(new ChangePhoneNumberViewModel() { UserId = _userManager.GetUserId(User) });
         }
@@ -185,6 +186,7 @@ namespace CraftworkProject.Web.Controllers
                 {
                     if (!string.IsNullOrWhiteSpace(model.Code))
                     {
+                        // TODO: ViewBag -> ViewData & modify tests
                         ViewBag.SmsSent = true;
                         bool result = await _userManager.ConfirmPhoneNumber(model.UserId, model.Code);
 
@@ -200,7 +202,7 @@ namespace CraftworkProject.Web.Controllers
                     var user = await _userManager.FindUserById(model.UserId);
                     var token = await _userManager.GenerateChangePhoneNumberToken(model.UserId, model.PhoneNumber);
                     var body = $"Confirmation code: {token}";
-                    bool status = await _smsService.SendAsync(model.PhoneNumber, body);
+                    var status = await _smsService.SendAsync(model.PhoneNumber, body);
 
                     if (status)
                     {
@@ -208,20 +210,22 @@ namespace CraftworkProject.Web.Controllers
                         await _userManager.UpdateUser(user);
                     }
 
+                    // TODO: ViewBag -> ViewData & modify tests
                     ViewBag.SmsSent = true;
                     return View(model);   
                 }
             }
 
+            // TODO: ViewBag -> ViewData & modify tests
             ViewBag.SmsSent = false;
             return View(model);
         }
 
         private async Task<string> UploadFile(IFormFile file)
         {
-            string uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
-            string fileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
-            string filePath = Path.Combine(uploadDir, fileName);
+            var uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
+            var fileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
+            var filePath = Path.Combine(uploadDir, fileName);
             
             await _imageService.SaveImage(file, filePath);
             return fileName;
@@ -229,8 +233,8 @@ namespace CraftworkProject.Web.Controllers
 
         private void DeleteFile(string fileName)
         {
-            string uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
-            string filePath = Path.Combine(uploadDir, fileName);
+            var uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
+            var filePath = Path.Combine(uploadDir, fileName);
             System.IO.File.Delete(filePath);
         }
     }

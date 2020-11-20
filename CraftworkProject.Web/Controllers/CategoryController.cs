@@ -8,7 +8,7 @@ namespace CraftworkProject.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        private const int PageSize = 2;
+        private const int PageSize = 9;
 
         private readonly IDataManager _dataManager;
         

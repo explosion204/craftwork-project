@@ -49,16 +49,18 @@ namespace CraftworkProject.Test.Controllers
             bool resetablePassword = true
         )
         {
+            var testUser = DomainTestUtil.GetTestUsers(1)[0];
+
             var userManagerMock = new Mock<IUserManager>();
             userManagerMock.Setup(x => x.SignIn(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns<string, string>((a, b) => Task.FromResult(loginSuccess));
             
             userManagerMock.Setup(x => x.FindUserByName(It.IsAny<string>()))
-                .Returns<string>(a => findsByUsername ? Task.FromResult(new User { EmailConfirmed = true }) : Task.FromResult(null as User));
+                .Returns<string>(a => Task.FromResult(findsByUsername ? testUser : null));
             
             userManagerMock.Setup(x => x.FindUserByEmail(It.IsAny<string>()))
-                .Returns<string>(a => findsByEmail ? Task.FromResult(new User { EmailConfirmed = true }) : Task.FromResult(null as User));
-
+                .Returns<string>(a => Task.FromResult(findsByEmail ? testUser : null));
+            
             userManagerMock.Setup(x => x.CreateUser(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<Guid>()))
                 .Returns<User, string, Guid>((a, b, c) => Task.FromResult(true));
             
@@ -165,7 +167,7 @@ namespace CraftworkProject.Test.Controllers
         {
             var controller = GetControllerWithAuthenticatedUser();
 
-            var result = controller.Login("test_url");
+            var result = controller.Signup("test_url");
             Assert.IsType<RedirectResult>(result);
         }
 

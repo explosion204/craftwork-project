@@ -9,7 +9,7 @@ using Xunit;
 
 namespace CraftworkProject.Test.Controllers
 {
-    public class HomeControllerTests
+    public class HomeControllerTest
     {
         [Fact]
         public void IndexTest()

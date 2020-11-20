@@ -46,7 +46,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                     fileName = await UploadFile(model.Image);
                 } 
                 
-                Product product = new Product()
+                var product = new Product
                 {
                     Name = model.Name,
                     Category = _dataManager.CategoryRepository.GetEntity(model.CategoryId),
@@ -67,23 +67,16 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            try
-            {
-                _dataManager.ProductRepository.DeleteEntity(Guid.Parse(id));
-                return Json(new {success = true});
-            }
-            catch (Exception)
-            {
-                return Json(new {success = false});;
-            }
+            _dataManager.ProductRepository.DeleteEntity(Guid.Parse(id));
+            return Json(new {success = true});
         }
 
         public IActionResult Update(Guid id)
         {
             ViewBag.AllCategories = _dataManager.CategoryRepository.GetAllEntities().ToList();
 
-            Product product = _dataManager.ProductRepository.GetEntity(id);
-            ProductViewModel viewModel = new ProductViewModel()
+            var product = _dataManager.ProductRepository.GetEntity(id);
+            var viewModel = new ProductViewModel
             {
                 Id = id,
                 CategoryId = product.Category.Id,
@@ -102,7 +95,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Product product = new Product()
+                var product = new Product
                 {
                     Id = model.Id,
                     Name = model.Name,
@@ -119,8 +112,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                     if (model.ImagePath != null)
                         DeleteFile(model.ImagePath);
                     product.ImagePath = await UploadFile(model.Image);
-                } 
-                
+                }
 
                 _dataManager.ProductRepository.SaveEntity(product);
                 return Redirect("/admin/products"); 

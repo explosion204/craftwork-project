@@ -48,5 +48,89 @@ namespace CraftworkProject.Test.Utils
 
             return products;
         }
+
+        public static List<Order> GetTestOrders(int count = 5)
+        {
+            var orders = new List<Order>();
+
+            for (var i = 0; i < count; i++)
+            {
+                orders.Add(new Order
+                {
+                    Id = Guid.NewGuid(),
+                    User = GetTestUsers(1)[0],
+                    PurchaseDetails = GetTestPurchaseDetails(),
+                    Canceled = false,
+                    Processed = false,
+                    Finished = false,
+                    Created = DateTime.Now
+                });
+            }
+
+            return orders;
+        }
+
+        public static List<PurchaseDetail> GetTestPurchaseDetails(int count = 5)
+        {
+            var details = new List<PurchaseDetail>();
+
+            for (var i = 0; i < count; i++)
+            {
+                details.Add(new PurchaseDetail()
+                {
+                    Id = Guid.NewGuid(),
+                    Product = GetTestProducts(1)[0],
+                    OrderId = Guid.NewGuid(),
+                    Amount = 1
+                });
+            }
+
+            return details;
+        }
+
+        public static List<User> GetTestUsers(int count = 5)
+        {
+            var users = new List<User>();
+
+            for (var i = 0; i < count; i++)
+            {
+                users.Add(new User
+                {
+                    Id = Guid.NewGuid(),
+                    Username = "test",
+                    FirstName = "test",
+                    LastName = "test",
+                    Email = "test",
+                    EmailConfirmed = true,
+                    PasswordHash = "test",
+                    PhoneNumber = "test",
+                    PhoneNumberConfirmed = true,
+                    ProfilePicture = "test"
+                });
+            }
+
+            return users;
+        }
+
+        public static List<Review> GetTestReviews(int count = 5)
+        {
+            var reviews = new List<Review>();
+
+            for (var i = 0; i < count; i++)
+            {
+                reviews.Add(new Review
+                {
+                    Id = Guid.NewGuid(),
+                    Product = GetTestProducts(1)[0],
+                    PublicationDate = DateTime.Now,
+                    Rating = 5,
+                    Text = "test",
+                    Title = "test",
+                    User = GetTestUsers(1)[0]
+                });
+            }
+
+            return reviews;
+        }
     }
 }
