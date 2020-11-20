@@ -5,6 +5,7 @@ using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
 using CraftworkProject.Services.Interfaces;
 using CraftworkProject.Web.ViewModels.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Controllers
@@ -34,7 +35,7 @@ namespace CraftworkProject.Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var userFinishedOrders = _dataManager.OrderRepository.GetAllEntities()
-                    .Where(x => x.User.Id == currentUserId && x.Finished);
+                    .Where(x => x.User.Id == currentUserId && x.Finished).ToList();
 
                 foreach (var order in userFinishedOrders)
                 {
@@ -64,7 +65,7 @@ namespace CraftworkProject.Web.Controllers
                 ReviewText = currentUserReview?.Text ?? "",
                 ReviewRating = currentUserReview?.Rating ?? 5
             };
-            
+
             if (TempData["errors"] != null)
             {
                 var errors = (string[]) TempData["errors"];
@@ -85,6 +86,7 @@ namespace CraftworkProject.Web.Controllers
             return View(viewModel);
         }
         
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> SubmitReview(ProductViewModel model)
         {

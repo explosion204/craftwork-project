@@ -50,12 +50,12 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                     ModelState.AddModelError(nameof(UserViewModel.Email), "This email is already taken");
                 }
                 
-                if (String.IsNullOrEmpty(model.NewPassword))
+                if (string.IsNullOrEmpty(model.NewPassword))
                 {
                     ModelState.AddModelError(nameof(UserViewModel.NewPassword), "This field must be not empty");
                 }
 
-                if (String.IsNullOrEmpty(model.ConfirmNewPassword))
+                if (string.IsNullOrEmpty(model.ConfirmNewPassword))
                 {
                     ModelState.AddModelError(nameof(UserViewModel.ConfirmNewPassword), "This field must be not empty");
                 }
@@ -93,11 +93,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                         ModelState.AddModelError(nameof(UserViewModel.NewPassword), "Passwords do not match");
                         ModelState.AddModelError(nameof(UserViewModel.ConfirmNewPassword), "Passwords do not match");
                     }
-
-                    return View(model);
                 }
-
-                return View(model);
             }
 
             return View(model);
@@ -106,7 +102,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
-            Guid currentUserId = _userManager.GetUserId(User);
+            var currentUserId = _userManager.GetUserId(User);
             
             if (!currentUserId.ToString().Equals(id))
             {
@@ -143,7 +139,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Update(UserViewModel model)
         {
             var user = await _userManager.FindUserByName(model.Username);
-            bool? roleEditAllowed = !_userManager.GetUserId(User).ToString()?.Equals(user.Id.ToString());
+            var roleEditAllowed = !_userManager.GetUserId(User).ToString()?.Equals(user.Id.ToString());
             ViewBag.RoleEditAllowed = roleEditAllowed;
             ViewBag.AllRoles = _userManager.GetAllRoles();
 
@@ -162,7 +158,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 user.PhoneNumber = model.PhoneNumber;
                 user.PhoneNumberConfirmed = model.PhoneNumberConfirmed;
 
-                if (!String.IsNullOrEmpty(model.NewPassword) && !String.IsNullOrEmpty(model.ConfirmNewPassword))
+                if (!string.IsNullOrEmpty(model.NewPassword) && !string.IsNullOrEmpty(model.ConfirmNewPassword))
                 {
                     if (!model.NewPassword.Equals(model.ConfirmNewPassword))
                     {
@@ -189,9 +185,9 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
 
         private async Task<string> UploadFile(IFormFile file)
         {
-            string uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
-            string fileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
-            string filePath = Path.Combine(uploadDir, fileName);
+            var uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
+            var fileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
+            var filePath = Path.Combine(uploadDir, fileName);
             
             await _imageService.SaveImage(file, filePath);
             return fileName;
@@ -199,9 +195,12 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
 
         private void DeleteFile(string fileName)
         {
-            string uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
+            var uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
             string filePath = Path.Combine(uploadDir, fileName);
-            System.IO.File.Delete(filePath);
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
         }
     }
 }

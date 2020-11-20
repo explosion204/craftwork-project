@@ -70,7 +70,7 @@ namespace CraftworkProject.Web.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> MakeOrder(CartViewModel model)
+        public async Task<IActionResult> MakeOrder()
         {
             var cartStr = HttpContext.Session.Keys.Contains("cart") ?
                 HttpContext.Session.GetString("cart") :

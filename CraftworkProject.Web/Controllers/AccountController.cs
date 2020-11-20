@@ -32,6 +32,7 @@ namespace CraftworkProject.Web.Controllers
                 return Redirect("/");
             }
             
+            // TODO: Change ViewBag to ViewData (and modify unit test)
             ViewBag.returnUrl = returnUrl;
 
             return View(new LoginViewModel());
@@ -70,7 +71,7 @@ namespace CraftworkProject.Web.Controllers
             
             _userManager.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return Redirect("/");
         }
 
         [AllowAnonymous]
@@ -81,8 +82,9 @@ namespace CraftworkProject.Web.Controllers
                 return Redirect("/");
             }
             
+            // TODO: Change ViewBag to ViewData (and modify unit test)
             ViewBag.returnUrl = returnUrl;
-            return View();
+            return View(new SignUpViewModel());
         }
 
         [AllowAnonymous]
@@ -97,31 +99,11 @@ namespace CraftworkProject.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindUserByName(model.Username);
-                if (user != null && user.EmailConfirmed)
+                if (user != null && user!.EmailConfirmed)
                 {
                     ModelState.AddModelError(nameof(SignUpViewModel.Username), "This username is already taken.");
                 }
                 
-                if (string.IsNullOrEmpty(model.Password))
-                {
-                    ModelState.AddModelError(nameof(SignUpViewModel.Password), "This field must be not empty");
-                }
-
-                if (string.IsNullOrEmpty(model.ConfirmPassword))
-                {
-                    ModelState.AddModelError(nameof(SignUpViewModel.ConfirmPassword), "This field must be not empty");
-                }
-
-                if (string.IsNullOrEmpty(model.Email))
-                {
-                    ModelState.AddModelError(nameof(SignUpViewModel.Email), "This field must be not empty");
-                }
-
-                if (string.IsNullOrEmpty(model.ConfirmEmail))
-                {
-                    ModelState.AddModelError(nameof(SignUpViewModel.ConfirmEmail), "This field must be not empty");
-                }
-
                 var userWithEmail = await _userManager.FindUserByEmail(model.Email);
                 if (userWithEmail != null && userWithEmail.EmailConfirmed)
                 {
@@ -161,9 +143,9 @@ namespace CraftworkProject.Web.Controllers
                     if (result)
                     {
                         var createdUser = await _userManager.FindUserByName(model.Username);
-                        var token = await _userManager.GenerateEmailConfirmationToken(createdUser.Id);
+                        var token = await _userManager.GenerateEmailConfirmationToken(createdUser?.Id ?? default);
                         var confirmationLink = Url.Action("ConfirmEmail", "Account",
-                            new {userId = createdUser.Id, token}, Request.Scheme);
+                            new {userId = createdUser?.Id ?? default, token}, Request.Scheme);
                         
                         await _emailService.SendEmailAsync(model.Email, "Email activation",
                             $"Email activation link: {confirmationLink}");
@@ -201,21 +183,22 @@ namespace CraftworkProject.Web.Controllers
             {
                 var user = await _userManager.FindUserByEmail(model.Email);
 
-                if (user == null || !user.EmailConfirmed)
+                if (user != null && user.EmailConfirmed)
                 {
+                    var token = await _userManager.GeneratePasswordResetToken(user.Id);
+                    var resetLink = Url.Action("ResetPassword", "Account",
+                        new {userId = user.Id, token}, Request.Scheme);
+                    await _emailService.SendEmailAsync(model.Email, "Password reset",
+                        $"Password reset link: {resetLink}");
+
                     return View("ForgotPasswordEmailSent");
                 }
-
-                var token = await _userManager.GeneratePasswordResetToken(user.Id);
-                var resetLink = Url.Action("ResetPassword", "Account",
-                    new {userId = user.Id, token}, Request.Scheme);
-                await _emailService.SendEmailAsync(model.Email, "Password reset",
-                    $"Password reset link: {resetLink}");
-
-                return View("ForgotPasswordEmailSent");
+                
+                ModelState.AddModelError(nameof(ForgotPasswordViewModel.Email),
+                    "Cannot find user with this email or email is not confirmed.");
             }
 
-            return View();
+            return View(model);
         }
 
         [AllowAnonymous]

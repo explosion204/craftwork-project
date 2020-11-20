@@ -11,16 +11,16 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
     public class ManagingController : Controller
     {
         private readonly IDataManager _dataManager;
-        private readonly IHubContext<NotificationHub> _notificationHubContent;
+        private readonly IHubContext<NotificationHub> _notificationHubContext;
         private readonly IUserConnectionManager _userConnectionManager;
         
         public ManagingController(
             IDataManager dataManager, 
-            IHubContext<NotificationHub> notificationHubContent,
+            IHubContext<NotificationHub> notificationHubContext,
             IUserConnectionManager userConnectionManager)
         {
             _dataManager = dataManager;
-            _notificationHubContent = notificationHubContent;
+            _notificationHubContext = notificationHubContext;
             _userConnectionManager = userConnectionManager;
         }
         
@@ -85,7 +85,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             {
                 foreach (var connectionId in connections)
                 {
-                    await _notificationHubContent.Clients.Client(connectionId).SendAsync(methodName);
+                    await _notificationHubContext.Clients.Client(connectionId).SendAsync(methodName);
                 }
             }
         }
