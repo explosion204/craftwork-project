@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Controllers
 {
+    // TODO: authorize policy
     public class OrdersController : Controller
     {
         private readonly IDataManager _dataManager;

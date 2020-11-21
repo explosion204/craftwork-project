@@ -1,6 +1,8 @@
 using System;
 using CraftworkProject.Infrastructure;
 using CraftworkProject.Infrastructure.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,12 +35,18 @@ namespace CraftworkProject.Web.Service
                 options.SlidingExpiration = true;
             });
 
+            services.Configure<CookiePolicyOptions>(opt =>
+            {
+                opt.CheckConsentNeeded = context => true;
+                opt.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddAuthentication().AddGoogle(opt =>
             {
                 opt.ClientId = GoogleConfig.ClientId;
                 opt.ClientSecret = GoogleConfig.ClientSecret;
             });
-
+            
             services.AddAuthorization(x =>
             {
                 x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
