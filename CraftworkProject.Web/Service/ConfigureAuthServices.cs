@@ -38,7 +38,7 @@ namespace CraftworkProject.Web.Service
             services.Configure<CookiePolicyOptions>(opt =>
             {
                 opt.CheckConsentNeeded = context => true;
-                opt.MinimumSameSitePolicy = SameSiteMode.None;
+                opt.MinimumSameSitePolicy = SameSiteMode.Unspecified;
             });
 
             services.AddAuthentication().AddGoogle(opt =>
