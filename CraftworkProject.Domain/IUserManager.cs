@@ -17,7 +17,6 @@ namespace CraftworkProject.Domain
         Task<User> FindUserByName(string username);
         Task<User> FindUserByEmail(string email);
         Task<User> FindUserByPhoneNumber(string phoneNumber);
-        Guid GetUserId(ClaimsPrincipal user);
         Task UpdateUser(User user);
         Task DeleteUser(Guid id);
         Task DeleteUser(string username);

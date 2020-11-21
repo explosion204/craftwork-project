@@ -9,18 +9,18 @@ namespace CraftworkProject.Web.Hubs
     public class NotificationHub : Hub
     {
         private readonly IUserConnectionManager _userConnectionManager;
-        private readonly IUserManager _userManager;
+        private readonly IUserManagerHelper _helper;
 
-        public NotificationHub(IUserConnectionManager userConnectionManager, IUserManager userManager)
+        public NotificationHub(IUserConnectionManager userConnectionManager, IUserManagerHelper helper)
         {
             _userConnectionManager = userConnectionManager;
-            _userManager = userManager;
+            _helper = helper;
         }
 
         public override Task OnConnectedAsync()
         {
             var connectionId = Context.ConnectionId;
-            var userId = _userManager.GetUserId(Context.User);
+            var userId = _helper.GetUserId(Context.User);
             _userConnectionManager.KeepUserConnection(userId, connectionId);
 
             return Task.FromResult(0);

@@ -31,6 +31,7 @@ namespace CraftworkProject.Test.Controllers
             
             var dataManagerMock = new Mock<IDataManager>();
             var userManagerMock = new Mock<IUserManager>();
+            var userManagerHelperMock = new Mock<IUserManagerHelper>();
             var smsServiceMock = new Mock<ISmsService>();
             var imageServiceMock = new Mock<IImageService>();
             var environmentMock = new Mock<IWebHostEnvironment>();
@@ -53,8 +54,14 @@ namespace CraftworkProject.Test.Controllers
             userManagerMock.Setup(x => x.ConfirmPhoneNumber(It.IsAny<Guid>(), It.IsAny<string>()))
                 .Returns<Guid, string>((a, b) => Task.FromResult(confirmablePhoneNumber));
             
-            return new ProfileController(dataManagerMock.Object, userManagerMock.Object,
-                smsServiceMock.Object, imageServiceMock.Object, environmentMock.Object)
+            return new ProfileController(
+                dataManagerMock.Object, 
+                userManagerMock.Object,
+                userManagerHelperMock.Object,
+                smsServiceMock.Object,
+                imageServiceMock.Object, 
+                environmentMock.Object
+            )
             {
                 ObjectValidator = ControllerTestUtil.GetObjectModelValidatorMock().Object,
                 TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),

@@ -18,13 +18,15 @@ namespace CraftworkProject.Web.Controllers
     {
         private readonly IDataManager _dataManager;
         private readonly IUserManager _userManager;
+        private readonly IUserManagerHelper _helper;
         private readonly ISmsService _smsService;
         private readonly IImageService _imageService;
         private readonly IWebHostEnvironment _environment;
 
         public ProfileController(
             IDataManager dataManager,
-            IUserManager userManager, 
+            IUserManager userManager,
+            IUserManagerHelper helper,
             ISmsService smsService,
             IImageService imageService,
             IWebHostEnvironment environment
@@ -32,6 +34,7 @@ namespace CraftworkProject.Web.Controllers
         {
             _dataManager = dataManager;
             _userManager = userManager;
+            _helper = helper;
             _smsService = smsService;
             _imageService = imageService;
             _environment = environment;
@@ -168,7 +171,7 @@ namespace CraftworkProject.Web.Controllers
         {
             // TODO: ViewBag -> ViewData & modify tests
             ViewBag.SmsSent = false;
-            return View(new ChangePhoneNumberViewModel() { UserId = _userManager.GetUserId(User) });
+            return View(new ChangePhoneNumberViewModel() { UserId = _helper.GetUserId(User) });
         }
 
         [HttpPost]

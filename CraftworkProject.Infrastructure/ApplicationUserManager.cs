@@ -118,13 +118,6 @@ namespace CraftworkProject.Infrastructure
             return efUser != null ? _mapper.Map<User>(efUser) : null;
         }
 
-        public Guid GetUserId(ClaimsPrincipal user)
-        {
-            var efUser = _userManager.Users.FirstOrDefault(x => x.UserName == user.Identity.Name);
-
-            return efUser?.Id ?? default;
-        }
-
         public async Task UpdateUser(User user)
         {
             var efUser = await _userManager.FindByIdAsync(user.Id.ToString());

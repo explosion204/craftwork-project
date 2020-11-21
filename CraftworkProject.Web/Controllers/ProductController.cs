@@ -14,11 +14,13 @@ namespace CraftworkProject.Web.Controllers
     {
         private readonly IDataManager _dataManager;
         private readonly IUserManager _userManager;
+        private readonly IUserManagerHelper _helper;
         
-        public ProductController(IDataManager dataManager, IUserManager userManager)
+        public ProductController(IDataManager dataManager, IUserManager userManager, IUserManagerHelper helper)
         {
             _dataManager = dataManager;
             _userManager = userManager;
+            _helper = helper;
         }
         public IActionResult Index(Guid id)
         {
@@ -28,7 +30,7 @@ namespace CraftworkProject.Web.Controllers
                 return Redirect("/error/404");
             
             var reviews = _dataManager.ReviewRepository.GetAllEntities().Where(x => x.Product.Id == id).ToList();
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUserId = _helper.GetUserId(User);
             var currentUserReview = reviews.FirstOrDefault(x => x.User.Id == currentUserId);
             var reviewSubmitAllowed = false;
             
@@ -100,7 +102,7 @@ namespace CraftworkProject.Web.Controllers
                     Rating = int.Parse(Request.Cookies["userRating"]),
                     Product = _dataManager.ProductRepository.GetEntity(model.ProductId),
                     PublicationDate = DateTime.Now,
-                    User = await _userManager.FindUserById(_userManager.GetUserId(User))
+                    User = await _userManager.FindUserById(_helper.GetUserId(User))
                 };
                 
                 _dataManager.ReviewRepository.SaveEntity(review);

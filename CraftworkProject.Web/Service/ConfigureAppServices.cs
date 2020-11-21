@@ -37,6 +37,8 @@ namespace CraftworkProject.Web.Service
                     x.GetRequiredService<IMapper>()
                     )
             );
+            services.AddScoped<IUserManagerHelper>(x => 
+                new UserManagerHelper(x.GetRequiredService<UserManager<EFUser>>()));
             services.AddScoped<IEmailService>(x => new EmailService(
                 MailConfig.Sender, MailConfig.SmtpServer, MailConfig.SmtpPort, MailConfig.Username, MailConfig.Password
             ));

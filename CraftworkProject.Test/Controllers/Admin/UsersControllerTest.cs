@@ -25,6 +25,8 @@ namespace CraftworkProject.Test.Controllers.Admin
         private UsersController GetController(bool creatableUser = true, bool updatableUser = true)
         {
             var userManagerMock = new Mock<IUserManager>();
+            var userManagerHelperMock = new Mock<IUserManagerHelper>();
+            
             userManagerMock.Setup(x => x.GetAllUsers())
                 .Returns(_testUsers);
             userManagerMock.Setup(x => x.FindUserById(It.IsAny<Guid>()))
@@ -35,7 +37,7 @@ namespace CraftworkProject.Test.Controllers.Admin
                 .Returns<User, string, Guid>((a, b, c) => Task.FromResult(creatableUser));
             userManagerMock.Setup(x => x.UpdateUser(It.IsAny<User>()))
                 .Returns<User>(a => Task.FromResult(updatableUser));
-            userManagerMock.Setup(x => x.GetUserId(It.IsAny<ClaimsPrincipal>()))
+            userManagerHelperMock.Setup(x => x.GetUserId(It.IsAny<ClaimsPrincipal>()))
                 .Returns<ClaimsPrincipal>(a => _testUsers[0].Id);
             
             var environmentMock = new Mock<IWebHostEnvironment>();
@@ -43,7 +45,12 @@ namespace CraftworkProject.Test.Controllers.Admin
             
             var imageServiceMock = new Mock<IImageService>();
 
-            return new UsersController(userManagerMock.Object, environmentMock.Object, imageServiceMock.Object)
+            return new UsersController(
+                userManagerMock.Object,
+                userManagerHelperMock.Object,
+                environmentMock.Object, 
+                imageServiceMock.Object
+            )
             {
                 ObjectValidator = ControllerTestUtil.GetObjectModelValidatorMock().Object
             };

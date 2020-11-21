@@ -30,6 +30,7 @@ namespace CraftworkProject.Test.Controllers
         private ProductController GetControllerWithAuthenticatedUser(bool returnsNullProduct = false)
         {
             var userManagerMock = new Mock<IUserManager>();
+            var userManagerHelperMock = new Mock<IUserManagerHelper>();
             var dataManagerMock = new Mock<IDataManager>();
 
             dataManagerMock.Setup(x => x.ProductRepository.GetEntity(It.IsAny<Guid>()))
@@ -41,10 +42,10 @@ namespace CraftworkProject.Test.Controllers
             dataManagerMock.Setup(x => x.OrderRepository.GetAllEntities())
                 .Returns(_testOrders);
 
-            userManagerMock.Setup(x => x.GetUserId(It.IsAny<ClaimsPrincipal>()))
+            userManagerHelperMock.Setup(x => x.GetUserId(It.IsAny<ClaimsPrincipal>()))
                 .Returns(_testUser.Id);
 
-            return new ProductController(dataManagerMock.Object, userManagerMock.Object)
+            return new ProductController(dataManagerMock.Object, userManagerMock.Object, userManagerHelperMock.Object)
             {
                 TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
                 ControllerContext = new ControllerContext
@@ -61,6 +62,7 @@ namespace CraftworkProject.Test.Controllers
         private ProductController GetControllerWithNotAuthenticatedUser(bool returnsNullProduct = false)
         {
             var userManagerMock = new Mock<IUserManager>();
+            var userManagerHelperMock = new Mock<IUserManagerHelper>();
             var dataManagerMock = new Mock<IDataManager>();
             
             dataManagerMock.Setup(x => x.ProductRepository.GetEntity(It.IsAny<Guid>()))
@@ -72,7 +74,7 @@ namespace CraftworkProject.Test.Controllers
             var identityMock = new Mock<GenericIdentity>("test");
             identityMock.SetupGet(x => x.IsAuthenticated).Returns(false);
 
-            return new ProductController(dataManagerMock.Object, userManagerMock.Object)
+            return new ProductController(dataManagerMock.Object, userManagerMock.Object, userManagerHelperMock.Object)
             {
                 TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
                 ControllerContext = new ControllerContext

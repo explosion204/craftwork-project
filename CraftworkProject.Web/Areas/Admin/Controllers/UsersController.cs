@@ -17,10 +17,12 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         private readonly IUserManager _userManager;
         private readonly IWebHostEnvironment _environment;
         private readonly IImageService _imageService;
+        private readonly IUserManagerHelper _helper;
         
-        public UsersController(IUserManager userManager, IWebHostEnvironment environment, IImageService imageService)
+        public UsersController(IUserManager userManager, IUserManagerHelper helper, IWebHostEnvironment environment, IImageService imageService)
         {
             _userManager = userManager;
+            _helper = helper;
             _environment = environment;
             _imageService = imageService;
         }
@@ -102,7 +104,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUserId = _helper.GetUserId(User);
             
             if (!currentUserId.ToString().Equals(id))
             {
@@ -131,7 +133,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             };
 
             ViewBag.AllRoles = _userManager.GetAllRoles();
-            ViewBag.RoleEditAllowed = !_userManager.GetUserId(User).ToString()?.Equals(id.ToString());
+            ViewBag.RoleEditAllowed = !_helper.GetUserId(User).ToString()?.Equals(id.ToString());
             return View(model);
         }
     
@@ -139,7 +141,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Update(UserViewModel model)
         {
             var user = await _userManager.FindUserByName(model.Username);
-            var roleEditAllowed = !_userManager.GetUserId(User).ToString()?.Equals(user.Id.ToString());
+            var roleEditAllowed = !_helper.GetUserId(User).ToString()?.Equals(user.Id.ToString());
             ViewBag.RoleEditAllowed = roleEditAllowed;
             ViewBag.AllRoles = _userManager.GetAllRoles();
 
