@@ -35,7 +35,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ForTest
+        name: Build
         path: ./
      
         
@@ -47,16 +47,10 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v1.0.0
         with:
-          name: ForTest
+          name: Build
   
       - name: Run tests
-        run: cd $(pwd)/ForTest && dotnet test
-  
-      - name: Upload artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: ForDeploy
-          path: ./ForTest
+        run: cd $(pwd)/Build && dotnet test
 
 
   deploy:
@@ -67,10 +61,10 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v1.0.0
         with:
-          name: ForDeploy
+          name: Build
 
       - name: Retreive project files from artifact folder
-        run: cp -r $(pwd)/ForDeploy/. $(pwd)
+        run: cp -r $(pwd)/Build/. $(pwd)
 
       - name: Copy aws-deployment-manifest to work directory
         run: cp $(pwd)/.github/workflows/deployment-conf/aws-windows-deployment-manifest.json ${{ env.WORK_DIR }}
@@ -87,7 +81,9 @@ jobs:
           && echo "`jq '.Project.ConnectionString="${{ secrets.DB_CONNECTION_STRING }}"' appsettings.json`" > appsettings.json \
           && echo "`jq '.Mailing.Password="${{ secrets.MAILING_PASSWORD }}"' appsettings.json`" > appsettings.json \
           && echo "`jq '.Twilio.AccountSid="${{ secrets.TWILIO_ACCOUNT_SID }}"' appsettings.json`" > appsettings.json \
-          && echo "`jq '.Twilio.AuthToken="${{ secrets.TWILIO_AUTH_TOKEN }}"' appsettings.json`" > appsettings.json
+          && echo "`jq '.Twilio.AuthToken="${{ secrets.TWILIO_AUTH_TOKEN }}"' appsettings.json`" > appsettings.json \
+          && echo "`jq '.Google.ClientId="${{ secrets.GOOGLE_CLIENT_ID }}"' appsettings.json`" > appsettings.json \
+          && echo "`jq '.Google.ClientSecret="${{ secrets.GOOGLE_CLIENT_SECRET }}"' appsettings.json`" > appsettings.json
         
       - name: Create zip package
         run: cd ${{ env.WORK_DIR }} && zip -r ${{ env.PACKAGE_NAME }} ./
