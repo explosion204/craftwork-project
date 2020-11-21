@@ -50,7 +50,7 @@ namespace CraftworkProject.Web.Controllers
                 return Redirect($"/search?query={model.SearchViewModel.Query}&filter={model.SearchViewModel.Filter}");
             }
 
-            return null;
+            return Redirect("/");
         }
     }
 }

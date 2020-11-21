@@ -124,4 +124,8 @@
       <Content Remove="wwwroot\img\about-06.jpg" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\img\profile" />
+    </ItemGroup>
+
 </Project>

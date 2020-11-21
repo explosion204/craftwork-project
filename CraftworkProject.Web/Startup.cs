@@ -1,4 +1,3 @@
-using CraftworkProject.Services.Interfaces;
 using CraftworkProject.Web.Hubs;
 using CraftworkProject.Web.Service;
 using CraftworkProject.Web.Service.ErrorHandling;
@@ -53,7 +52,7 @@ namespace CraftworkProject.Web
             app.UseRouting();
 
             // setting up auth
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -35,12 +35,6 @@ namespace CraftworkProject.Web.Service
                 options.SlidingExpiration = true;
             });
 
-            services.Configure<CookiePolicyOptions>(opt =>
-            {
-                opt.CheckConsentNeeded = context => true;
-                opt.MinimumSameSitePolicy = SameSiteMode.Unspecified;
-            });
-
             services.AddAuthentication().AddGoogle(opt =>
             {
                 opt.ClientId = GoogleConfig.ClientId;

@@ -3,11 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using CraftworkProject.Domain;
 using CraftworkProject.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftworkProject.Web.Controllers
 {
-    // TODO: authorize policy
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IDataManager _dataManager;
