@@ -40,7 +40,9 @@
 							<form method="post" action="/profile/changepersonalinfo" enctype="multipart/form-data">
 								<input hidden asp-for="Id">
 								<input hidden asp-for="Username">
-								<input hidden asp-for="CurrentPassword">
+								<input hidden asp-for="CurrentPassword" value="123456789">
+								<input hidden asp-for="NewPassword" value="123456789">
+								<input hidden asp-for="ConfirmNewPassword" value="123456789">
 								<!-- First Name -->
 								<div class="form-group">
 									<label asp-for="FirstName" for="first-name">First Name</label>
