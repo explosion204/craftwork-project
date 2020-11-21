@@ -425,7 +425,7 @@ namespace CraftworkProject.Test.Controllers
 
             var result = controller.ExternalLoginCallback("test").Result;
             var redirectResult = Assert.IsType<RedirectResult>(result);
-            Assert.Equal("/signup", redirectResult.Url);
+            Assert.Equal("/account/signup", redirectResult.Url);
         }
         
         [Fact]
