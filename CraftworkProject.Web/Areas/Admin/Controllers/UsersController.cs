@@ -198,7 +198,8 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         private void DeleteFile(string fileName)
         {
             var uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
-            string filePath = Path.Combine(uploadDir, fileName);
+            var filePath = Path.Combine(uploadDir, fileName ?? "");
+            
             if (System.IO.File.Exists(filePath))
             {
                 System.IO.File.Delete(filePath);

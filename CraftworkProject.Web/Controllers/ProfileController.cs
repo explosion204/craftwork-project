@@ -229,8 +229,13 @@ namespace CraftworkProject.Web.Controllers
         private void DeleteFile(string fileName)
         {
             var uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
-            var filePath = Path.Combine(uploadDir, fileName);
-            System.IO.File.Delete(filePath);
+            var filePath = Path.Combine(uploadDir, fileName ?? string.Empty);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+
+            }
         }
     }
 }
