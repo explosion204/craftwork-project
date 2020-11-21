@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using CraftworkProject.Domain.Models;
 
@@ -12,7 +11,7 @@ namespace CraftworkProject.Domain
         List<UserRole> GetAllRoles();
         Task<Guid> GetRoleId(string roleName);
         Task<Guid> GetUserRoleId(Guid userId);
-        Task<bool> CreateUser(User newUser, string password, Guid roleId);
+        Task<Guid> CreateUser(User newUser, string password, Guid roleId);
         Task<User> FindUserById(Guid id);
         Task<User> FindUserByName(string username);
         Task<User> FindUserByEmail(string email);

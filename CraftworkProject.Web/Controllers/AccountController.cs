@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
@@ -13,14 +14,17 @@ namespace CraftworkProject.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IUserManager _userManager;
+        private readonly IUserManagerHelper _helper;
         private readonly IEmailService _emailService;
 
         public AccountController(
             IUserManager userManager,
+            IUserManagerHelper helper,
             IEmailService emailService
         )
         {
             _userManager = userManager;
+            _helper = helper;
             _emailService = emailService;
         }
 
@@ -32,9 +36,7 @@ namespace CraftworkProject.Web.Controllers
                 return Redirect("/");
             }
             
-            // TODO: Change ViewBag to ViewData (and modify unit test)
-            ViewBag.returnUrl = returnUrl;
-
+            ViewData["returnUrl"] = returnUrl;
             return View(new LoginViewModel());
         }
 
@@ -49,7 +51,7 @@ namespace CraftworkProject.Web.Controllers
             
             if (ModelState.IsValid)
             {
-                bool status = await _userManager.SignIn(model.Username, model.Password);
+                var status = await _userManager.SignIn(model.Username, model.Password);
                 
                 if (status)
                 {
@@ -82,8 +84,7 @@ namespace CraftworkProject.Web.Controllers
                 return Redirect("/");
             }
             
-            // TODO: Change ViewBag to ViewData (and modify unit test)
-            ViewBag.returnUrl = returnUrl;
+            ViewData["returnUrl"] = returnUrl;
             return View(new SignUpViewModel());
         }
 
@@ -128,6 +129,8 @@ namespace CraftworkProject.Web.Controllers
                     User newUser = new User()
                     {
                         Username = model.Username,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
                         Email = model.Email,
                         EmailConfirmed = false,
                         PhoneNumber = null,
@@ -138,11 +141,23 @@ namespace CraftworkProject.Web.Controllers
                     await _userManager.DeleteUser(model.Username);
 
                     var roleId = await _userManager.GetRoleId("customer");
-                    var result = await _userManager.CreateUser(newUser, model.Password, roleId);
+                    var userId = await _userManager.CreateUser(newUser, model.Password, roleId);
 
-                    if (result)
+                    if (userId != default)
                     {
-                        var createdUser = await _userManager.FindUserByName(model.Username);
+                        var externalLoginInfo = await _helper.GetExternalLoginInfo();
+                        var createdUser = await _userManager.FindUserById(userId);
+
+                        if (externalLoginInfo != null && createdUser != null)
+                        {
+                            await _helper.AddExternalLogin(createdUser.Id, externalLoginInfo);
+                            createdUser.EmailConfirmed = true;
+                            await _userManager.UpdateUser(createdUser);
+                            await _userManager.SignIn(createdUser.Username, model.Password);
+
+                            return Redirect("/profile");
+                        }
+
                         var token = await _userManager.GenerateEmailConfirmationToken(createdUser?.Id ?? default);
                         var confirmationLink = Url.Action("ConfirmEmail", "Account",
                             new {userId = createdUser?.Id ?? default, token}, Request.Scheme);
@@ -157,6 +172,87 @@ namespace CraftworkProject.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> ExternalSignUp(string returnUrl)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            
+            // get google provider
+            var googleProvider = (await _helper.GetExternalAuthenticationSchemes())[0].Name;
+
+            var callbackUrl = $"/account/externalsignupcallback?returnUrl={returnUrl}";
+            var properties = _helper.ConfigureExternalAuthenticationProperties(googleProvider, callbackUrl);
+
+            return new ChallengeResult(googleProvider, properties);
+        }
+        
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> ExternalLogin(string returnUrl)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            
+            // get google provider
+            var googleProvider = (await _helper.GetExternalAuthenticationSchemes())[0].Name;
+
+            var callbackUrl = $"/account/externallogincallback?returnUrl={returnUrl}";
+            var properties = _helper.ConfigureExternalAuthenticationProperties(googleProvider, callbackUrl);
+
+            return new ChallengeResult(googleProvider, properties);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalSignUpCallback(string returnUrl = null)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            
+            returnUrl ??= "/";
+
+            var info = await _helper.GetExternalLoginInfo();
+
+            if (info != null)
+            {
+                ViewData["email"] = info.Principal.Claims.FirstOrDefault(x => x.Type.Contains("email"))?.Value ??
+                                    string.Empty;
+                
+                return View("Signup", new SignUpViewModel());
+            }
+
+            return Redirect($"/signup?returnUrl={returnUrl}");
+        }
+        
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            
+            returnUrl ??= "/";
+
+            var info = await _helper.GetExternalLoginInfo();
+
+            if (info != null)
+            {
+                var result = await _helper.ExternalLoginSignIn(info);
+
+                return Redirect(result ? returnUrl : "/signup");
+            }
+            
+            return Redirect($"/login?returnUrl={returnUrl}");
         }
 
         [AllowAnonymous]

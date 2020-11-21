@@ -5,8 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-8 align-item-center">
                 <div class="border border">
-                    <h3 class="bg-gray p-4">Sign Up Now</h3>
-                    <form method="post" action="/account/signup?returnUrl=@ViewBag.returnUrl">
+                    <h3 class="bg-gray p-4 text-center">Sign Up Now</h3>
+                    <form method="post" action="/account/signup?returnUrl=@ViewData["returnUrl"]">
                         <fieldset class="p-4">
                             <input asp-for="Username" type="text" placeholder="Username" class="border p-3 w-100 my-2">
                             <span asp-validation-for="Username"></span>
@@ -18,12 +18,32 @@
                             <span asp-validation-for="Password"></span>
                             <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" class="border p-3 w-100 my-2">
                             <span asp-validation-for="ConfirmPassword"></span>
-                            <input asp-for="Email" type="email" placeholder="Email" class="border p-3 w-100">
-                            <span asp-validation-for="Email"></span>
-                            <input asp-for="ConfirmEmail" type="email" placeholder="Confirm Email" class="border p-3 w-100 my-2">
-                            <span asp-validation-for="ConfirmEmail"></span>
-                            <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold"
-                                    >Register Now</button>
+                            @if (ViewData.Keys.Contains("email"))
+                            {
+                                <input readonly asp-for="Email" type="email" placeholder="Email" class="border p-3 w-100" value="@ViewData["email"]">
+                                <span asp-validation-for="Email"></span>
+                                <input readonly asp-for="ConfirmEmail" type="email" placeholder="Confirm Email" class="border p-3 w-100 my-2" value="@ViewData["email"]">
+                                <span asp-validation-for="ConfirmEmail"></span>
+                            }
+                            else
+                            {
+                                <input asp-for="Email" type="email" placeholder="Email" class="border p-3 w-100">
+                                <span asp-validation-for="Email"></span>
+                                <input asp-for="ConfirmEmail" type="email" placeholder="Confirm Email" class="border p-3 w-100 my-2">
+                                <span asp-validation-for="ConfirmEmail"></span>
+                            }
+                            <button type="submit" class="d-block py-3 my-3 w-100 px-4 bg-primary text-white border-0 rounded font-weight-bold">Sign up</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-lg-5 col-md-8 align-item-center">
+                <div class="border">
+                    <h3 class="bg-gray p-4 text-center">Use external services to sign up</h3>
+                    <form method="post" action="/account/externalsignup?returnUrl=@ViewData["returnUrl"]">
+                        <fieldset class="p-4">
+                            <button type="submit" class="d-block py-3 px-4 my-2 w-100 bg-primary text-white border-0 rounded font-weight-bold">Google Account</button>
                         </fieldset>
                     </form>
                 </div>
@@ -31,3 +51,4 @@
         </div>
     </div>
 </section>
+

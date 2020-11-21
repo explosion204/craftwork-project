@@ -33,6 +33,12 @@ namespace CraftworkProject.Web.Service
                 options.SlidingExpiration = true;
             });
 
+            services.AddAuthentication().AddGoogle(opt =>
+            {
+                opt.ClientId = GoogleConfig.ClientId;
+                opt.ClientSecret = GoogleConfig.ClientSecret;
+            });
+
             services.AddAuthorization(x =>
             {
                 x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });

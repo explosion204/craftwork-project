@@ -26,6 +26,7 @@ namespace CraftworkProject.Web
             Configuration.Bind("Project", new Config());
             Configuration.Bind("Mailing", new MailConfig());
             Configuration.Bind("Twilio", new TwilioConfig());
+            Configuration.Bind("Google", new GoogleConfig());
             ConfigureAppServices.Configure(services, _env);
             ConfigureAuthServices.Configure(services);
         }

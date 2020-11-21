@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using CraftworkProject.Domain;
@@ -61,7 +60,7 @@ namespace CraftworkProject.Infrastructure
             return roleId;
         }
 
-        public async Task<bool> CreateUser(User newUser, string password, Guid roleId)
+        public async Task<Guid> CreateUser(User newUser, string password, Guid roleId)
         {
             var efUser = new EFUser()
             {
@@ -76,18 +75,18 @@ namespace CraftworkProject.Infrastructure
                 ProfilePicture = newUser.ProfilePicture
             };
             var userCreation = await _userManager.CreateAsync(efUser, password);
-            
+
             if (userCreation.Succeeded)
             {
                 var userRole = await _roleManager.FindByIdAsync(roleId.ToString());
                 var roleAssigning = await _userManager.AddToRoleAsync(efUser, userRole.Name);
                 if (roleAssigning.Succeeded)
                 {
-                    return true;
+                    return efUser.Id;
                 }
             }
 
-            return false;
+            return default;
         }
 
         public async Task<User> FindUserById(Guid id)

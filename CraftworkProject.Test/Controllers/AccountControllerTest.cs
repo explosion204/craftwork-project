@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Threading;
 using System.Threading.Tasks;
 using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
@@ -10,11 +9,10 @@ using CraftworkProject.Services.Interfaces;
 using CraftworkProject.Test.Utils;
 using CraftworkProject.Web.Controllers;
 using CraftworkProject.Web.ViewModels.Account;
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Moq;
 using Xunit;
@@ -27,8 +25,9 @@ namespace CraftworkProject.Test.Controllers
         {
             var userManagerMock = new Mock<IUserManager>();
             var emailServiceMock = new Mock<IEmailService>();
+            var userManagerHelperMock = new Mock<IUserManagerHelper>();
 
-            return new AccountController(userManagerMock.Object, emailServiceMock.Object)
+            return new AccountController(userManagerMock.Object, userManagerHelperMock.Object, emailServiceMock.Object)
             {
                 ControllerContext = new ControllerContext
                 {
@@ -43,10 +42,13 @@ namespace CraftworkProject.Test.Controllers
 
         private AccountController GetControllerWithNotAuthenticatedUser(
             bool loginSuccess = false,
+            bool externalLoginSuccess = false,
+            bool findsById = true,
             bool findsByUsername = false,
             bool findsByEmail = false,
             bool confirmableEmail = true,
-            bool resetablePassword = true
+            bool resetablePassword = true,
+            bool nullExternalLoginInfo = true
         )
         {
             var testUser = DomainTestUtil.GetTestUsers(1)[0];
@@ -54,19 +56,16 @@ namespace CraftworkProject.Test.Controllers
             var userManagerMock = new Mock<IUserManager>();
             userManagerMock.Setup(x => x.SignIn(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns<string, string>((a, b) => Task.FromResult(loginSuccess));
-            
+            userManagerMock.Setup(x => x.FindUserById(It.IsAny<Guid>()))
+                .Returns<Guid>(a => Task.FromResult(findsById ? testUser : null));
             userManagerMock.Setup(x => x.FindUserByName(It.IsAny<string>()))
                 .Returns<string>(a => Task.FromResult(findsByUsername ? testUser : null));
-            
             userManagerMock.Setup(x => x.FindUserByEmail(It.IsAny<string>()))
                 .Returns<string>(a => Task.FromResult(findsByEmail ? testUser : null));
-            
             userManagerMock.Setup(x => x.CreateUser(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<Guid>()))
-                .Returns<User, string, Guid>((a, b, c) => Task.FromResult(true));
-            
+                .Returns<User, string, Guid>((a, b, c) => Task.FromResult(Guid.NewGuid()));
             userManagerMock.Setup(x => x.GenerateEmailConfirmationToken(It.IsAny<Guid>()))
                 .Returns<Guid>(a => Task.FromResult(string.Empty));
-
             userManagerMock.Setup(x => x.ConfirmEmail(It.IsAny<Guid>(), It.IsAny<string>()))
                 .Returns<Guid, string>((a, b) => Task.FromResult(confirmableEmail));
 
@@ -76,11 +75,28 @@ namespace CraftworkProject.Test.Controllers
             var emailServiceMock = new Mock<IEmailService>();
             var identityMock = new Mock<GenericIdentity>("test");
             identityMock.SetupGet(x => x.IsAuthenticated).Returns(false);
+            
             var urlHelperMock = new Mock<IUrlHelper>(MockBehavior.Strict);
             urlHelperMock.Setup(x => x.Action(It.IsAny<UrlActionContext>()))
-                .Returns("callbackUrl").Verifiable();
+                .Returns("callbackUrl");
+            
+            var externalLoginInfoMock = new Mock<ExternalLoginInfo>(new ClaimsPrincipal(), "test", "test", "test");
+            var authSchemeMock = new Mock<AuthenticationScheme>("test", "test", typeof(IAuthenticationHandler));
+            
+            var userManagerHelperMock = new Mock<IUserManagerHelper>();
+            userManagerHelperMock.Setup(x => x.GetExternalLoginInfo())
+                .Returns(Task.FromResult(nullExternalLoginInfo ? null : externalLoginInfoMock.Object));
+            userManagerHelperMock.Setup(x => x.AddExternalLogin(It.IsAny<Guid>(), It.IsAny<ExternalLoginInfo>()))
+                .Returns<Guid, ExternalLoginInfo>((a, b) => Task.FromResult(0));
+            userManagerHelperMock.Setup(x => x.GetExternalAuthenticationSchemes())
+                .Returns(Task.FromResult(new List<AuthenticationScheme> {authSchemeMock.Object}));
+            userManagerHelperMock.Setup(x =>
+                x.ConfigureExternalAuthenticationProperties(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns<string, string>((a, b) => new AuthenticationProperties { RedirectUri = "test" });
+            userManagerHelperMock.Setup(x => x.ExternalLoginSignIn(It.IsAny<ExternalLoginInfo>()))
+                .Returns(Task.FromResult(externalLoginSuccess));
 
-            return new AccountController(userManagerMock.Object, emailServiceMock.Object)
+            return new AccountController(userManagerMock.Object, userManagerHelperMock.Object, emailServiceMock.Object)
             {
                 ControllerContext = new ControllerContext
                 {
@@ -111,6 +127,7 @@ namespace CraftworkProject.Test.Controllers
             var result = controller.Login("test_url");
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<LoginViewModel>(viewResult.Model);
+            Assert.NotNull(controller.ViewData["returnUrl"]);
         }
 
         [Fact]
@@ -179,6 +196,7 @@ namespace CraftworkProject.Test.Controllers
             var result = controller.Signup("test_url");
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<SignUpViewModel>(viewResult.Model);
+            Assert.NotNull(controller.ViewData["returnUrl"]);
         }
 
         [Fact]
@@ -208,6 +226,24 @@ namespace CraftworkProject.Test.Controllers
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Equal("test_email", viewResult.ViewData["Email"]);
             Assert.Equal("EmailSent", viewResult.ViewName);
+        }
+        
+        [Fact]
+        public void SignupNotAuthenticatedPostExternalSignupTest()
+        {
+            var controller = GetControllerWithNotAuthenticatedUser(nullExternalLoginInfo: false, findsById: true);
+            
+            var result = controller.Signup(new SignUpViewModel
+                {
+                    Username = "test_username", 
+                    Password = "test_password",
+                    ConfirmPassword = "test_password",
+                    Email = "test_email",
+                    ConfirmEmail = "test_email"
+                }, "test_url")
+                .Result;
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("/profile", redirectResult.Url);
         }
 
         [Fact]
@@ -288,6 +324,118 @@ namespace CraftworkProject.Test.Controllers
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<SignUpViewModel>(viewResult.Model);
             Assert.True(controller.ModelState.ErrorCount > 0);
+        }
+
+        [Fact]
+        public void ExternalSignupAuthenticatedPostTest()
+        {
+            var controller = GetControllerWithAuthenticatedUser();
+
+            var result = controller.ExternalSignUp("test").Result;
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("/", redirectResult.Url);
+        }
+        
+        [Fact]
+        public void ExternalSignupNotAuthenticatedPostTest()
+        {
+            var controller = GetControllerWithNotAuthenticatedUser();
+
+            var result = controller.ExternalSignUp("test").Result;
+            var challengeResult = Assert.IsType<ChallengeResult>(result);
+            Assert.Equal("test", challengeResult.Properties.RedirectUri);
+        }
+        
+        [Fact]
+        public void ExternalLoginAuthenticatedPostTest()
+        {
+            var controller = GetControllerWithAuthenticatedUser();
+
+            var result = controller.ExternalLogin("test").Result;
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("/", redirectResult.Url);
+        }
+        
+        [Fact]
+        public void ExternalLoginNotAuthenticatedPostTest()
+        {
+            var controller = GetControllerWithNotAuthenticatedUser();
+
+            var result = controller.ExternalLogin("test").Result;
+            var challengeResult = Assert.IsType<ChallengeResult>(result);
+            Assert.Equal("test", challengeResult.Properties.RedirectUri);
+        }
+        
+        [Fact]
+        public void ExternalSignupCallbackAuthenticatedPostTest()
+        {
+            var controller = GetControllerWithAuthenticatedUser();
+
+            var result = controller.ExternalSignUpCallback("test").Result;
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("/", redirectResult.Url);
+        }
+        
+        [Fact]
+        public void ExternalSignupCallbackNotAuthenticatedPostTest()
+        {
+            var controller = GetControllerWithNotAuthenticatedUser(nullExternalLoginInfo: false);
+
+            var result = controller.ExternalSignUpCallback("test").Result;
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsType<SignUpViewModel>(viewResult.Model);
+            Assert.NotNull(controller.ViewData["email"]);
+            Assert.Equal("Signup", viewResult.ViewName);
+        }
+        
+        [Fact]
+        public void ExternalSignupCallbackNotAuthenticatedPostNullExternalLoginInfoTest()
+        {
+            var controller = GetControllerWithNotAuthenticatedUser(nullExternalLoginInfo: true);
+
+            var result = controller.ExternalSignUpCallback("test").Result;
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("/signup?returnUrl=test", redirectResult.Url);
+        }
+        
+        [Fact]
+        public void ExternalLoginCallbackAuthenticatedPostTest()
+        {
+            var controller = GetControllerWithAuthenticatedUser();
+
+            var result = controller.ExternalLoginCallback("test").Result;
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("/", redirectResult.Url);
+        }
+        
+        [Fact]
+        public void ExternalLoginCallbackNotAuthenticatedPostTest()
+        {
+            var controller = GetControllerWithNotAuthenticatedUser(nullExternalLoginInfo: false, externalLoginSuccess: true);
+
+            var result = controller.ExternalLoginCallback("test").Result;
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("test", redirectResult.Url);
+        }
+        
+        [Fact]
+        public void ExternalLoginCallbackNotAuthenticatedCannotLoginPostTest()
+        {
+            var controller = GetControllerWithNotAuthenticatedUser(nullExternalLoginInfo: false);
+
+            var result = controller.ExternalLoginCallback("test").Result;
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("/signup", redirectResult.Url);
+        }
+        
+        [Fact]
+        public void ExternalLoginCallbackNotAuthenticatedPostNullExternalLoginInfoTest()
+        {
+            var controller = GetControllerWithNotAuthenticatedUser(nullExternalLoginInfo: true);
+
+            var result = controller.ExternalLoginCallback("test").Result;
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("/login?returnUrl=test", redirectResult.Url);
         }
         
         [Fact]
