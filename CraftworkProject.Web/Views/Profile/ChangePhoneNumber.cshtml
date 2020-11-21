@@ -9,19 +9,21 @@
                     <form method="post" action="/profile/changephonenumber">
                         <fieldset class="p-4">
                             <input hidden asp-for="UserId">
-                            @if (ViewBag.SmsSent)
+                            @if ((bool)ViewData["SmsSent"])
                             {
                                 <input id="phone-number" asp-for="PhoneNumber" type="tel" readonly placeholder="New phone number" class="border p-3 w-100 my-2">
                                 <input id="sms-code" asp-for="Code" pattern="\d{6}" maxlength="6" placeholder="Code from SMS" class="border p-3 w-100">
                                 <span asp-validation-for="Code"></span>
-                                <input id="submit-btn" type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-2" value="Send code">
+                                <input id="submit-btn" type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-2" value="Send code"
+                                       onclick="this.disabled = true; this.form.submit();">
                             }
                             else
                             {
                                 <input id="phone-number" asp-for="PhoneNumber" type="text" placeholder="New phone number" class="border p-3 w-100 my-2">
                                 <span asp-validation-for="PhoneNumber"></span>
                                 <input disabled id="sms-code" asp-for="Code" pattern="\d{4}" maxlength="4" placeholder="Code from SMS" class="border p-3 w-100">
-                                <input id="submit-btn" type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-2" value="Send SMS">
+                                <input id="submit-btn" type="submit" class="d-block py-3 px-5 bg-primary text-white border-0 rounded font-weight-bold mt-2" value="Send SMS"
+                                       onclick="this.disabled = true; this.form.submit();">
                             }
                         </fieldset>
                     </form>

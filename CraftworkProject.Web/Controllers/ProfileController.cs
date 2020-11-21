@@ -53,10 +53,9 @@ namespace CraftworkProject.Web.Controllers
                 PhoneNumber = user.PhoneNumber
             };
             
-            // TODO: ViewBag -> ViewData & modify tests
-            ViewBag.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
-            ViewBag.Email = user.Email;
-            ViewBag.EmailConfirmed = user.EmailConfirmed;
+            ViewData["PhoneNumberConfirmed"] = user.PhoneNumberConfirmed;
+            ViewData["Email"] = user.Email;
+            ViewData["EmailConfirmed"] = user.EmailConfirmed;
 
             var userOrders = _dataManager.OrderRepository.GetAllEntities()
                 .Where(x => x.User.Id == user.Id);
@@ -169,8 +168,7 @@ namespace CraftworkProject.Web.Controllers
 
         public IActionResult ChangePhoneNumber()
         {
-            // TODO: ViewBag -> ViewData & modify tests
-            ViewBag.SmsSent = false;
+            ViewData["SmsSent"] = false;
             return View(new ChangePhoneNumberViewModel() { UserId = _helper.GetUserId(User) });
         }
 
@@ -189,9 +187,8 @@ namespace CraftworkProject.Web.Controllers
                 {
                     if (!string.IsNullOrWhiteSpace(model.Code))
                     {
-                        // TODO: ViewBag -> ViewData & modify tests
-                        ViewBag.SmsSent = true;
-                        bool result = await _userManager.ConfirmPhoneNumber(model.UserId, model.Code);
+                        ViewData["SmsSent"] = true;
+                        var result = await _userManager.ConfirmPhoneNumber(model.UserId, model.Code);
 
                         if (result)
                         {
@@ -212,15 +209,10 @@ namespace CraftworkProject.Web.Controllers
                         user.PhoneNumber = model.PhoneNumber;
                         await _userManager.UpdateUser(user);
                     }
-
-                    // TODO: ViewBag -> ViewData & modify tests
-                    ViewBag.SmsSent = true;
-                    return View(model);   
                 }
             }
 
-            // TODO: ViewBag -> ViewData & modify tests
-            ViewBag.SmsSent = false;
+            ViewData["SmsSent"] = false;
             return View(model);
         }
 

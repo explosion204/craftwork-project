@@ -60,7 +60,7 @@
 									<span asp-validation-for="ProfilePicture"></span>
 								</div>
 								<!-- Submit button -->
-								<button class="btn btn-transparent">Save Changes</button>
+								<button class="btn btn-transparent" onclick="this.disabled = true; this.form.submit();">Save Changes</button>
 							</form>
 						</div>
 					</div>
@@ -92,7 +92,7 @@
 									<span asp-validation-for="ConfirmNewPassword"></span>
 								</div>
 								<!-- Submit Button -->
-								<button class="btn btn-transparent">Change Password</button>
+								<button class="btn btn-transparent" onclick="this.disabled = true; this.form.submit();">Change Password</button>
 							</form>
 						</div>
 					</div>
@@ -101,7 +101,7 @@
 						<div class="widget change-email mb-0">
 							<h3 class="widget-header user">Change Phone Number</h3>
 							<div class="form-group">
-								@if (ViewBag.PhoneNumberConfirmed)
+								@if ((bool)ViewData["PhoneNumberConfirmed"])
 								{
 									<label for="zip-code">Phone Number <b>(Confirmed)</b></label>
 								}
@@ -125,7 +125,7 @@
 								<input hidden asp-for="FirstName">
 								<input hidden asp-for="LastName">
 								<div class="form-group">
-									@if (ViewBag.EmailConfirmed)
+									@if ((bool)ViewData["EmailConfirmed"])
 									{
 										<label for="current-email">Current Email <b>(Confirmed)</b></label>
 
@@ -135,7 +135,7 @@
 										<label for="current-email">Current Email <b>(Not Confirmed)</b></label>
 
 									}
-									<input readonly type="email" class="form-control" id="current-email" value="@ViewBag.Email">
+									<input readonly type="email" class="form-control" id="current-email" value="@ViewData["Email"]">
 								</div>
 								<!-- New email -->
 								<div class="form-group">
@@ -143,7 +143,7 @@
 									<input readonly type="email" class="form-control" id="new-email">
 								</div>
 								<!-- Submit Button -->
-								<button disabled class="btn btn-transparent">Change email</button>
+								<button disabled class="btn btn-transparent" onclick="this.disabled = true; this.form.submit();">Change email</button>
 							</form>
 						</div>
 					</div>

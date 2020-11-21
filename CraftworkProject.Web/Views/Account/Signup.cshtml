@@ -32,7 +32,8 @@
                                 <input asp-for="ConfirmEmail" type="email" placeholder="Confirm Email" class="border p-3 w-100 my-2">
                                 <span asp-validation-for="ConfirmEmail"></span>
                             }
-                            <button type="submit" class="d-block py-3 my-3 w-100 px-4 bg-primary text-white border-0 rounded font-weight-bold">Sign up</button>
+                            <button type="submit" class="d-block py-3 my-3 w-100 px-4 bg-primary text-white border-0 rounded font-weight-bold"
+                                    onclick="this.disabled = true; this.form.submit();">Sign up</button>
                         </fieldset>
                     </form>
                 </div>
@@ -43,7 +44,8 @@
                     <h3 class="bg-gray p-4 text-center">Use external services to sign up</h3>
                     <form method="post" action="/account/externalsignup?returnUrl=@ViewData["returnUrl"]">
                         <fieldset class="p-4">
-                            <button type="submit" class="d-block py-3 px-4 my-2 w-100 bg-primary text-white border-0 rounded font-weight-bold">Google Account</button>
+                            <button type="submit" class="d-block py-3 px-4 my-2 w-100 bg-primary text-white border-0 rounded font-weight-bold"
+                                    onclick="this.disabled = true; this.form.submit();">Google Account</button>
                         </fieldset>
                     </form>
                 </div>

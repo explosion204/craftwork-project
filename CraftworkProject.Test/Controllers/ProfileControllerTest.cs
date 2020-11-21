@@ -88,6 +88,9 @@ namespace CraftworkProject.Test.Controllers
             Assert.NotNull(viewResult.ViewData["pendingOrdersCount"]);
             Assert.NotNull(viewResult.ViewData["canceledOrdersCount"]);
             Assert.NotNull(viewResult.ViewData["finishedOrdersCount"]);
+            Assert.NotNull(viewResult.ViewData["Email"]);
+            Assert.NotNull(viewResult.ViewData["EmailConfirmed"]);
+            Assert.NotNull(viewResult.ViewData["PhoneNumberConfirmed"]);
         }
 
         [Fact]
@@ -203,6 +206,7 @@ namespace CraftworkProject.Test.Controllers
             var result = controller.ChangePhoneNumber();
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<ChangePhoneNumberViewModel>(viewResult.Model);
+            Assert.NotNull(controller.ViewData["SmsSent"]);
         }
 
         [Fact]
@@ -219,18 +223,7 @@ namespace CraftworkProject.Test.Controllers
             var redirectResult = Assert.IsType<RedirectResult>(result);
             Assert.Equal("/profile", redirectResult.Url);
         }
-        
-        [Fact]
-        public void ChangePhoneNumberInvalidModelStateTest()
-        {
-            var controller = GetController(findsByPhoneNumber: false);
-            controller.ModelState.AddModelError("errorName", "error");
 
-            var result = controller.ChangePhoneNumber(new ChangePhoneNumberViewModel()).Result;
-            var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.IsType<ChangePhoneNumberViewModel>(viewResult.Model);
-        }
-        
         [Fact]
         public void ChangePhoneNumberPostDuplicatePhoneNumberTest()
         {
@@ -275,6 +268,7 @@ namespace CraftworkProject.Test.Controllers
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<ChangePhoneNumberViewModel>(viewResult.Model);
             Assert.True(controller.ModelState.ErrorCount == 1);
+            Assert.NotNull(controller.ViewData["SmsSent"]);
         }
     }
 }

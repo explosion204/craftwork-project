@@ -16,9 +16,9 @@ namespace CraftworkProject.Test.Mocks
             set => _sessionStorage[name] = value;
         }
 
-        string ISession.Id => throw new NotImplementedException();
+        string ISession.Id => string.Empty;
 
-        bool ISession.IsAvailable => throw new NotImplementedException();
+        bool ISession.IsAvailable => true;
 
         IEnumerable<string> ISession.Keys => _sessionStorage.Keys;
 
@@ -29,12 +29,12 @@ namespace CraftworkProject.Test.Mocks
         
         Task ISession.CommitAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(0);
         }
 
         Task ISession.LoadAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(0);
         }
 
         void ISession.Remove(string key)

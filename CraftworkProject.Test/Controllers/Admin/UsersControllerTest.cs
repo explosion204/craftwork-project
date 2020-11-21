@@ -34,7 +34,7 @@ namespace CraftworkProject.Test.Controllers.Admin
             userManagerMock.Setup(x => x.FindUserByName(It.IsAny<string>()))
                 .Returns<string>(a => Task.FromResult(_testUsers[1]));
             userManagerMock.Setup(x => x.CreateUser(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<Guid>()))
-                .Returns<User, string, Guid>((a, b, c) => Task.FromResult(creatableUser));
+                .Returns<User, string, Guid>((a, b, c) => Task.FromResult(Guid.NewGuid()));
             userManagerMock.Setup(x => x.UpdateUser(It.IsAny<User>()))
                 .Returns<User>(a => Task.FromResult(updatableUser));
             userManagerHelperMock.Setup(x => x.GetUserId(It.IsAny<ClaimsPrincipal>()))

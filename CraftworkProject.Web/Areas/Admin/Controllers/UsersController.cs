@@ -85,7 +85,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                         };
                         var result = await _userManager.CreateUser(newUser, model.NewPassword, model.RoleId);
 
-                        if (result)
+                        if (result != default)
                         {
                             return Redirect("/admin/users");
                         }

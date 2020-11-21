@@ -46,10 +46,7 @@
                         <td>
                             <img src="~/img/profile/@item.ProfilePicture" width="40" height="40" />
                         </td>
-                        @{
-                            var id = ViewBag.userManager.GetUserId(User);
-                        }
-                        @if (!ViewBag.userManager.GetUserId(User).ToString().Equals(item.Id.ToString()))
+                        @if (!ViewBag.UserManagerHelper.GetUserId(User).ToString().Equals(item.Id.ToString()))
                         {
                             <td><a href="/admin/users/update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
                         }
