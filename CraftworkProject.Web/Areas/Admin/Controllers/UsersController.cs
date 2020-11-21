@@ -29,7 +29,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.userManager = _userManager;
+            ViewBag.UserManagerHelper = _helper;
             return View(_userManager.GetAllUsers());
         }
 
@@ -108,7 +108,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             
             if (!currentUserId.ToString().Equals(id))
             {
-                await _userManager.DeleteUser(id);
+                await _userManager.DeleteUser(Guid.Parse(id));
                 return Json(new {success = true});
             }
             
