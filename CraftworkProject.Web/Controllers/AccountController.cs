@@ -249,7 +249,7 @@ namespace CraftworkProject.Web.Controllers
             {
                 var result = await _helper.ExternalLoginSignIn(info);
 
-                return Redirect(result ? returnUrl : "/signup");
+                return Redirect(result ? returnUrl : "/account/signup");
             }
             
             return Redirect($"/login?returnUrl={returnUrl}");
