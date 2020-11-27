@@ -12,7 +12,7 @@ namespace CraftworkProject.Web
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         private readonly IWebHostEnvironment _env;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
@@ -51,7 +51,7 @@ namespace CraftworkProject.Web
             app.UseRouting();
 
             // setting up auth
-            //app.UseCookiePolicy();
+            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
 
