@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CraftworkProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201127201342_1th")]
+    [Migration("20201127210227_1th")]
     partial class _1th
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,70 +20,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                 .UseIdentityByDefaultColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.0-rc.1.20451.13");
-
-            modelBuilder.Entity("CraftworkProject.Domain.Models.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Desc")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("CraftworkProject.Domain.Models.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("CategoryId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Desc")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("InStock")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
-
-                    b.Property<int>("RatesCount")
-                        .HasColumnType("integer");
-
-                    b.Property<double>("Rating")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("ShortDesc")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Product");
-                });
 
             modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFCategory", b =>
                 {
@@ -303,13 +239,13 @@ namespace CraftworkProject.Infrastructure.Migrations
                         {
                             Id = new Guid("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e3542db7-d46c-4c6d-8aa7-69af4172ddc9",
+                            ConcurrencyStamp = "e60feae9-ebe2-4333-9d0d-581a5ae06247",
                             Email = "dzmitriy20magic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DZMITRIY20MAGIC@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG6IsvvZK83KpyQ/8BhYbNS79tKz4vNgyUyn1Ev4fk7KP3X0hhIjcM7H2RIgSHoRvw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHpmmsmyTTkQ70h36RyfqIBwAn1hKdnWaU+1yG5ZAVpoMz0qJqsxvWdZBIloe8f7hg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -347,14 +283,14 @@ namespace CraftworkProject.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"),
-                            ConcurrencyStamp = "18001d45-54f0-4ba8-9428-d5a3e4d4531b",
+                            ConcurrencyStamp = "451c9636-ba95-480a-8759-1d090afbb5be",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("3800721a-cf25-427e-b5e1-9c26710df0d5"),
-                            ConcurrencyStamp = "a94939e7-69ca-4c2a-b6d8-fc4b5cbca686",
+                            ConcurrencyStamp = "874a095e-579b-46ba-9165-33ec2d7e31d0",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -468,15 +404,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CraftworkProject.Domain.Models.Product", b =>
-                {
-                    b.HasOne("CraftworkProject.Domain.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId");
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFOrder", b =>
                 {
                     b.HasOne("CraftworkProject.Infrastructure.Models.EFUser", null)
@@ -512,7 +439,7 @@ namespace CraftworkProject.Infrastructure.Migrations
 
             modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFReview", b =>
                 {
-                    b.HasOne("CraftworkProject.Domain.Models.Product", null)
+                    b.HasOne("CraftworkProject.Infrastructure.Models.EFProduct", null)
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -568,11 +495,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CraftworkProject.Domain.Models.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

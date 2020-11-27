@@ -64,19 +64,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Desc = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Category", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -231,32 +218,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    ShortDesc = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Desc = table.Column<string>(type: "text", nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    InStock = table.Column<bool>(type: "boolean", nullable: false),
-                    ImagePath = table.Column<string>(type: "text", nullable: false),
-                    Rating = table.Column<double>(type: "double precision", nullable: false),
-                    RatesCount = table.Column<int>(type: "integer", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uuid", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Product", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Product_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PurchaseDetails",
                 columns: table => new
                 {
@@ -298,9 +259,9 @@ namespace CraftworkProject.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Reviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reviews_Product_ProductId",
+                        name: "FK_Reviews_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Product",
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -310,14 +271,14 @@ namespace CraftworkProject.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"), "18001d45-54f0-4ba8-9428-d5a3e4d4531b", "admin", "ADMIN" },
-                    { new Guid("3800721a-cf25-427e-b5e1-9c26710df0d5"), "a94939e7-69ca-4c2a-b6d8-fc4b5cbca686", "customer", "CUSTOMER" }
+                    { new Guid("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"), "451c9636-ba95-480a-8759-1d090afbb5be", "admin", "ADMIN" },
+                    { new Guid("3800721a-cf25-427e-b5e1-9c26710df0d5"), "874a095e-579b-46ba-9165-33ec2d7e31d0", "customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"), 0, "e3542db7-d46c-4c6d-8aa7-69af4172ddc9", "dzmitriy20magic@gmail.com", true, null, null, false, null, "DZMITRIY20MAGIC@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEG6IsvvZK83KpyQ/8BhYbNS79tKz4vNgyUyn1Ev4fk7KP3X0hhIjcM7H2RIgSHoRvw==", null, false, null, "", false, "admin" });
+                values: new object[] { new Guid("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"), 0, "e60feae9-ebe2-4333-9d0d-581a5ae06247", "dzmitriy20magic@gmail.com", true, null, null, false, null, "DZMITRIY20MAGIC@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEHpmmsmyTTkQ70h36RyfqIBwAn1hKdnWaU+1yG5ZAVpoMz0qJqsxvWdZBIloe8f7hg==", null, false, null, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -365,11 +326,6 @@ namespace CraftworkProject.Infrastructure.Migrations
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
-                table: "Product",
-                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -425,16 +381,10 @@ namespace CraftworkProject.Infrastructure.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Product");
-
-            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Category");
         }
     }
 }

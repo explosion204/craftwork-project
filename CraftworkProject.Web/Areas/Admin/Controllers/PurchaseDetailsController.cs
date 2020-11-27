@@ -36,7 +36,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             {
                 PurchaseDetail detail = new PurchaseDetail()
                 {
-                    OrderId = model.Id,
+                    OrderId = model.OrderId,
                     Product = _dataManager.ProductRepository.GetEntity(model.ProductId),
                     Amount = model.Amount
                 };

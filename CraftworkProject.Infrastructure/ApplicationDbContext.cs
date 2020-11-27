@@ -1,5 +1,4 @@
 ﻿using System;
-using CraftworkProject.Domain.Models;
 using CraftworkProject.Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -21,47 +20,38 @@ namespace CraftworkProject.Infrastructure
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<EFProduct>(b =>
-            {
-                b.HasOne<EFCategory>()
-                    .WithMany()
-                    .HasForeignKey(x => x.CategoryId);
-            });
+            builder.Entity<EFCategory>()
+                .HasMany<EFProduct>()
+                .WithOne()
+                .HasForeignKey(e => e.CategoryId);
 
-            builder.Entity<EFOrder>(b =>
-            {
-                b.HasOne<EFUser>()
-                    .WithMany()
-                    .HasForeignKey(x => x.UserId);
-            });
+            builder.Entity<EFUser>()
+                .HasMany<EFOrder>()
+                .WithOne()
+                .HasForeignKey(e => e.UserId);
 
-            builder.Entity<EFPurchaseDetail>(b =>
-            {
-                b.HasOne<EFOrder>()
-                    .WithMany()
-                    .HasForeignKey(x => x.OrderId);
+            builder.Entity<EFOrder>()
+                .HasMany<EFPurchaseDetail>()
+                .WithOne()
+                .HasForeignKey(e => e.OrderId);
 
-                b.HasOne<EFProduct>()
-                    .WithMany()
-                    .HasForeignKey(x => x.ProductId);
-            });
+            builder.Entity<EFProduct>()
+                .HasMany<EFPurchaseDetail>()
+                .WithOne()
+                .HasForeignKey(e => e.ProductId);
 
-            builder.Entity<EFReview>(b =>
-            {
-                b.HasOne<Product>()
-                    .WithMany()
-                    .HasForeignKey(x => x.ProductId);
-            });
-            
+            builder.Entity<EFProduct>()
+                .HasMany<EFReview>()
+                .WithOne()
+                .HasForeignKey(e => e.ProductId);
+
             builder.Entity<EFUserRole>().HasData(new EFUserRole()
             {
                 Id = Guid.Parse("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"),
                 Name = "admin",
                 NormalizedName = "ADMIN"
             });
-            
-            
-            
+
             builder.Entity<EFUserRole>().HasData(new EFUserRole()
             {
                 Id = Guid.Parse("3800721a-cf25-427e-b5e1-9c26710df0d5"),
