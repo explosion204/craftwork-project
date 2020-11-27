@@ -58,10 +58,18 @@
             <!-- /.box-body -->
             <div class="box-footer">
                 <input type="button" class="btn btn-info" value="Cancel" onclick="location.href='/admin/reviews/'">
-                <button type="submit" class="btn btn-info pull-right" id="createBtn" onclick="this.disabled = true; this.form.submit();">Create</button>
+                <button disabled type="submit" class="btn btn-info pull-right" id="createBtn" onclick="this.disabled = true; this.form.submit();">Create</button>
             </div>
             <!-- /.box-footer -->
         </form>
     </div>
     <!-- /.box -->
 </section>
+
+<script>    
+    window.onload = function () {
+        @if (ViewBag.AllProducts.Count != 0 && ViewBag.AllUsers.Count != 0) {
+            @:document.getElementById('createBtn').disabled = false; 
+        }
+    }
+</script>
