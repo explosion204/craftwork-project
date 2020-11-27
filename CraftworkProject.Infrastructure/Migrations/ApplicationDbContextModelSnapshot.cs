@@ -19,6 +19,70 @@ namespace CraftworkProject.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.0-rc.1.20451.13");
 
+            modelBuilder.Entity("CraftworkProject.Domain.Models.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("CraftworkProject.Domain.Models.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("InStock")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("RatesCount")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("ShortDesc")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Product");
+                });
+
             modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFCategory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -237,13 +301,13 @@ namespace CraftworkProject.Infrastructure.Migrations
                         {
                             Id = new Guid("5a1e1cfc-ee1d-4afb-aad3-a6d932066727"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f661cb0c-902a-42ab-9b77-bbe75cf72fb0",
+                            ConcurrencyStamp = "e3542db7-d46c-4c6d-8aa7-69af4172ddc9",
                             Email = "dzmitriy20magic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DZMITRIY20MAGIC@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENrGQJF1TE/nmOXQwips+sZxCWRKHDn7y9ZnDfeD8ypRLsxCA4mHuykfEaCvZ1YPAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG6IsvvZK83KpyQ/8BhYbNS79tKz4vNgyUyn1Ev4fk7KP3X0hhIjcM7H2RIgSHoRvw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -281,14 +345,14 @@ namespace CraftworkProject.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("1a1059b8-61e5-4ea8-b2dd-7d44793910f4"),
-                            ConcurrencyStamp = "e23f3869-c0a5-4497-ac46-9bf6471afbee",
+                            ConcurrencyStamp = "18001d45-54f0-4ba8-9428-d5a3e4d4531b",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("3800721a-cf25-427e-b5e1-9c26710df0d5"),
-                            ConcurrencyStamp = "5c4d8595-ac36-4044-87da-d16f27a1f22f",
+                            ConcurrencyStamp = "a94939e7-69ca-4c2a-b6d8-fc4b5cbca686",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -402,6 +466,15 @@ namespace CraftworkProject.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("CraftworkProject.Domain.Models.Product", b =>
+                {
+                    b.HasOne("CraftworkProject.Domain.Models.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFOrder", b =>
                 {
                     b.HasOne("CraftworkProject.Infrastructure.Models.EFUser", null)
@@ -437,7 +510,7 @@ namespace CraftworkProject.Infrastructure.Migrations
 
             modelBuilder.Entity("CraftworkProject.Infrastructure.Models.EFReview", b =>
                 {
-                    b.HasOne("CraftworkProject.Infrastructure.Models.EFProduct", null)
+                    b.HasOne("CraftworkProject.Domain.Models.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -493,6 +566,11 @@ namespace CraftworkProject.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CraftworkProject.Domain.Models.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
