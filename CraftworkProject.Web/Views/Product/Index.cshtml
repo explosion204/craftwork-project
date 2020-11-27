@@ -171,7 +171,7 @@
 		  	disableAfterRate: false,
 		  	ratedColor: '#5672f9',
 		  	callback: function(currentRating, $el) {
-				document.cookie='userRating=' + currentRating;
+				document.cookie='userRating=' + encodeURIComponent(currentRating)
 		  	}
 		});
         
