@@ -40,9 +40,8 @@ namespace CraftworkProject.Web
             else
             {
                 app.UseStatusCodePagesWithRedirects("/error/{0}");
+                app.ConfigureExceptionHandler(logger);
             }
-            
-            app.ConfigureExceptionHandler(logger);
 
             // setting up static files
             app.UseStaticFiles();
