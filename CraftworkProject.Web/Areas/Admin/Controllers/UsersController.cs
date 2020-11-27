@@ -188,6 +188,12 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         private async Task<string> UploadFile(IFormFile file)
         {
             var uploadDir = Path.Combine(_environment.WebRootPath, "img/profile");
+
+            if (!Directory.Exists(uploadDir))
+            {
+                Directory.CreateDirectory(uploadDir);
+            }
+            
             var fileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
             var filePath = Path.Combine(uploadDir, fileName);
             

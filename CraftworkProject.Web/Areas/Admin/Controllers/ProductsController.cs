@@ -125,6 +125,12 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         private async Task<string> UploadFile(IFormFile file)
         {
             string uploadDir = Path.Combine(_environment.WebRootPath, "img/product");
+
+            if (!Directory.Exists(uploadDir))
+            {
+                Directory.CreateDirectory(uploadDir);
+            }
+            
             string fileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
             string filePath = Path.Combine(uploadDir, fileName);
             
@@ -136,7 +142,11 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         {
             string uploadDir = Path.Combine(_environment.WebRootPath, "img/product");
             string filePath = Path.Combine(uploadDir, fileName);
-            System.IO.File.Delete(filePath);
+            
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
         }
     }
 }
