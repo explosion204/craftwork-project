@@ -13,6 +13,19 @@
 <script src="/js/script.js"></script>
 
 <script>
+      $(function () {
+          $.ajax(
+          {
+              type: 'POST',
+              dataType: 'text',
+              url: '/timezone',
+              data: {
+                  timeZoneOffset: (new Date()).getTimezoneOffset()
+              },
+              success: function (result) {}
+          });
+      });
+
       function makeOrderModal(details) {
         let html = `<div id="myModal" class="modal fade" role="dialog" aria-labelledby="exampleModalCenterTitle">
         <div class="modal-dialog">

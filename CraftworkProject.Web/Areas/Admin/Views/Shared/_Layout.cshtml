@@ -36,49 +36,64 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 
-  <div class="wrapper">
-    <!-- Main Header -->
-    <header class="main-header">
-      <!-- Logo -->
-      <a href="/admin/categories/index" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>AP</b></span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>AdminPanel</b></span>
-      </a>
-      <!-- Header Navbar -->
-      <nav class="navbar navbar-static-top" role="navigation">
-        <!-- Navbar Right Menu -->
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account Menu -->
-            <li class="dropdown user user-menu">
-              <!-- Menu Toggle Button -->
-              <a href="/account/logout">Log out</a>
+<div class="wrapper">
+  <!-- Main Header -->
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="/admin/categories/index" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>AP</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>AdminPanel</b></span>
+    </a>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="/account/logout">Log out</a>
               
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-      <!-- sidebar: style can be found in sidebar.less -->
-      <section class="sidebar">
-        <!-- /.search form -->
-        <!-- Sidebar Menu -->
-        @await Html.PartialAsync("_MainMenu")
-        <!-- /.sidebar-menu -->
-      </section>
-      <!-- /.sidebar -->
-    </aside>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      @RenderBody()
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- /.search form -->
+      <!-- Sidebar Menu -->
+      @await Html.PartialAsync("_MainMenu")
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    @RenderBody()
+    <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
+</div>
 </body>
 </html>
+
+<script>
+  $(function () {
+      $.ajax(
+      {
+          type: 'POST',
+          dataType: 'text',
+          url: '/timezone',
+          data: {
+              timeZoneOffset: (new Date()).getTimezoneOffset()
+          },
+          success: function (result) {}
+      });
+  });
+</script>

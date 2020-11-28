@@ -1,3 +1,4 @@
+@using Microsoft.AspNetCore.Http
 @model CraftworkProject.Web.ViewModels.Product.ProductViewModel
 
 <section class="section bg-gray">
@@ -117,7 +118,15 @@
 											<h5>@review.User.Username</h5>
 										</div>
 										<div class="date">
-											<p>@review.PublicationDate</p>
+					                        @if (Context.Session.Keys.Contains("timeZoneOffset"))
+                                            {
+                                                var timeZoneOffset = int.Parse(Context.Session.GetString("timeZoneOffset"));
+                                                <td>@(review.PublicationDate - new TimeSpan(0, timeZoneOffset, 0))</td>
+                                            }
+                                            else
+                                            {
+	                                            <p>@review.PublicationDate</p>
+                                            }
 										</div>
 										<div class="review-comment">
 											<h5>@review.Title</h5>
