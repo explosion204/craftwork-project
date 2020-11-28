@@ -85,7 +85,9 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                 Desc = product.Desc,
                 Price = product.Price,
                 InStock = product.InStock,
-                ImagePath = product.ImagePath
+                ImagePath = product.ImagePath,
+                Rating = product.Rating,
+                RatesCount = product.RatesCount
             };
             return View(viewModel);
         }
@@ -104,7 +106,9 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                     Desc = model.Desc,
                     InStock = model.InStock,
                     Price = model.Price,
-                    ImagePath = model.ImagePath
+                    ImagePath = model.ImagePath,
+                    Rating = model.Rating,
+                    RatesCount = model.RatesCount
                 };
                 
                 if (model.Image != null)

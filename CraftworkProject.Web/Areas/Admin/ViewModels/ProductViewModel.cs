@@ -31,6 +31,9 @@ namespace CraftworkProject.Web.Areas.Admin.ViewModels
         public IFormFile Image { get; set; }
         
         public string ImagePath { get; set; }
+        
+        public double Rating { get; set; }
+        public int RatesCount { get; set; }
 
         [Required]
         public Guid CategoryId { get; set; }

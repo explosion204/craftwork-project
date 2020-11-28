@@ -68,19 +68,6 @@ namespace CraftworkProject.Infrastructure.Repositories
                 efProduct.Rating = (efProduct.Rating * efProduct.RatesCount + efReview.Rating) / (efProduct.RatesCount + 1);
                 efProduct.RatesCount++;
                 
-                // trying my hard to catch damn bug
-                try
-                {
-                    if (efProduct.RatesCount < 1)
-                    {
-                        throw new Exception();
-                    } 
-                }
-                catch (Exception)
-                {
-                    var str = "BREAKPOINT";
-                }
-
                 _context.Entry(efReview).State = EntityState.Added;
             }
             else
