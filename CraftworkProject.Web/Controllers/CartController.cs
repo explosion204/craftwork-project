@@ -80,7 +80,7 @@ namespace CraftworkProject.Web.Controllers
 
             var newOrder = new Order
             {
-                Created = DateTime.Now,
+                Created = DateTime.UtcNow,
                 User = await _userManager.FindUserByName(User.Identity.Name)
             };
             var newOrderId = _dataManager.OrderRepository.SaveEntity(newOrder);

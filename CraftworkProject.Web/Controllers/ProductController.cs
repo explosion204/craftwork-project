@@ -101,7 +101,7 @@ namespace CraftworkProject.Web.Controllers
                     Text = model.ReviewText,
                     Rating = int.Parse(Request.Cookies["userRating"]),
                     Product = _dataManager.ProductRepository.GetEntity(model.ProductId),
-                    PublicationDate = DateTime.Now,
+                    PublicationDate = DateTime.UtcNow,
                     User = await _userManager.FindUserById(_helper.GetUserId(User))
                 };
                 

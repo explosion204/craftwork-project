@@ -62,7 +62,7 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
                         Rating = model.Rating,
                         Title = model.Title,
                         Text = model.Text,
-                        PublicationDate = DateTime.Now
+                        PublicationDate = DateTime.UtcNow
                     };
                 
                     _dataManager.ReviewRepository.SaveEntity(review);
