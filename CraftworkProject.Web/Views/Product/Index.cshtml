@@ -156,7 +156,7 @@
 
 <script>
 	$(document).ready(function () {
-		document.cookie = @Model.ReviewRating;
+		document.cookie='userRating=' + encodeURIComponent(@Model.ReviewRating);
 		
         $('.my-rating').starRating({
 		  	totalStars: 5,
