@@ -2,9 +2,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using CraftworkProject.Domain.Models;
 
-namespace CraftworkProject.Infrastructure.Models
+namespace CraftworkProject.Infrastructure
 {
-    public class EFReview
+    internal class EFReview
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

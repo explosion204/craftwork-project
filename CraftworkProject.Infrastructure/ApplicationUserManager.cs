@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
-using CraftworkProject.Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CraftworkProject.Infrastructure
 {
-    public class ApplicationUserManager : IUserManager
+    internal class ApplicationUserManager : IUserManager
     {
         private readonly UserManager<EFUser> _userManager;
         private readonly RoleManager<EFUserRole> _roleManager;

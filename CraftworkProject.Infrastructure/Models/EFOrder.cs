@@ -1,8 +1,8 @@
 using System;
 
-namespace CraftworkProject.Infrastructure.Models
+namespace CraftworkProject.Infrastructure
 {
-    public class EFOrder
+    internal class EFOrder
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

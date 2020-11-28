@@ -4,13 +4,12 @@ using System.Linq;
 using AutoMapper;
 using CraftworkProject.Domain;
 using CraftworkProject.Domain.Models;
-using CraftworkProject.Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace CraftworkProject.Infrastructure.Repositories
+namespace CraftworkProject.Infrastructure
 {
-    public class OrderRepository : IRepository<Order>
+    internal class OrderRepository : IRepository<Order>
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;

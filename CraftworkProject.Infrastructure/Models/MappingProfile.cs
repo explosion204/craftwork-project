@@ -1,10 +1,9 @@
 using AutoMapper;
 using CraftworkProject.Domain.Models;
-using CraftworkProject.Infrastructure.Models;
 
 namespace CraftworkProject.Infrastructure
 {
-    public class MappingProfile : Profile
+    internal class MappingProfile : Profile
     {
         public MappingProfile()
         {

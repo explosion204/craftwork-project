@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CraftworkProject.Infrastructure.Models
+namespace CraftworkProject.Infrastructure
 {
-    public class EFPurchaseDetail
+    internal class EFPurchaseDetail
     {
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }

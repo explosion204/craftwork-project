@@ -1,3 +1,4 @@
+using CraftworkProject.Infrastructure;
 using CraftworkProject.Web.Hubs;
 using CraftworkProject.Web.Service;
 using CraftworkProject.Web.Service.ErrorHandling;
@@ -20,14 +21,42 @@ namespace CraftworkProject.Web
             Configuration = configuration;
             _env = env;
         } 
+        
         public void ConfigureServices(IServiceCollection services)
         {
-            Configuration.Bind("Project", new Config());
-            Configuration.Bind("Mailing", new MailConfig());
-            Configuration.Bind("Twilio", new TwilioConfig());
-            Configuration.Bind("Google", new GoogleConfig());
-            ConfigureAppServices.Configure(services, _env);
-            ConfigureAuthServices.Configure(services);
+            // services.Configure<AppOptions>(Configuration.GetSection(AppOptions.SectionName));
+            // services.Configure<MailOptions>(Configuration.GetSection(MailOptions.SectionName));
+            // services.Configure<TwilioOptions>(Configuration.GetSection(TwilioOptions.SectionName));
+            // services.Configure<GoogleOptions>(Configuration.GetSection(GoogleOptions.SectionName));
+            
+            var appOptions = new AppOptions();
+            Configuration.GetSection(AppOptions.SectionName).Bind(appOptions);
+
+            services.AddRepositories(new DbContextOptions { ConnectionString = appOptions.ConnectionString });
+            services.ConfigureIdentity(x =>
+            {
+                x.User.RequireUniqueEmail = true;
+                x.Password.RequiredLength = 8;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireLowercase = false;
+                x.Password.RequireUppercase = false;
+                x.Password.RequireDigit = false;
+            });
+            services.AddAuth(Configuration);
+            services.AddAppServices(_env, Configuration);
+            services.AddUserManager();
+            services.AddUserManagerHelper();
+            services.AddMapper();
+
+            
+            services.AddControllersWithViews(options =>
+            {
+                options.Conventions.Add(new AdminAreaAuth("Admin", "AdminArea"));
+            })
+            .AddSessionStateTempDataProvider();
+            services.AddSession();
+            services.AddSignalR();
+            services.AddSignalRCore();
         }
 
         public void Configure(IApplicationBuilder app, ILogger<Startup> logger)

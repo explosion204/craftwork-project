@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CraftworkProject.Infrastructure.Models;
 using CraftworkProject.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace CraftworkProject.Services.Implementations
+namespace CraftworkProject.Infrastructure
 {
-    public class UserManagerHelper : IUserManagerHelper
+    internal class UserManagerHelper : IUserManagerHelper
     {
         private readonly UserManager<EFUser> _userManager;
         private readonly SignInManager<EFUser> _signInManager;

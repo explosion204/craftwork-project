@@ -1,8 +1,14 @@
 ﻿@using CraftworkProject.Web.Service
-
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+@{
+    var appOptions = new AppOptions();
+    Configuration.GetSection(AppOptions.SectionName).Bind(appOptions);
+}
 
 @if (ViewBag.Title != null)
 {
@@ -10,5 +16,5 @@
 }
 else
 {
-    <title>@Config.CompanyName</title>
+    <title>@appOptions.CompanyName</title>
 }

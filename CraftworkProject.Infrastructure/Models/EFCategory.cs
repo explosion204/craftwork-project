@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CraftworkProject.Infrastructure.Models
+namespace CraftworkProject.Infrastructure
 {
-    public class EFCategory
+    internal class EFCategory
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -1,9 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace CraftworkProject.Infrastructure.Models
+namespace CraftworkProject.Infrastructure
 {
-    public class EFUser : IdentityUser<Guid>
+    internal class EFUser : IdentityUser<Guid>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

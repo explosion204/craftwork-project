@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CraftworkProject.Infrastructure.Models
+namespace CraftworkProject.Infrastructure
 {
-    public class EFProduct
+    internal class EFProduct
     {
         public Guid Id { get; set; }
         public Guid CategoryId { get; set; }
