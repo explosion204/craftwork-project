@@ -41,10 +41,10 @@ namespace CraftworkProject.Web.Service
 
         public static void AddAppServices(this IServiceCollection services, IWebHostEnvironment env, IConfiguration config)
         {
-            var mailOptions = new MailOptions();
+            var mailOptions = new MailingOptions();
             var twilioOptions = new TwilioOptions();
             var loggingOptions = new LoggingOptions();
-            config.GetSection(MailOptions.SectionName).Bind(mailOptions);
+            config.GetSection(MailingOptions.SectionName).Bind(mailOptions);
             config.GetSection(TwilioOptions.SectionName).Bind(twilioOptions);
             config.GetSection(LoggingOptions.SectionName).Bind(loggingOptions);
 

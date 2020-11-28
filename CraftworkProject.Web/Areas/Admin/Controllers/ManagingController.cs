@@ -13,15 +13,18 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
         private readonly IDataManager _dataManager;
         private readonly IHubContext<NotificationHub> _notificationHubContext;
         private readonly IUserConnectionManager _userConnectionManager;
+        private readonly IEmailService _emailService;
         
         public ManagingController(
             IDataManager dataManager, 
             IHubContext<NotificationHub> notificationHubContext,
-            IUserConnectionManager userConnectionManager)
+            IUserConnectionManager userConnectionManager,
+            IEmailService emailService)
         {
             _dataManager = dataManager;
             _notificationHubContext = notificationHubContext;
             _userConnectionManager = userConnectionManager;
+            _emailService = emailService;
         }
         
         public IActionResult Index()
@@ -37,6 +40,8 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             _dataManager.OrderRepository.SaveEntity(order);
 
             await SendNotification(order.User.Id, "notifyOrderConfirmed");
+            await _emailService.SendEmailAsync(order.User.Email, "Craftwork Project | Order status changed",
+                $"Your order ({order.Id}) confirmed. Checkout your profile fore more details.");
 
             return Json(new {success = true});
         }
@@ -49,6 +54,8 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             _dataManager.OrderRepository.SaveEntity(order);
             
             await SendNotification(order.User.Id, "notifyOrderCanceled");
+            await _emailService.SendEmailAsync(order.User.Email, "Craftwork Project | Order status changed",
+                $"Your order ({order.Id}) canceled. Checkout your profile fore more details.");
 
             return Json(new {success = true});
         }
@@ -61,6 +68,8 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             _dataManager.OrderRepository.SaveEntity(order);
             
             await SendNotification(order.User.Id, "notifyOrderRestored");
+            await _emailService.SendEmailAsync(order.User.Email, "Craftwork Project | Order status changed",
+                $"Your order ({order.Id}) restored. Checkout your profile fore more details.");
 
             return Json(new {success = true});
         }
@@ -73,6 +82,8 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
             _dataManager.OrderRepository.SaveEntity(order);
 
             await SendNotification(order.User.Id, "notifyOrderFinished");
+            await _emailService.SendEmailAsync(order.User.Email, "Craftwork Project | Order status changed",
+                $"Your order ({order.Id}) finished. Now you can send your review. Thank you for purchase!");
 
             return Json(new {success = true});
         }

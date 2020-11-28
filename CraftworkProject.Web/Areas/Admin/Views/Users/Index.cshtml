@@ -1,4 +1,6 @@
+@using CraftworkProject.Services.Interfaces
 @model List<CraftworkProject.Domain.Models.User>
+@inject IUserManagerHelper UserManagerHelper
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <section class="content-header">
@@ -46,7 +48,7 @@
                         <td>
                             <img src="~/img/profile/@item.ProfilePicture" width="40" height="40" />
                         </td>
-                        @if (!ViewBag.UserManagerHelper.GetUserId(User).ToString().Equals(item.Id.ToString()))
+                        @if (!UserManagerHelper.GetUserId(User).ToString().Equals(item.Id.ToString()))
                         {
                             <td><a href="/admin/users/update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
                         }

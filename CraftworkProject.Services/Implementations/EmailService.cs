@@ -8,11 +8,11 @@ namespace CraftworkProject.Services.Implementations
 {
     public class EmailService : IEmailService
     {
-        private string _sender;
-        private string _smtpServer;
-        private int _smtpPort;
-        private string _username;
-        private string _password;
+        private readonly string _sender;
+        private readonly string _smtpServer;
+        private readonly int _smtpPort;
+        private readonly string _username;
+        private readonly string _password;
         public EmailService(string sender, string smtpServer, int smtpPort, string username, string password)
         {
             _sender = sender;

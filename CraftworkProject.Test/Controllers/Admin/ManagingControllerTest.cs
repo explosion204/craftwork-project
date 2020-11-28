@@ -25,11 +25,13 @@ namespace CraftworkProject.Test.Controllers.Admin
             
             var notificationHubContextMock = new Mock<IHubContext<NotificationHub>>();
             var userConnectionManagerMock = new Mock<IUserConnectionManager>();
+            var emailServiceMock = new Mock<IEmailService>();
 
             return new ManagingController(
                 dataManagerMock.Object,
                 notificationHubContextMock.Object,
-                userConnectionManagerMock.Object
+                userConnectionManagerMock.Object,
+                emailServiceMock.Object
             )
             {
                 ObjectValidator = ControllerTestUtil.GetObjectModelValidatorMock().Object

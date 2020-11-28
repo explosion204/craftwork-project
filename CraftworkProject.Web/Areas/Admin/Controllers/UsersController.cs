@@ -29,7 +29,6 @@ namespace CraftworkProject.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.UserManagerHelper = _helper;
             return View(_userManager.GetAllUsers());
         }
 
