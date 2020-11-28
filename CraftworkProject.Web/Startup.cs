@@ -24,11 +24,8 @@ namespace CraftworkProject.Web
         
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.Configure<AppOptions>(Configuration.GetSection(AppOptions.SectionName));
-            // services.Configure<MailOptions>(Configuration.GetSection(MailOptions.SectionName));
-            // services.Configure<TwilioOptions>(Configuration.GetSection(TwilioOptions.SectionName));
-            // services.Configure<GoogleOptions>(Configuration.GetSection(GoogleOptions.SectionName));
-            
+            services.Configure<LoggingOptions>(Configuration.GetSection(LoggingOptions.SectionName));
+
             var appOptions = new AppOptions();
             Configuration.GetSection(AppOptions.SectionName).Bind(appOptions);
 

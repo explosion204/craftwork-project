@@ -43,8 +43,10 @@ namespace CraftworkProject.Web.Service
         {
             var mailOptions = new MailOptions();
             var twilioOptions = new TwilioOptions();
+            var loggingOptions = new LoggingOptions();
             config.GetSection(MailOptions.SectionName).Bind(mailOptions);
             config.GetSection(TwilioOptions.SectionName).Bind(twilioOptions);
+            config.GetSection(LoggingOptions.SectionName).Bind(loggingOptions);
 
             services.AddScoped<IDataManager, DataManager>();
             services.AddScoped<IEmailService>(x => new EmailService(
@@ -57,9 +59,8 @@ namespace CraftworkProject.Web.Service
             services.AddLogging(opt =>
             {
                 opt.AddConsole();
-                // TODO: filenames -> config
-                opt.AddFile(Path.Combine(env.WebRootPath, "logs", "all.log"));
-                opt.AddFile(Path.Combine(env.WebRootPath, "logs", "error.log"), LogLevel.Error);
+                opt.AddFile(Path.Combine(env.WebRootPath, loggingOptions.CommonLogFilePath));
+                opt.AddFile(Path.Combine(env.WebRootPath, loggingOptions.ErrorLogFilePath), LogLevel.Error);
             });
             services.AddSingleton<IUserConnectionManager, UserConnectionManager>();
         }
