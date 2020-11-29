@@ -30,17 +30,20 @@
             </thead>
             <tbody>
             @foreach (var item in Model.ToList())
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.User.Username)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Product.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-                        <td>@Html.DisplayFor(modelItem => item.PublicationDate)</td>
-                        <td><a href="/admin/reviews/update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
-                    </tr>
-                }
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.User.Username)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Product.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Rating)</td>
+                    @{
+                        //TODO: show local time (I have no time and no intention to fix it in the nearest future, it's not critical)
+                    }
+                    <td>@Html.DisplayFor(modelItem => item.PublicationDate)</td>
+                    <td><a href="/admin/reviews/update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
+                </tr>
+            }
             </table>
         </div>
         <!-- /.box-body -->

@@ -151,6 +151,7 @@ namespace CraftworkProject.Infrastructure
             }
         }
 
+        //TODO: method is called but cascade delete is not executed
         private void CascadeDeleteReviews(EFUser efUser)
         {
             var associatedReviews = _reviewRepository.GetAllEntities().Where(x => x.User.Id == efUser.Id);

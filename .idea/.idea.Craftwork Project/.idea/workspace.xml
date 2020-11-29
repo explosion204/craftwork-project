@@ -18,68 +18,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd76b39-8ba4-4d35-8830-ca6b0cec1686" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Domain/IUserManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/User.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/UserRole.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationUserManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/MappingProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFCategory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFOrder.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFProduct.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFPurchaseDetail.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFUserRole.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/CategoryRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/OrderRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/PurchaseDetailRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Services/Implementations/DataManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Services/Interfaces/IDataManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/OrderViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/ProductViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/PurchaseDetailViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Service/ConfigureAppServices.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CraftworkProject.Web/Service/ConfigureAuthServices.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Craftwork Project/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Craftwork Project/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Craftwork Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Craftwork Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/IRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/IRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Identity/ApplicationUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/BaseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Category.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Order.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/Product.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Domain/Models/PurchaseDetail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Domain/Models/PurchaseDetail.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/CraftworkProject.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/CraftworkProject.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Migrations/20201002191052_initial.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Migrations/20201002191052_initial.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/Repositories/ProductRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Services/CraftworkProject.Services.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Services/CraftworkProject.Services.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Services/DataManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/CategoriesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/CategoriesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/OrdersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/OrdersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/ProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/ProductsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/PurchaseDetailsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/PurchaseDetailsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/UserViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/UserViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Update.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Orders/Update.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Update.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Update.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Update.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Users/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/CraftworkProject.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/CraftworkProject.Web.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Service/AdminAreaAuth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Service/AdminAreaAuth.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationUserManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationUserManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Services/Interfaces/IEmailService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Services/Interfaces/IEmailService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Reviews/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Reviews/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/plugins/jquery-nice-select/js/fastclick.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/plugins/jquery-nice-select/js/fastclick.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/plugins/smoothscroll/SmoothScroll.js" beforeDir="false" afterPath="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/plugins/smoothscroll/SmoothScroll.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,44 +42,35 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D0228696-B9FC-4262-A62B-D47E2177138A/24/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/33D3E218-D40A-4945-A4E2-F89375128B97/20/ServiceProviderEngine.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/33D3E218-D40A-4945-A4E2-F89375128B97/16/DynamicServiceProviderEngine.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/33D3E218-D40A-4945-A4E2-F89375128B97/12/CallSiteVisitor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/33D3E218-D40A-4945-A4E2-F89375128B97/10/CallSiteRuntimeResolver.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Views/Account/Signup.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/3/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/ViewModels/SignUpViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6DF8B57F-11CD-48D1-9EFD-9623E18A39F1/C/Controller.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/85B739A8-30DD-4AAB-8776-49AB424D41C1/81/aa166642/UserManager`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/ViewModels/LoginViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CraftworkProject.Domain/IUserManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4548C038-E0FD-4678-A83D-53D9C5058FA0/1D/UserManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/1/IdentityRole.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/6/IdentityUserRole.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D0228696-B9FC-4262-A62B-D47E2177138A/F3/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/366E8AE0-1B9B-4017-9558-D9119070DE22/F/RazorPageOfT.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/70C6E57A-8249-4F3C-B229-F9CCDA65A029/7/ClaimsPrincipal.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/45212CA3-153F-478C-B9B1-60517BBB01B3/eb/a206858a/ICollection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/FDEE9ED9-C809-4C83-BD12-4B44803B9F5A/F/SignInManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/32054AB3-4C81-4CFE-B5C7-40D95EFA55EC/8/Queryable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/33D3E218-D40A-4945-A4E2-F89375128B97/C/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4548C038-E0FD-4678-A83D-53D9C5058FA0/13/RoleManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D0228696-B9FC-4262-A62B-D47E2177138A/11C/ResourceInvoker.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/25/fa2c7ffa/IdentityUserRole`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/45212CA3-153F-478C-B9B1-60517BBB01B3/4e/a939c660/IEquatable`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/EEE8FA28-D331-44D7-89B2-84DAE1CE6370/2/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CraftworkProject.Services/Implementations/DataManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Views/Account/Login.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4548C038-E0FD-4678-A83D-53D9C5058FA0/8/IdentityBuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/FA36EC45-3EB7-4EEB-BF86-06BBB413059F/8/ServiceDescriptor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CraftworkProject.Infrastructure/Database/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FA36EC45-3EB7-4EEB-BF86-06BBB413059F/a5/59df8adc/IServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/3/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/74DAB51B-BB68-47F1-90B2-0FA8FF7ED63D/7/IConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CraftworkProject.Services/Implementations/DataManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E8DB869E-6ADB-4825-BAA7-1F3A0BC5282D/6/IdentityUserRole.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2A7B9519-FE31-4C9B-B8C4-5A3ED6673590/2/IdentityServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CraftworkProject.Domain/IUserManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/CF38E32A-92D3-40E3-ABE3-7A488DB956B3/A/EntityFrameworkServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/60C7208E-971E-4E2B-BFF0-F3388FEEDF37/10/SignInManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Controllers/HomeController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/UserViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/AD61CA47-F8B7-4CC6-93A0-BA44CC73B5C7/1E0/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/F680C866-D120-4163-9634-EBD842255BE9/46/MvcCoreLoggerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/projects/craftwork-project/CraftworkProject.Infrastructure/ApplicationUserManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/FA36EC45-3EB7-4EEB-BF86-06BBB413059F/A/ActivatorUtilities.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/33D3E218-D40A-4945-A4E2-F89375128B97/21/ServiceProviderEngineScope.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Categories/Update.cshtml" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/ViewModels/OrderViewModel.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Domain/Models/BaseEntity.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Create.cshtml" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Products/Update.cshtml" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Create.cshtml" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/PurchaseDetails/Update.cshtml" />
@@ -164,7 +99,6 @@
         <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFProduct.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFPurchaseDetail.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/Models/EFUser.cs" />
-        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationUserManager.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/MappingProfile.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Services/Implementations/DataManager.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Controllers/CategoriesController.cs" />
@@ -183,6 +117,11 @@
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Service/ConfigureAppServices.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Service/ConfigureAuthServices.cs" />
         <option value="$PROJECT_DIR$/CraftworkProject.Web/Startup.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Services/Interfaces/IEmailService.cs" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/plugins/smoothscroll/SmoothScroll.js" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/wwwroot/plugins/jquery-nice-select/js/fastclick.js" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Web/Areas/Admin/Views/Reviews/Index.cshtml" />
+        <option value="$PROJECT_DIR$/CraftworkProject.Infrastructure/ApplicationUserManager.cs" />
       </list>
     </option>
   </component>
