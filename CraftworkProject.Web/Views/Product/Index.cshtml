@@ -118,7 +118,7 @@
 											<h5>@review.User.Username</h5>
 										</div>
 										<div class="date">
-					                        @if (false)
+					                        @if (Context.Session.Keys.Contains("timeZoneOffset"))
                                             {
                                                 var timeZoneOffset = int.Parse(Context.Session.GetString("timeZoneOffset"));
                                                 <td>@(review.PublicationDate - new TimeSpan(0, timeZoneOffset, 0))</td>
