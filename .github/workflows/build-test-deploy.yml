@@ -8,8 +8,8 @@ on:
 
 env:
   S3_BUCKET_NAME: "elasticbeanstalk-us-west-2-559355273819"
-  APP_NAME: "CraftworkProject"
-  ENV_NAME: "CraftworkProject-env"
+  APP_NAME: "Craftwork-Project"
+  ENV_NAME: "craftwork-project-env"
   PACKAGE_NAME: "craftwork-app-${{ github.sha }}.zip"
   AWS_REGION: "us-west-2"
   WORK_DIR: $(pwd)/CraftworkProject.Web/bin/Release/netcoreapp3.1
