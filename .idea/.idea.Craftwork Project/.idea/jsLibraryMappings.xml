@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{buttons.dataTables, buttons.html5, dataTables.buttons, dataTables.select, jquery-1.11.3, jquery-3.5.1, jquery.dataTables, select.dataTables}" />
-  </component>
-</project>
